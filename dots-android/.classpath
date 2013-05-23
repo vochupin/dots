@@ -9,5 +9,6 @@
 	<classpathentry exported="true" kind="lib" path="/dots/libs/bodyeditor-loader.jar" sourcepath="/dots/libs/bodyeditor-loader-sources.jar"/>
 	<classpathentry exported="true" kind="lib" path="/dots/libs/tween-engine-api.jar" sourcepath="/dots/libs/tween-engine-api-sources.jar"/>
 	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.LIBRARIES"/>
+	<classpathentry kind="con" path="com.android.ide.eclipse.adt.DEPENDENCIES"/>
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>
