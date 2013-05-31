@@ -59,6 +59,7 @@ public class Dots implements ApplicationListener {
 		
 		batch.setProjectionMatrix(camera.combined);
 		batch.begin();
+		sprite.setPosition(-sprite.getWidth(), -sprite.getHeight());
 		sprite.draw(batch);
 		batch.end();
 	}
