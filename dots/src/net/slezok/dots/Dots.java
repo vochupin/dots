@@ -18,7 +18,6 @@ public class Dots implements ApplicationListener {
 	private Sprite sprite;
 	
 	private InputProcessor inputProcessor = new InputProcessor(){
-
 		@Override
 		public boolean keyDown(int keycode) {
 			// TODO Auto-generated method stub
@@ -67,7 +66,6 @@ public class Dots implements ApplicationListener {
 			// TODO Auto-generated method stub
 			return false;
 		}
-		
 	};
 	
 	@Override
