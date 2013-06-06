@@ -33,7 +33,7 @@ public class Dots implements ApplicationListener {
 	private Rectangle CREATE_VERT_LINE_RECTANGLE;
 	private final float BUTTON_HEIGHT = 50;
 	private final float BUTTON_WIDTH = 50;
-	private final float GRID_STEP = 50;
+	private final float GRID_STEP = 64;
 	
 	private InputProcessor inputProcessor = new InputProcessor(){
 		@Override
