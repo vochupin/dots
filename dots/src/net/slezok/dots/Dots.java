@@ -33,6 +33,7 @@ public class Dots implements ApplicationListener {
 	private Rectangle CREATE_VERT_LINE_RECTANGLE;
 	private final float BUTTON_HEIGHT = 50;
 	private final float BUTTON_WIDTH = 50;
+	private final float GRID_STEP = 50;
 	
 	private InputProcessor inputProcessor = new InputProcessor(){
 		@Override
@@ -159,7 +160,15 @@ public class Dots implements ApplicationListener {
 		for(Sprite sprite : sprites){
 			sprite.draw(batch);
 		}
-		batch.draw(dotTexture, 10, 10);
+		float yPos = GRID_STEP/2;
+		while(yPos < h){
+			float xPos = GRID_STEP/2;
+			while(xPos < w){
+				batch.draw(dotTexture, xPos - w/2, h/2 - yPos);
+				xPos += GRID_STEP; 
+			}
+			yPos += GRID_STEP;
+		}
 		batch.end();
 	}
 
