@@ -22,6 +22,7 @@ public class Dots implements ApplicationListener {
 	private SpriteBatch batch;
 	private Texture hlineTexture;
 	private Texture vlineTexture;
+	private Texture dotTexture;
 	
 	private List<Sprite> sprites = new ArrayList<Sprite>();
 	private Sprite currentSprite = null;
@@ -133,7 +134,10 @@ public class Dots implements ApplicationListener {
 
 		vlineTexture = new Texture(Gdx.files.internal("data/vline.png"));
 		vlineTexture.setFilter(TextureFilter.Linear, TextureFilter.Linear);
-				
+
+		dotTexture = new Texture(Gdx.files.internal("data/dot.png"));
+		dotTexture.setFilter(TextureFilter.Linear, TextureFilter.Linear);
+
 		Gdx.input.setInputProcessor(inputProcessor);
 	}
 
@@ -155,6 +159,7 @@ public class Dots implements ApplicationListener {
 		for(Sprite sprite : sprites){
 			sprite.draw(batch);
 		}
+		batch.draw(dotTexture, 10, 10);
 		batch.end();
 	}
 
