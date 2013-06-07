@@ -10,17 +10,17 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import net.slezok.dots.Assets;
-import net.slezok.dots.LibGdxGame;
+import net.slezok.dots.Dots;
 
 public class MainMenuScreen implements Screen {
 	
-	LibGdxGame game;
+	Dots game;
 	Stage stage;
 	TextButton startGameButton;
 	TextButton optionsButton;
 	TextButton exitButton;
 	
-	public MainMenuScreen(LibGdxGame game) {
+	public MainMenuScreen(Dots game) {
 		this.game = game;
 	}
 

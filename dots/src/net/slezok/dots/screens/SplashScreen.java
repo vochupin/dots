@@ -8,14 +8,14 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import net.slezok.dots.Assets;
-import net.slezok.dots.LibGdxGame;
+import net.slezok.dots.Dots;
 
 public class SplashScreen implements Screen {
 
-	LibGdxGame game;
+	Dots game;
 	Stage stage;
 	
-	public SplashScreen(LibGdxGame game) {
+	public SplashScreen(Dots game) {
 		// TODO Auto-generated constructor stub
 		this.game = game;
 	}
@@ -45,7 +45,7 @@ public class SplashScreen implements Screen {
 		
 		Image splashImage = new Image(Assets.backgroundTexture);	
 //		splashImage.addAction(Actions.fadeIn( 2f ));
-		splashImage.addAction( Actions.sequence( Actions.fadeOut( 0.001f ), Actions.fadeIn( 2f ), Actions.run(onSplashFinishedRunnable) ) );
+		splashImage.addAction( Actions.sequence( Actions.fadeOut( 0.001f ), Actions.fadeIn( 1f ), Actions.run(onSplashFinishedRunnable) ) );
 		
 		stage.addActor(splashImage);
 	}

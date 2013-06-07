@@ -17,7 +17,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import net.slezok.dots.Assets;
 import net.slezok.dots.InputHandler;
-import net.slezok.dots.LibGdxGame;
+import net.slezok.dots.Dots;
 import net.slezok.dots.OverlapTester;
 import net.slezok.dots.actors.FallingMan;
 import net.slezok.dots.actors.Platforms;
@@ -25,7 +25,7 @@ import net.slezok.dots.actors.Platforms;
 public class GameScreen implements Screen{
 	
 	World world;
-	LibGdxGame game;
+	Dots game;
 	Stage stage;
 	Stage staticStage;
 	public static final float WORLD_WIDTH = 15;
@@ -44,7 +44,7 @@ public class GameScreen implements Screen{
 	
 	Box2DDebugRenderer debugRenderer = new Box2DDebugRenderer();
 	
-	public GameScreen(LibGdxGame game) {
+	public GameScreen(Dots game) {
 		this.game = game;
 	}
 
