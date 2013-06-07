@@ -51,9 +51,9 @@ public class GameScreen implements Screen{
 	@Override
 	public void render(float delta) {
 		
-		if (Gdx.app.getType() == Application.ApplicationType.Android) {
-			inputHandler.accelerometerChange(Gdx.input.getAccelerometerX());
-		}
+//		if (Gdx.app.getType() == Application.ApplicationType.Android) {
+//			inputHandler.accelerometerChange(Gdx.input.getAccelerometerX());
+//		}
 		
 		// TODO Auto-generated method stub
 		Camera camera = stage.getCamera();

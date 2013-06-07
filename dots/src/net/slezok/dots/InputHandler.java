@@ -18,9 +18,9 @@ public class InputHandler extends InputListener {
 	public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
 		System.out.println("down x=" + x +" y=" + y + " " + piggy.getX());
 		if(piggy.getX() < x){
-			piggy.moveFallingManLeftRight(-5f);
+			piggy.moveFallingManLeftRight(5f);
 		}else{
-			piggy.moveFallingManLeftRight(5f);			
+			piggy.moveFallingManLeftRight(-5f);			
 		}
 		return true;
 	}
@@ -82,12 +82,12 @@ public class InputHandler extends InputListener {
 //		return true;
 //	}
 	
-	public void accelerometerChange(float acc) {
-		
-		piggy.moveFallingManLeftRight(-acc);
-		
-//		felix = world.getFelix();
-//		felix.getVelocity().x = -acc;
-		
-	}
+//	public void accelerometerChange(float acc) {
+//		
+//		piggy.moveFallingManLeftRight(-acc);
+//		
+////		felix = world.getFelix();
+////		felix.getVelocity().x = -acc;
+//		
+//	}
 }
