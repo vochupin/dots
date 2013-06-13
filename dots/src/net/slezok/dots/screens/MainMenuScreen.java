@@ -53,6 +53,7 @@ public class MainMenuScreen implements Screen {
 		optionsButton = new TextButton("Options", Assets.skin);
 		exitButton = new TextButton("Exit", Assets.skin);
 		Image backImage = new Image(Assets.backgroundTexture);
+		backImage.setFillParent(true);
 		
 		startGameButton.addListener(new InputListener() {
 

@@ -101,6 +101,7 @@ public class GameScreen implements Screen{
 		stage.addActor(platforms);
 		
 		Image testPlatform = new Image(Assets.backgroundTexture);
+		testPlatform.setFillParent(true);
 		testPlatform.setPosition(0,  0);
 		staticStage.addActor(testPlatform);
 		

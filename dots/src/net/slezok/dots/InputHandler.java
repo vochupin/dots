@@ -8,6 +8,7 @@ import net.slezok.dots.actors.FallingMan;
 
 public class InputHandler extends InputListener {
 	
+	private static final String TAG = "InputHandler";
 	FallingMan piggy;
 	
 	public InputHandler(FallingMan piggy) {
@@ -16,7 +17,7 @@ public class InputHandler extends InputListener {
 	
 	@Override
 	public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-		System.out.println("down x=" + x +" y=" + y + " " + piggy.getX());
+		Gdx.app.log(TAG, "down x=" + x +" y=" + y + " " + piggy.getX());
 		if(piggy.getX() < x){
 			piggy.moveFallingManLeftRight(5f);
 		}else{
