@@ -17,7 +17,7 @@ public class MainMenuScreen implements Screen {
 	Dots game;
 	Stage stage;
 	TextButton startGameButton;
-	TextButton optionsButton;
+	TextButton gridButton;
 	TextButton exitButton;
 	
 	public MainMenuScreen(Dots game) {
@@ -50,7 +50,7 @@ public class MainMenuScreen implements Screen {
 		Table table = new Table(Assets.skin);
 		
 		startGameButton = new TextButton("New Game", Assets.skin);
-		optionsButton = new TextButton("Options", Assets.skin);
+		gridButton = new TextButton("Grid", Assets.skin);
 		exitButton = new TextButton("Exit", Assets.skin);
 		Image backImage = new Image(Assets.backgroundTexture);
 		backImage.setFillParent(true);
@@ -58,23 +58,30 @@ public class MainMenuScreen implements Screen {
 		startGameButton.addListener(new InputListener() {
 
 			@Override
-			public boolean touchDown(InputEvent event, float x, float y,
-					int pointer, int button) {
-				// TODO Auto-generated method stub
+			public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
 				game.setScreen(new GameScreen(game));
-				
 				return true;
 			}
 			
 		});
-		
+
+		gridButton.addListener(new InputListener() {
+
+			@Override
+			public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+				game.setScreen(new GridScreen(game));
+				return true;
+			}
+			
+		});
+
 		table.setFillParent(true);
 //		table.debug(); 
-		table.add(startGameButton).width(150).height(50);
+		table.add(startGameButton).width(300).height(80);
 		table.row();
-		table.add(optionsButton).width(150).height(50).padTop(10);
+		table.add(gridButton).width(250).height(80).padTop(30);
 		table.row();
-		table.add(exitButton).width(150).height(50).padTop(10);
+		table.add(exitButton).width(200).height(80).padTop(30);
 		
 		stage.addActor(backImage);
 		stage.addActor(table);
