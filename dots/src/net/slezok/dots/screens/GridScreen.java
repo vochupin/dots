@@ -19,6 +19,7 @@ import net.slezok.dots.Assets;
 import net.slezok.dots.InputHandler;
 import net.slezok.dots.Dots;
 import net.slezok.dots.OverlapTester;
+import net.slezok.dots.actors.Bridges;
 import net.slezok.dots.actors.FallingMan;
 import net.slezok.dots.actors.Platforms;
 
@@ -28,10 +29,12 @@ public class GridScreen implements Screen{
 	Dots game;
 	Stage stage;
 	Stage staticStage;
-	public static final float WORLD_WIDTH = 15;
-	public static final float FRUSTUM_HEIGHT = 25;
+	public static final float WORLD_WIDTH = 30;
+	public static final float FRUSTUM_HEIGHT = 20;
 	public static final float WORLD_HEIGHT = FRUSTUM_HEIGHT * 20;
 	public static final float FRUSTUM_WIDTH = WORLD_WIDTH;
+	
+	private Bridges bridges;
 	
 	enum GameState {
 		Play, Pause
@@ -78,10 +81,13 @@ public class GridScreen implements Screen{
 		stage = new Stage();
 		staticStage = new Stage();	
 		
-		Image testPlatform = new Image(Assets.backgroundTexture);
-		testPlatform.setFillParent(true);
-		testPlatform.setPosition(0,  0);
-		staticStage.addActor(testPlatform);
+		bridges = new Bridges(world);
+		stage.addActor(bridges);
+		
+		Image bgrImage = new Image(Assets.backgroundTexture);
+		bgrImage.setFillParent(true);
+		bgrImage.setPosition(0,  0);
+		staticStage.addActor(bgrImage);
 	}
 
 	@Override

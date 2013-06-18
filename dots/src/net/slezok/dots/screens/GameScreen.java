@@ -100,10 +100,10 @@ public class GameScreen implements Screen{
 		stage.addActor(fallingMan);
 		stage.addActor(platforms);
 		
-		Image testPlatform = new Image(Assets.backgroundTexture);
-		testPlatform.setFillParent(true);
-		testPlatform.setPosition(0,  0);
-		staticStage.addActor(testPlatform);
+		Image bgrImage = new Image(Assets.backgroundTexture);
+		bgrImage.setFillParent(true);
+		bgrImage.setPosition(0,  0);
+		staticStage.addActor(bgrImage);
 		
 		InputMultiplexer im = new InputMultiplexer(staticStage, stage);
 		

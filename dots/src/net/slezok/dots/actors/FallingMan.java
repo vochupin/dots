@@ -61,8 +61,7 @@ public class FallingMan extends Actor {
 
 		if (fallingManState == FallingManState.Falling) {
 
-			TextureRegion keyFrame = Assets.fallingManAnim
-					.getKeyFrame(stateTime, true);
+			TextureRegion keyFrame = Assets.fallingManAnim.getKeyFrame(stateTime, true);
 
 			batch.draw(keyFrame, getX(), getY(), 0, 0, getWidth(), getHeight(),
 					1, 1, getRotation());

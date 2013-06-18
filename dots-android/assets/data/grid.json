@@ -1,0 +1,11 @@
+[
+{
+	class: net.slezok.dots.Bridge,
+	x: 1,
+	y: 5},
+{
+	class: net.slezok.dots.Bridge,
+	x: 5,
+	y: 10
+}
+]
