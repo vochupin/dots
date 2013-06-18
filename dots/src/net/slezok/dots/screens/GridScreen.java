@@ -56,6 +56,8 @@ public class GridScreen implements Screen{
 //		}
 		
 		Camera camera = stage.getCamera();
+		camera.position.y += 0.01F;
+
 		
 		Gdx.gl.glClearColor(1f, 0f, 1f, 1);
 		Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);

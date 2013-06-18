@@ -50,8 +50,6 @@ public class FallingMan extends Actor {
 
 	@Override
 	public void draw(SpriteBatch batch, float parentAlpha) {
-		// TODO Auto-generated method stub
-
 		setRotation(MathUtils.radiansToDegrees * fallingManBody.getAngle());
 		setPosition(fallingManBody.getPosition().x, fallingManBody.getPosition().y);
 		
@@ -76,7 +74,6 @@ public class FallingMan extends Actor {
 	}
 	
 	private void restartFallingMan() {
-		
 		fallingManState = FallingManState.Falling;
 		setWidth(2);
 		setHeight(2);
