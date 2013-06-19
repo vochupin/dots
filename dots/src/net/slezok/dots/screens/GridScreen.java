@@ -16,6 +16,7 @@ import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import net.slezok.dots.Assets;
+import net.slezok.dots.BridgesInputHandler;
 import net.slezok.dots.InputHandler;
 import net.slezok.dots.Dots;
 import net.slezok.dots.OverlapTester;
@@ -24,7 +25,8 @@ import net.slezok.dots.actors.FallingMan;
 import net.slezok.dots.actors.Platforms;
 
 public class GridScreen implements Screen{
-	
+	private static final String TAG = "GridScreen";
+
 	World world;
 	Dots game;
 	Stage stage;
@@ -35,6 +37,7 @@ public class GridScreen implements Screen{
 	public static final float FRUSTUM_WIDTH = WORLD_WIDTH;
 	
 	private Bridges bridges;
+	private BridgesInputHandler inputHandler;
 	
 	enum GameState {
 		Play, Pause
@@ -56,9 +59,6 @@ public class GridScreen implements Screen{
 //		}
 		
 		Camera camera = stage.getCamera();
-		camera.position.y += 0.01F;
-
-		
 		Gdx.gl.glClearColor(1f, 0f, 1f, 1);
 		Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
 		staticStage.act(delta);
@@ -82,7 +82,9 @@ public class GridScreen implements Screen{
 		
 		stage = new Stage();
 		staticStage = new Stage();	
-		
+
+		inputHandler = new BridgesInputHandler(this);
+		stage.addListener(inputHandler);
 		bridges = new Bridges(world);
 		stage.addActor(bridges);
 		
@@ -90,6 +92,9 @@ public class GridScreen implements Screen{
 		bgrImage.setFillParent(true);
 		bgrImage.setPosition(0,  0);
 		staticStage.addActor(bgrImage);
+		
+		InputMultiplexer im = new InputMultiplexer(staticStage, stage);
+		Gdx.input.setInputProcessor(im);
 	}
 
 	@Override
@@ -113,6 +118,10 @@ public class GridScreen implements Screen{
 	@Override
 	public void dispose() {
 		stage.dispose();
+	}
+
+	public void moveRelatively(float startX, float startY, float x, float y) {
+		Gdx.app.log(TAG, "startX: " + startX + " startY: " + startY + " currX: " + x + " currY: " + y);
 	}
 	
 }
