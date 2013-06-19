@@ -125,7 +125,10 @@ public class GridScreen implements Screen{
 	}
 
 	public void moveRelatively(float startX, float startY, float x, float y) {
-		Gdx.app.log(TAG, "startX: " + startX + " startY: " + startY + " currX: " + x + " currY: " + y);
+//		Gdx.app.log(TAG, "startX: " + startX + " startY: " + startY + " currX: " + x + " currY: " + y);
+		Camera camera = stage.getCamera();
+		camera.position.y -= y;
+		Gdx.app.log(TAG, y + " " + camera.position.y);
 	}
 	
 }
