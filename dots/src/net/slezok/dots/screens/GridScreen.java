@@ -6,6 +6,7 @@ import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.GL10;
+import com.badlogic.gdx.input.GestureDetector;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
@@ -31,10 +32,10 @@ public class GridScreen implements Screen{
 	Dots game;
 	Stage stage;
 	Stage staticStage;
-	public static final float WORLD_WIDTH = 30;
-	public static final float FRUSTUM_HEIGHT = 20;
-	public static final float WORLD_HEIGHT = FRUSTUM_HEIGHT * 20;
-	public static final float FRUSTUM_WIDTH = WORLD_WIDTH;
+	public final float WORLD_WIDTH;
+	public final float FRUSTUM_HEIGHT;
+	public final float WORLD_HEIGHT;
+	public final float FRUSTUM_WIDTH;
 	
 	private Bridges bridges;
 	private BridgesInputHandler inputHandler;
@@ -48,6 +49,11 @@ public class GridScreen implements Screen{
 	Box2DDebugRenderer debugRenderer = new Box2DDebugRenderer();
 	
 	public GridScreen(Dots game) {
+		WORLD_WIDTH = Gdx.graphics.getWidth();
+		FRUSTUM_HEIGHT = Gdx.graphics.getHeight();
+		WORLD_HEIGHT = FRUSTUM_HEIGHT * 20;
+		FRUSTUM_WIDTH = WORLD_WIDTH;
+		Gdx.app.log(TAG, "WORLD_WIDTH: " + WORLD_WIDTH + " WORLD_HEIGHT: " + WORLD_HEIGHT);
 		this.game = game;
 	}
 
@@ -83,9 +89,8 @@ public class GridScreen implements Screen{
 		stage = new Stage();
 		staticStage = new Stage();	
 
-		inputHandler = new BridgesInputHandler(this);
-		stage.addListener(inputHandler);
 		bridges = new Bridges(world);
+		stage.addListener(new BridgesInputHandler(this));
 		stage.addActor(bridges);
 		
 		Image bgrImage = new Image(Assets.backgroundTexture);
@@ -93,8 +98,7 @@ public class GridScreen implements Screen{
 		bgrImage.setPosition(0,  0);
 		staticStage.addActor(bgrImage);
 		
-		InputMultiplexer im = new InputMultiplexer(staticStage, stage);
-		Gdx.input.setInputProcessor(im);
+		Gdx.input.setInputProcessor(stage);
 	}
 
 	@Override
