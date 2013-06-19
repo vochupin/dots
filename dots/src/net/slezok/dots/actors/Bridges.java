@@ -17,24 +17,35 @@ import net.slezok.dots.Bridge;
 import net.slezok.dots.GameItem;
 
 public class Bridges extends Group {
+	private static final float VIEW_WIDTH = 30;
+	private static final float VIEW_HEIGHT = 20;
+	private final float SCREEN_WIDTH;
+	private final float SCREEN_HEIGHT;
 	
 	final int gameUnitConst = 32;
 	private World world;
 	
 	public Bridges(World world) {
 		this.world = world;
+		
+		SCREEN_WIDTH = Gdx.graphics.getWidth();
+		SCREEN_HEIGHT = Gdx.graphics.getHeight();
+		
 		FileHandle file =  Gdx.files.internal("data/grid.json");
 		Json json = new Json();
 		@SuppressWarnings("unchecked")
 		Array<Bridge> bridges = json.fromJson(Array.class, Bridge.class, file);	
 		
+		float scaleX = SCREEN_WIDTH / VIEW_WIDTH;
+		float scaleY = SCREEN_HEIGHT / VIEW_HEIGHT;
+		
 		for (Bridge bridge : bridges) {
 			Image platform = new Image(Assets.platform);
-			platform.setPosition(bridge.getX(), bridge.getY());
-			platform.setWidth(3F);
-			platform.setHeight(1F);
+			platform.setPosition(bridge.getX() * scaleX, bridge.getY() * scaleY);
+			platform.setWidth(3F * scaleX);
+			platform.setHeight(1F * scaleY);
 
-			createPlatformBody(bridge.getX(), bridge.getY(), 3F, 1F);
+			createPlatformBody(bridge.getX(), bridge.getY(), 3F * scaleX, 1F * scaleY);
 
 			addActor(platform);
 		}
