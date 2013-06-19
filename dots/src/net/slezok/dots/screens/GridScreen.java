@@ -17,7 +17,7 @@ import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import net.slezok.dots.Assets;
-import net.slezok.dots.BridgesInputHandler;
+import net.slezok.dots.BridgesGestureHandler;
 import net.slezok.dots.InputHandler;
 import net.slezok.dots.Dots;
 import net.slezok.dots.OverlapTester;
@@ -38,7 +38,7 @@ public class GridScreen implements Screen{
 	public final float FRUSTUM_WIDTH;
 	
 	private Bridges bridges;
-	private BridgesInputHandler inputHandler;
+	private BridgesGestureHandler inputHandler;
 	
 	enum GameState {
 		Play, Pause
@@ -90,7 +90,7 @@ public class GridScreen implements Screen{
 		staticStage = new Stage();	
 
 		bridges = new Bridges(world);
-		stage.addListener(new BridgesInputHandler(this));
+		staticStage.addListener(new BridgesGestureHandler(this));
 		stage.addActor(bridges);
 		
 		Image bgrImage = new Image(Assets.backgroundTexture);
@@ -98,7 +98,7 @@ public class GridScreen implements Screen{
 		bgrImage.setPosition(0,  0);
 		staticStage.addActor(bgrImage);
 		
-		Gdx.input.setInputProcessor(stage);
+		Gdx.input.setInputProcessor(staticStage);
 	}
 
 	@Override
@@ -124,11 +124,12 @@ public class GridScreen implements Screen{
 		stage.dispose();
 	}
 
-	public void moveRelatively(float startX, float startY, float x, float y) {
+	
+	
+	public void moveRelatively(float x, float y) {
 //		Gdx.app.log(TAG, "startX: " + startX + " startY: " + startY + " currX: " + x + " currY: " + y);
 		Camera camera = stage.getCamera();
 		camera.position.y -= y;
-		Gdx.app.log(TAG, y + " " + camera.position.y);
-	}
-	
+//		Gdx.app.log(TAG, y + " " + camera.position.y);
+	}	
 }

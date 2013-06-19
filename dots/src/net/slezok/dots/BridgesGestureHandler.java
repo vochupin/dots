@@ -9,12 +9,12 @@ import com.badlogic.gdx.scenes.scene2d.utils.ActorGestureListener;
 
 import net.slezok.dots.screens.GridScreen;
 
-public class BridgesInputHandler extends ActorGestureListener{//implements GestureDetector.GestureListener {
+public class BridgesGestureHandler extends ActorGestureListener{//implements GestureDetector.GestureListener {
 	private static final String TAG = "BridgesInputHandler";
 	
 	GridScreen gridScreen;
 	
-	public BridgesInputHandler(GridScreen gridScreen) {
+	public BridgesGestureHandler(GridScreen gridScreen) {
 		this.gridScreen = gridScreen;
 	}
 
@@ -25,6 +25,6 @@ public class BridgesInputHandler extends ActorGestureListener{//implements Gestu
 
 	@Override
 	public void pan(InputEvent event, float x, float y, float deltaX, float deltaY) {
-		gridScreen.moveRelatively(x, y, deltaX, deltaY);
+		gridScreen.moveRelatively(deltaX, deltaY);
 	}
 }
