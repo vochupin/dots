@@ -13,8 +13,6 @@ import net.slezok.dots.screens.GridScreen;
 public class BridgesGestureHandler extends ActorGestureListener{//implements GestureDetector.GestureListener {
 	private static final String TAG = "BridgesInputHandler";
 	
-	private int i = 15;
-	
 	GridScreen gridScreen;
 	
 	public BridgesGestureHandler(GridScreen gridScreen) {
@@ -33,9 +31,12 @@ public class BridgesGestureHandler extends ActorGestureListener{//implements Ges
 
 	@Override
 	public boolean longPress(Actor actor, float x, float y) {
-		Bridge bridge = new Bridge(i, i, i * 90, 1, 5);
-		i += 5;
-		gridScreen.addBridge(bridge);
+		gridScreen.setNormalZoom();
 		return true;
+	}
+
+	@Override
+	public void zoom(InputEvent event, float initialDistance, float distance) {
+		gridScreen.zoom(initialDistance, distance);
 	}
 }

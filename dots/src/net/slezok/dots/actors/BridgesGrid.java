@@ -21,7 +21,7 @@ public class BridgesGrid extends Group {
 	private static final String TAG = "Bridges";
 
 	private static final float VIEW_WIDTH = 100;
-	private final float VIEW_HEIGHT;
+	private final float VIEW_HEIGHT = 100;
 	private final float SCREEN_WIDTH;
 	private final float SCREEN_HEIGHT;
 	private final float WORLD_WIDTH;
@@ -40,7 +40,7 @@ public class BridgesGrid extends Group {
 		WORLD_HEIGHT = SCREEN_HEIGHT * 5;
 		WORLD_WIDTH = SCREEN_WIDTH * 5;
 		
-		VIEW_HEIGHT = VIEW_WIDTH * SCREEN_HEIGHT / SCREEN_WIDTH;
+//		VIEW_HEIGHT = VIEW_WIDTH * SCREEN_HEIGHT / SCREEN_WIDTH;
 		Gdx.app.log(TAG, "Screen width: " + SCREEN_WIDTH + " Screen height: " + SCREEN_HEIGHT);
 		Gdx.app.log(TAG, "View width: " + VIEW_WIDTH + " View height: " + VIEW_HEIGHT);
 		
@@ -78,13 +78,12 @@ public class BridgesGrid extends Group {
 	}
 
 	public void addBridge(Bridge bridge) {
-		float scaleX = SCREEN_WIDTH / VIEW_WIDTH;
-		float scaleY = SCREEN_HEIGHT / VIEW_HEIGHT;
+		float scale = SCREEN_WIDTH / VIEW_WIDTH;
 
 		Image platform = new Image(Assets.platform);
-		platform.setPosition(bridge.getX() * scaleX, bridge.getY() * scaleY);
-		platform.setWidth(bridge.getWidth() * scaleX);
-		platform.setHeight(bridge.getHeight() * scaleY);
+		platform.setPosition(bridge.getX() * scale, bridge.getY() * scale);
+		platform.setWidth(bridge.getWidth() * scale);
+		platform.setHeight(bridge.getHeight() * scale);
 		platform.setRotation(bridge.getDirection());
 
 		createPlatformBody(bridge.getX(), bridge.getY(), platform.getWidth(), platform.getHeight());

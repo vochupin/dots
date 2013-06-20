@@ -36,6 +36,10 @@ public class GridScreen implements Screen{
 	Stage staticStage;
 	private BridgesGrid bridgesGrid;
 	private BridgesGestureHandler inputHandler;
+
+	//for zoom
+	private float oldInitialDistance = 0;
+	private float initialScale = 0;
 	
 	enum GameState {
 		Play, Pause
@@ -129,16 +133,29 @@ public class GridScreen implements Screen{
 		
 		camera.position.x -= x;
 		if(camera.position.x < 0) camera.position.x = 0;
-		if(camera.position.x > bridgesGrid.getScreenWidth()) camera.position.x = bridgesGrid.getScreenWidth();
+//		if(camera.position.x > bridgesGrid.getScreenWidth()) camera.position.x = bridgesGrid.getScreenWidth();
 
 		camera.position.y -= y;
 		if(camera.position.y < 0) camera.position.y = 0;
-		if(camera.position.y > bridgesGrid.getScreenHeight()) camera.position.y = bridgesGrid.getScreenHeight();
+//		if(camera.position.y > bridgesGrid.getScreenHeight()) camera.position.y = bridgesGrid.getScreenHeight();
 		
 //		Gdx.app.log(TAG, "New Y camera position: " + camera.position.y + " y: " + y);
 	}
 
 	public void addBridge(Bridge bridge) {
 		bridgesGrid.addBridge(bridge);
+	}
+	
+	public void zoom(float initialDistance, float distance) {
+		if(oldInitialDistance != initialDistance){
+			initialScale = bridgesGrid.getScaleX();
+			oldInitialDistance = initialDistance;
+		}else{
+			bridgesGrid.setScale(initialScale * distance / initialDistance);
+		}
+	}
+
+	public void setNormalZoom() {
+		bridgesGrid.setScale(1);		
 	}	
 }
