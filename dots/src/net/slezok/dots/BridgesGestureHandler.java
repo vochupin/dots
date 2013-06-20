@@ -3,6 +3,7 @@ package net.slezok.dots;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.input.GestureDetector;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ActorGestureListener;
@@ -11,6 +12,8 @@ import net.slezok.dots.screens.GridScreen;
 
 public class BridgesGestureHandler extends ActorGestureListener{//implements GestureDetector.GestureListener {
 	private static final String TAG = "BridgesInputHandler";
+	
+	private int i = 15;
 	
 	GridScreen gridScreen;
 	
@@ -26,5 +29,13 @@ public class BridgesGestureHandler extends ActorGestureListener{//implements Ges
 	@Override
 	public void pan(InputEvent event, float x, float y, float deltaX, float deltaY) {
 		gridScreen.moveRelatively(deltaX, deltaY);
+	}
+
+	@Override
+	public boolean longPress(Actor actor, float x, float y) {
+		Bridge bridge = new Bridge(i, i, i * 90, 1, 5);
+		i += 5;
+		gridScreen.addBridge(bridge);
+		return true;
 	}
 }

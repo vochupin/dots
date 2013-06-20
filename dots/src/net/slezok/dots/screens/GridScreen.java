@@ -17,6 +17,7 @@ import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import net.slezok.dots.Assets;
+import net.slezok.dots.Bridge;
 import net.slezok.dots.BridgesGestureHandler;
 import net.slezok.dots.InputHandler;
 import net.slezok.dots.Dots;
@@ -133,5 +134,9 @@ public class GridScreen implements Screen{
 		camera.position.y -= y;
 		if(camera.position.y < 0) camera.position.y = 0;
 		Gdx.app.log(TAG, "New Y camera position: " + camera.position.y + " y: " + y);
+	}
+
+	public void addBridge(Bridge bridge) {
+		bridges.addBridge(bridge);
 	}	
 }

@@ -11,6 +11,17 @@ public class Bridge{
 	private int width;
 	private int height;
 	
+	
+	
+	public Bridge(int x, int y, int direction, int width, int height) {
+		super();
+		this.x = x;
+		this.y = y;
+		this.direction = direction;
+		this.width = width;
+		this.height = height;
+	}
+
 	public Bridge() {
 		x = y = direction = 0;
 		width = 1; height = 5;

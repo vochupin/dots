@@ -40,20 +40,9 @@ public class Bridges extends Group {
 		Json json = new Json();
 		@SuppressWarnings("unchecked")
 		Array<Bridge> bridges = json.fromJson(Array.class, Bridge.class, file);	
-		
-		float scaleX = SCREEN_WIDTH / VIEW_WIDTH;
-		float scaleY = SCREEN_HEIGHT / VIEW_HEIGHT;
-		
+				
 		for (Bridge bridge : bridges) {
-			Image platform = new Image(Assets.platform);
-			platform.setPosition(bridge.getX() * scaleX, bridge.getY() * scaleY);
-			platform.setWidth(bridge.getWidth() * scaleX);
-			platform.setHeight(bridge.getHeight() * scaleY);
-			platform.setRotation(bridge.getDirection());
-
-			createPlatformBody(bridge.getX(), bridge.getY(), platform.getWidth(), platform.getHeight());
-
-			addActor(platform);
+			addBridge(bridge);
 		}
 	}
 
@@ -78,6 +67,21 @@ public class Bridges extends Group {
 		groundBox.setAsBox(width/2, 0.5f);
 		// Create a fixture from our polygon shape and add it to our ground body
 		platformBody.createFixture(groundBox, 0.0f);
+	}
+
+	public void addBridge(Bridge bridge) {
+		float scaleX = SCREEN_WIDTH / VIEW_WIDTH;
+		float scaleY = SCREEN_HEIGHT / VIEW_HEIGHT;
+
+		Image platform = new Image(Assets.platform);
+		platform.setPosition(bridge.getX() * scaleX, bridge.getY() * scaleY);
+		platform.setWidth(bridge.getWidth() * scaleX);
+		platform.setHeight(bridge.getHeight() * scaleY);
+		platform.setRotation(bridge.getDirection());
+
+		createPlatformBody(bridge.getX(), bridge.getY(), platform.getWidth(), platform.getHeight());
+
+		addActor(platform);
 	}
 	
 }
