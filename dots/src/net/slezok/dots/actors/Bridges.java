@@ -17,8 +17,10 @@ import net.slezok.dots.Bridge;
 import net.slezok.dots.GameItem;
 
 public class Bridges extends Group {
-	private static final float VIEW_WIDTH = 30;
-	private static final float VIEW_HEIGHT = 20;
+	private static final String TAG = "Bridges";
+
+	private static final float VIEW_WIDTH = 100;
+	private final float VIEW_HEIGHT;
 	private final float SCREEN_WIDTH;
 	private final float SCREEN_HEIGHT;
 		
@@ -30,6 +32,9 @@ public class Bridges extends Group {
 		
 		SCREEN_WIDTH = Gdx.graphics.getWidth();
 		SCREEN_HEIGHT = Gdx.graphics.getHeight();
+		VIEW_HEIGHT = VIEW_WIDTH * SCREEN_HEIGHT / SCREEN_WIDTH;
+		Gdx.app.log(TAG, "Screen width: " + SCREEN_WIDTH + " Screen height: " + SCREEN_HEIGHT);
+		Gdx.app.log(TAG, "View width: " + VIEW_WIDTH + " View height: " + VIEW_HEIGHT);
 		
 		FileHandle file =  Gdx.files.internal("data/grid.json");
 		Json json = new Json();
@@ -42,11 +47,11 @@ public class Bridges extends Group {
 		for (Bridge bridge : bridges) {
 			Image platform = new Image(Assets.platform);
 			platform.setPosition(bridge.getX() * scaleX, bridge.getY() * scaleY);
-			platform.setWidth(3F * scaleX);
-			platform.setHeight(1F * scaleY);
+			platform.setWidth(bridge.getWidth() * scaleX);
+			platform.setHeight(bridge.getHeight() * scaleY);
 			platform.setRotation(bridge.getDirection());
 
-			createPlatformBody(bridge.getX(), bridge.getY(), 3F * scaleX, 1F * scaleY);
+			createPlatformBody(bridge.getX(), bridge.getY(), platform.getWidth(), platform.getHeight());
 
 			addActor(platform);
 		}

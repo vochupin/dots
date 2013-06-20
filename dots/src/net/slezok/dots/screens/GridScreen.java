@@ -88,9 +88,11 @@ public class GridScreen implements Screen{
 		
 		stage = new Stage();
 		staticStage = new Stage();	
+		staticStage.addListener(new BridgesGestureHandler(this));
 
 		bridges = new Bridges(world);
-		staticStage.addListener(new BridgesGestureHandler(this));
+		bridges.setPosition(0, 0);
+		
 		stage.addActor(bridges);
 		
 		Image bgrImage = new Image(Assets.backgroundTexture);
@@ -127,9 +129,9 @@ public class GridScreen implements Screen{
 	
 	
 	public void moveRelatively(float x, float y) {
-//		Gdx.app.log(TAG, "startX: " + startX + " startY: " + startY + " currX: " + x + " currY: " + y);
 		Camera camera = stage.getCamera();
 		camera.position.y -= y;
-//		Gdx.app.log(TAG, y + " " + camera.position.y);
+		if(camera.position.y < 0) camera.position.y = 0;
+		Gdx.app.log(TAG, "New Y camera position: " + camera.position.y + " y: " + y);
 	}	
 }

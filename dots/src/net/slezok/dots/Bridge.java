@@ -7,17 +7,13 @@ public class Bridge{
 
 	private int x;
 	private int y;
-	
 	private int direction;
-	
-	public Bridge(int x, int y, int direction) {
-		this.x = x;
-		this.y = y;
-		this.direction = direction;
-	}
+	private int width;
+	private int height;
 	
 	public Bridge() {
 		x = y = direction = 0;
+		width = 1; height = 5;
 	}
 
 	public int getX() {
@@ -42,5 +38,21 @@ public class Bridge{
 
 	public void setDirection(int direction) {
 		this.direction = direction;
+	}
+
+	public int getWidth() {
+		return width;
+	}
+
+	public void setWidth(int width) {
+		this.width = width;
+	}
+
+	public int getHeight() {
+		return height;
+	}
+
+	public void setHeight(int height) {
+		this.height = height;
 	}
 }
