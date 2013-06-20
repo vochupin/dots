@@ -3,6 +3,7 @@ package net.slezok.dots.actors;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
@@ -16,22 +17,29 @@ import net.slezok.dots.Assets;
 import net.slezok.dots.Bridge;
 import net.slezok.dots.GameItem;
 
-public class Bridges extends Group {
+public class BridgesGrid extends Group {
 	private static final String TAG = "Bridges";
 
 	private static final float VIEW_WIDTH = 100;
 	private final float VIEW_HEIGHT;
 	private final float SCREEN_WIDTH;
 	private final float SCREEN_HEIGHT;
+	private final float WORLD_WIDTH;
+	private final float WORLD_HEIGHT;
+
 		
 	final int gameUnitConst = 32;
 	private World world;
 	
-	public Bridges(World world) {
+	public BridgesGrid(World world) {
 		this.world = world;
 		
 		SCREEN_WIDTH = Gdx.graphics.getWidth();
 		SCREEN_HEIGHT = Gdx.graphics.getHeight();
+
+		WORLD_HEIGHT = SCREEN_HEIGHT * 5;
+		WORLD_WIDTH = SCREEN_WIDTH * 5;
+		
 		VIEW_HEIGHT = VIEW_WIDTH * SCREEN_HEIGHT / SCREEN_WIDTH;
 		Gdx.app.log(TAG, "Screen width: " + SCREEN_WIDTH + " Screen height: " + SCREEN_HEIGHT);
 		Gdx.app.log(TAG, "View width: " + VIEW_WIDTH + " View height: " + VIEW_HEIGHT);
@@ -82,6 +90,14 @@ public class Bridges extends Group {
 		createPlatformBody(bridge.getX(), bridge.getY(), platform.getWidth(), platform.getHeight());
 
 		addActor(platform);
+	}
+
+	public float getScreenWidth() {
+		return SCREEN_WIDTH;
+	}
+
+	public float getScreenHeight() {
+		return SCREEN_HEIGHT;
 	}
 	
 }

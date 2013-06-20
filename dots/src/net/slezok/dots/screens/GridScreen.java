@@ -6,6 +6,7 @@ import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.GL10;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.input.GestureDetector;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
@@ -22,7 +23,7 @@ import net.slezok.dots.BridgesGestureHandler;
 import net.slezok.dots.InputHandler;
 import net.slezok.dots.Dots;
 import net.slezok.dots.OverlapTester;
-import net.slezok.dots.actors.Bridges;
+import net.slezok.dots.actors.BridgesGrid;
 import net.slezok.dots.actors.FallingMan;
 import net.slezok.dots.actors.Platforms;
 
@@ -33,12 +34,7 @@ public class GridScreen implements Screen{
 	Dots game;
 	Stage stage;
 	Stage staticStage;
-	public final float WORLD_WIDTH;
-	public final float FRUSTUM_HEIGHT;
-	public final float WORLD_HEIGHT;
-	public final float FRUSTUM_WIDTH;
-	
-	private Bridges bridges;
+	private BridgesGrid bridgesGrid;
 	private BridgesGestureHandler inputHandler;
 	
 	enum GameState {
@@ -50,11 +46,6 @@ public class GridScreen implements Screen{
 	Box2DDebugRenderer debugRenderer = new Box2DDebugRenderer();
 	
 	public GridScreen(Dots game) {
-		FRUSTUM_WIDTH = Gdx.graphics.getWidth();
-		FRUSTUM_HEIGHT = Gdx.graphics.getHeight();
-		WORLD_HEIGHT = FRUSTUM_HEIGHT * 5;
-		WORLD_WIDTH = FRUSTUM_WIDTH * 5;
-		Gdx.app.log(TAG, "WORLD_WIDTH: " + WORLD_WIDTH + " WORLD_HEIGHT: " + WORLD_HEIGHT);
 		this.game = game;
 	}
 
@@ -66,8 +57,10 @@ public class GridScreen implements Screen{
 //		}
 		
 		Camera camera = stage.getCamera();
+		
 		Gdx.gl.glClearColor(1f, 0f, 1f, 1);
 		Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
+		
 		staticStage.act(delta);
         staticStage.draw();
         stage.act(delta);
@@ -80,7 +73,9 @@ public class GridScreen implements Screen{
 
 	@Override
 	public void resize(int width, int height) {
-		stage.setViewport(FRUSTUM_WIDTH, FRUSTUM_HEIGHT, false);
+		if(bridgesGrid != null){
+			stage.setViewport(bridgesGrid.getScreenWidth(), bridgesGrid.getScreenHeight(), false);
+		}
 	}
 
 	@Override
@@ -91,10 +86,10 @@ public class GridScreen implements Screen{
 		staticStage = new Stage();	
 		staticStage.addListener(new BridgesGestureHandler(this));
 
-		bridges = new Bridges(world);
-		bridges.setPosition(0, 0);
+		bridgesGrid = new BridgesGrid(world);
+		bridgesGrid.setPosition(0, 0);
 		
-		stage.addActor(bridges);
+		stage.addActor(bridgesGrid);
 		
 		Image bgrImage = new Image(Assets.backgroundTexture);
 		bgrImage.setFillParent(true);
@@ -134,16 +129,16 @@ public class GridScreen implements Screen{
 		
 		camera.position.x -= x;
 		if(camera.position.x < 0) camera.position.x = 0;
-		if(camera.position.x > FRUSTUM_WIDTH) camera.position.x = FRUSTUM_WIDTH;
+		if(camera.position.x > bridgesGrid.getScreenWidth()) camera.position.x = bridgesGrid.getScreenWidth();
 
 		camera.position.y -= y;
 		if(camera.position.y < 0) camera.position.y = 0;
-		if(camera.position.y > FRUSTUM_HEIGHT) camera.position.y = FRUSTUM_HEIGHT;
+		if(camera.position.y > bridgesGrid.getScreenHeight()) camera.position.y = bridgesGrid.getScreenHeight();
 		
 //		Gdx.app.log(TAG, "New Y camera position: " + camera.position.y + " y: " + y);
 	}
 
 	public void addBridge(Bridge bridge) {
-		bridges.addBridge(bridge);
+		bridgesGrid.addBridge(bridge);
 	}	
 }
