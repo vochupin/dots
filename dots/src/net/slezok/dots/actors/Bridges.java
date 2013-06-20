@@ -21,7 +21,7 @@ public class Bridges extends Group {
 	private static final float VIEW_HEIGHT = 20;
 	private final float SCREEN_WIDTH;
 	private final float SCREEN_HEIGHT;
-	
+		
 	final int gameUnitConst = 32;
 	private World world;
 	
@@ -44,6 +44,7 @@ public class Bridges extends Group {
 			platform.setPosition(bridge.getX() * scaleX, bridge.getY() * scaleY);
 			platform.setWidth(3F * scaleX);
 			platform.setHeight(1F * scaleY);
+			platform.setRotation(bridge.getDirection());
 
 			createPlatformBody(bridge.getX(), bridge.getY(), 3F * scaleX, 1F * scaleY);
 
