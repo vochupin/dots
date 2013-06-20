@@ -50,10 +50,10 @@ public class GridScreen implements Screen{
 	Box2DDebugRenderer debugRenderer = new Box2DDebugRenderer();
 	
 	public GridScreen(Dots game) {
-		WORLD_WIDTH = Gdx.graphics.getWidth();
+		FRUSTUM_WIDTH = Gdx.graphics.getWidth();
 		FRUSTUM_HEIGHT = Gdx.graphics.getHeight();
-		WORLD_HEIGHT = FRUSTUM_HEIGHT * 20;
-		FRUSTUM_WIDTH = WORLD_WIDTH;
+		WORLD_HEIGHT = FRUSTUM_HEIGHT * 5;
+		WORLD_WIDTH = FRUSTUM_WIDTH * 5;
 		Gdx.app.log(TAG, "WORLD_WIDTH: " + WORLD_WIDTH + " WORLD_HEIGHT: " + WORLD_HEIGHT);
 		this.game = game;
 	}
@@ -131,9 +131,16 @@ public class GridScreen implements Screen{
 	
 	public void moveRelatively(float x, float y) {
 		Camera camera = stage.getCamera();
+		
+		camera.position.x -= x;
+		if(camera.position.x < 0) camera.position.x = 0;
+		if(camera.position.x > FRUSTUM_WIDTH) camera.position.x = FRUSTUM_WIDTH;
+
 		camera.position.y -= y;
 		if(camera.position.y < 0) camera.position.y = 0;
-		Gdx.app.log(TAG, "New Y camera position: " + camera.position.y + " y: " + y);
+		if(camera.position.y > FRUSTUM_HEIGHT) camera.position.y = FRUSTUM_HEIGHT;
+		
+//		Gdx.app.log(TAG, "New Y camera position: " + camera.position.y + " y: " + y);
 	}
 
 	public void addBridge(Bridge bridge) {
