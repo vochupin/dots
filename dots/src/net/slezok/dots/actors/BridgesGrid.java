@@ -34,7 +34,7 @@ public class BridgesGrid extends Group {
 		SCREEN_WIDTH = Gdx.graphics.getWidth();
 		SCREEN_HEIGHT = Gdx.graphics.getHeight();
 
-		WORLD_HEIGHT = SCREEN_HEIGHT * 1;
+		WORLD_HEIGHT = SCREEN_HEIGHT * 2;
 		WORLD_WIDTH = SCREEN_WIDTH * 1;
 		
 //		VIEW_HEIGHT = VIEW_WIDTH * SCREEN_HEIGHT / SCREEN_WIDTH;
