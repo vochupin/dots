@@ -49,6 +49,11 @@ public class BridgesGrid extends Group {
 		for (Bridge bridge : bridges) {
 			addBridge(bridge);
 		}
+		for(int x = 0; x < FIELD_WIDTH; x++){
+			for(int y = 0; y < FIELD_HEIGHT; y++){
+				addDot(x,y);
+			}
+		}
 	}
 
 	@Override
@@ -86,6 +91,22 @@ public class BridgesGrid extends Group {
 		createPlatformBody(bridge.getX(), bridge.getY(), platform.getWidth(), platform.getHeight());
 
 		addActor(platform);
+	}
+
+	public void addDot(int x, int y) {
+		float scale = SCREEN_WIDTH / FIELD_WIDTH;
+
+		Image dot = new Image(Assets.platform);
+		float xPos = (float) (x * scale - 0.5);
+		float yPos = (float) (y * scale - 0.5);
+		dot.setPosition(xPos, yPos);
+		dot.setWidth(1);
+		dot.setHeight(1);
+		dot.setRotation(0);
+
+		createPlatformBody(xPos, yPos, 1, 1);
+
+		addActor(dot);
 	}
 
 	public float getScreenWidth() {
