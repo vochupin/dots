@@ -17,8 +17,8 @@ import net.slezok.dots.Bridge;
 public class BridgesGrid extends Group {
 	private static final String TAG = "Bridges";
 
-	private static final float VIEW_WIDTH = 100;
-	private final float VIEW_HEIGHT = 100;
+	private static final float FIELD_WIDTH = 100;
+	private final float FIELD_HEIGHT = 100;
 	private final float SCREEN_WIDTH;
 	private final float SCREEN_HEIGHT;
 	private final float WORLD_WIDTH;
@@ -39,7 +39,7 @@ public class BridgesGrid extends Group {
 		
 //		VIEW_HEIGHT = VIEW_WIDTH * SCREEN_HEIGHT / SCREEN_WIDTH;
 		Gdx.app.log(TAG, "Screen width: " + SCREEN_WIDTH + " Screen height: " + SCREEN_HEIGHT);
-		Gdx.app.log(TAG, "View width: " + VIEW_WIDTH + " View height: " + VIEW_HEIGHT);
+		Gdx.app.log(TAG, "Field width: " + FIELD_WIDTH + " Field height: " + FIELD_HEIGHT);
 		
 		FileHandle file =  Gdx.files.internal("data/grid.json");
 		Json json = new Json();
@@ -75,7 +75,7 @@ public class BridgesGrid extends Group {
 	}
 
 	public void addBridge(Bridge bridge) {
-		float scale = SCREEN_WIDTH / VIEW_WIDTH;
+		float scale = SCREEN_WIDTH / FIELD_WIDTH;
 
 		Image platform = new Image(Assets.platform);
 		platform.setPosition(bridge.getX() * scale, bridge.getY() * scale);
