@@ -9,7 +9,7 @@ public class Bridge{
 	private int y;
 	private int direction;
 	private int width;
-	private int height;
+	private int length;
 	
 	
 	
@@ -19,12 +19,12 @@ public class Bridge{
 		this.y = y;
 		this.direction = direction;
 		this.width = width;
-		this.height = height;
+		this.length = height;
 	}
 
 	public Bridge() {
 		x = y = direction = 0;
-		width = 1; height = 5;
+		width = 1; length = 5;
 	}
 
 	public int getX() {
@@ -59,11 +59,11 @@ public class Bridge{
 		this.width = width;
 	}
 
-	public int getHeight() {
-		return height;
+	public int getLength() {
+		return length;
 	}
 
-	public void setHeight(int height) {
-		this.height = height;
+	public void setLength(int height) {
+		this.length = height;
 	}
 }

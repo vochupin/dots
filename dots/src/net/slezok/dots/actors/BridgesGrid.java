@@ -80,7 +80,7 @@ public class BridgesGrid extends Group {
 		Image platform = new Image(Assets.platform);
 		platform.setPosition(bridge.getX() * scale, bridge.getY() * scale);
 		platform.setWidth(bridge.getWidth() * scale);
-		platform.setHeight(bridge.getHeight() * scale);
+		platform.setHeight(bridge.getLength() * scale);
 		platform.setRotation(bridge.getDirection());
 
 		createPlatformBody(bridge.getX(), bridge.getY(), platform.getWidth(), platform.getHeight());
