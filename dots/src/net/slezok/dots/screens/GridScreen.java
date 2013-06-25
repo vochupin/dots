@@ -41,12 +41,6 @@ public class GridScreen implements Screen{
 	private float oldInitialDistance = 0;
 	private float initialScale = 0;
 	
-	enum GameState {
-		Play, Pause
-	}
-	
-	GameState gameState = GameState.Play;
-	
 	Box2DDebugRenderer debugRenderer = new Box2DDebugRenderer();
 	
 	public GridScreen(Dots game) {
