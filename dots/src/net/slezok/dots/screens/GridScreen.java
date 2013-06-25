@@ -56,10 +56,6 @@ public class GridScreen implements Screen{
 	@Override
 	public void render(float delta) {
 		
-//		if (Gdx.app.getType() == Application.ApplicationType.Android) {
-//			inputHandler.accelerometerChange(Gdx.input.getAccelerometerX());
-//		}
-		
 		Camera camera = stage.getCamera();
 		
 		Gdx.gl.glClearColor(1f, 0f, 1f, 1);
@@ -133,13 +129,13 @@ public class GridScreen implements Screen{
 		
 		camera.position.x -= x;
 		if(camera.position.x < 0) camera.position.x = 0;
-//		if(camera.position.x > bridgesGrid.getScreenWidth()) camera.position.x = bridgesGrid.getScreenWidth();
+		if(camera.position.x > bridgesGrid.getWorldWidth()) camera.position.x = bridgesGrid.getWorldWidth();
 
 		camera.position.y -= y;
 		if(camera.position.y < 0) camera.position.y = 0;
-//		if(camera.position.y > bridgesGrid.getScreenHeight()) camera.position.y = bridgesGrid.getScreenHeight();
+		if(camera.position.y > bridgesGrid.getWorldHeight()) camera.position.y = bridgesGrid.getWorldHeight();
 		
-//		Gdx.app.log(TAG, "New Y camera position: " + camera.position.y + " y: " + y);
+		Gdx.app.log(TAG, "New camera position: x=" + camera.position.x + " y=" + camera.position.y);
 	}
 
 	public void addBridge(Bridge bridge) {
