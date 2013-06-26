@@ -4,8 +4,6 @@
 	startX: 5,
 	startY: 5,
 	levelFile: "data/grid.json",
-	x: [1,2,3,4,5],
-	y: [1,2,3,4,5],
-	direction: [0,90,180,270,0]
+	directions: [0,0,0,270,270,270]
 }
 ]

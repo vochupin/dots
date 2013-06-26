@@ -38,6 +38,8 @@ import net.slezok.dots.actors.Platforms;
 public class GridScreen implements Screen{
 	private static final String TAG = "GridScreen";
 
+	protected static final int STEP_SIZE = 5;
+
 	World world;
 	Dots game;
 	Stage stage;
@@ -106,7 +108,7 @@ public class GridScreen implements Screen{
 		bridgesGrid.setPosition(0, 0);
 		stage.addActor(bridgesGrid);
 		
-		Table table = new Table(Assets.skin);
+		final Table table = new Table(Assets.skin);
 		upButton = new TextButton("up", Assets.skin);
 		downButton = new TextButton("down", Assets.skin);
 		leftButton = new TextButton("left", Assets.skin);
@@ -114,25 +116,42 @@ public class GridScreen implements Screen{
 		InputListener buttonListener = new InputListener() {
 			
 			int caretX = level.getStartX(), caretY = level.getStartY();
+			int step = 0;
+			int[] directions = level.getDirections();
 			@Override
 			public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
 				Actor actor = event.getListenerActor();
+				int direction = -1;
+				int nextCaretX = -1, nextCaretY = -1;
+				
 				if(actor.equals(upButton)){
-					Bridge bridge = new Bridge(caretX, caretY, Bridge.DIRECTION_UP, 1, 5);
-					bridgesGrid.addBridge(bridge);
-					caretY += 5;
+					direction = Bridge.DIRECTION_UP;
+					nextCaretX = caretX;
+					nextCaretY = caretY + STEP_SIZE;
 				}else if(actor.equals(downButton)){
-					Bridge bridge = new Bridge(caretX, caretY, Bridge.DIRECTION_DOWN, 1, 5);
-					bridgesGrid.addBridge(bridge);
-					caretY -= 5;
+					direction = Bridge.DIRECTION_DOWN;
+					nextCaretX = caretX;
+					nextCaretY = caretY - STEP_SIZE;
 				}else if(actor.equals(leftButton)){
-					Bridge bridge = new Bridge(caretX, caretY, Bridge.DIRECTION_LEFT, 1, 5);
-					bridgesGrid.addBridge(bridge);
-					caretX -= 5;
+					direction = Bridge.DIRECTION_LEFT;
+					nextCaretX = caretX - STEP_SIZE;
+					nextCaretY = caretY;
 				}else if(actor.equals(rightButton)){
-					Bridge bridge = new Bridge(caretX, caretY, Bridge.DIRECTION_RIGHT, 1, 5);
-					bridgesGrid.addBridge(bridge);
-					caretX += 5;
+					direction = Bridge.DIRECTION_RIGHT;
+					nextCaretX = caretX + STEP_SIZE;
+					nextCaretY = caretY;
+				}
+				if(directions[step] != direction){
+					Gdx.app.log(TAG, "WRONG STEP");
+				}else{
+					Gdx.app.log(TAG, "GOOD STEP");
+					bridgesGrid.addBridge(new Bridge(caretX, caretY, direction, 1, STEP_SIZE));
+					caretX = nextCaretX; caretY = nextCaretY;
+					step++;
+				}
+				if(step >= directions.length){
+					Gdx.app.log(TAG, "GAME COMPLETED");
+					staticStage.getRoot().removeActor(table);
 				}
 				return true;
 			}
