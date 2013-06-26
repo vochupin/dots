@@ -103,17 +103,27 @@ public class GridScreen implements Screen{
 		leftButton = new TextButton("left", Assets.skin);
 		rightButton = new TextButton("right", Assets.skin);
 		InputListener buttonListener = new InputListener() {
+			
+			int caretX = 10, caretY = 10;
 			@Override
 			public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
 				Actor actor = event.getListenerActor();
 				if(actor.equals(upButton)){
-					Gdx.app.log(TAG, "up pressed");
+					Bridge bridge = new Bridge(caretX, caretY, Bridge.DIRECTION_UP, 1, 5);
+					bridgesGrid.addBridge(bridge);
+					caretY += 5;
 				}else if(actor.equals(downButton)){
-					Gdx.app.log(TAG, "down pressed");
+					Bridge bridge = new Bridge(caretX, caretY, Bridge.DIRECTION_DOWN, 1, 5);
+					bridgesGrid.addBridge(bridge);
+					caretY -= 5;
 				}else if(actor.equals(leftButton)){
-					Gdx.app.log(TAG, "left pressed");
+					Bridge bridge = new Bridge(caretX, caretY, Bridge.DIRECTION_LEFT, 1, 5);
+					bridgesGrid.addBridge(bridge);
+					caretX -= 5;
 				}else if(actor.equals(rightButton)){
-					Gdx.app.log(TAG, "right pressed");
+					Bridge bridge = new Bridge(caretX, caretY, Bridge.DIRECTION_RIGHT, 1, 5);
+					bridgesGrid.addBridge(bridge);
+					caretX += 5;
 				}
 				return true;
 			}

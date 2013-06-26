@@ -2,8 +2,10 @@ package net.slezok.dots;
 
 public class Bridge{
 	
-	private final int DIRECTION_VERTICAL = 0;
-	private final int DIRECTION_HORIZONTAL = 270;
+	public static final int DIRECTION_UP = 0;
+	public static final int DIRECTION_DOWN = 180;
+	public static final int DIRECTION_LEFT = 90;
+	public static final int DIRECTION_RIGHT = 270;
 
 	private int x;
 	private int y;
