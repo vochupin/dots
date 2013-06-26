@@ -30,7 +30,7 @@ public class BridgesGrid extends Group {
 	final int gameUnitConst = 32;
 	private World world;
 	
-	public BridgesGrid(World world) {
+	public BridgesGrid(World world, String levelFileName) {
 		this.world = world;
 		
 		SCREEN_WIDTH = Gdx.graphics.getWidth();
@@ -42,7 +42,7 @@ public class BridgesGrid extends Group {
 		Gdx.app.log(TAG, "Screen width: " + SCREEN_WIDTH + " Screen height: " + SCREEN_HEIGHT);
 		Gdx.app.log(TAG, "Field width: " + FIELD_WIDTH + " Field height: " + FIELD_HEIGHT);
 		
-		FileHandle file =  Gdx.files.internal("data/grid.json");
+		FileHandle file =  Gdx.files.internal(levelFileName);
 		Json json = new Json();
 		@SuppressWarnings("unchecked")
 		Array<Bridge> bridges = json.fromJson(Array.class, Bridge.class, file);	

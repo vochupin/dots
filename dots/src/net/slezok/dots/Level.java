@@ -5,6 +5,9 @@ public class Level{
 	private int startX;
 	private int startY;
 	private String levelFile;
+	private float[] x;
+	private float[] y;
+	private float[] direction;
 	
 	public Level(int startX, int startY) {
 		super();
@@ -37,5 +40,29 @@ public class Level{
 
 	public void setLevelFile(String levelFile) {
 		this.levelFile = levelFile;
+	}
+
+	public float[] getX() {
+		return x;
+	}
+
+	public void setX(float[] x) {
+		this.x = x;
+	}
+
+	public float[] getY() {
+		return y;
+	}
+
+	public void setY(float[] y) {
+		this.y = y;
+	}
+
+	public float[] getDirection() {
+		return direction;
+	}
+
+	public void setDirection(float[] direction) {
+		this.direction = direction;
 	}
 }

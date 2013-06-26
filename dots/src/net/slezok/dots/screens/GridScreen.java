@@ -96,14 +96,14 @@ public class GridScreen implements Screen{
 		staticStage = new Stage();	
 		staticStage.addListener(new BridgesGestureHandler(this));
 
-		bridgesGrid = new BridgesGrid(world);
-		bridgesGrid.setPosition(0, 0);
-		
 		FileHandle file =  Gdx.files.internal("data/levels.json");
 		Json json = new Json();
 		@SuppressWarnings("unchecked")
 		Array<Level> levels = json.fromJson(Array.class, Level.class, file);
+		final Level level = levels.get(0);
 		
+		bridgesGrid = new BridgesGrid(world, level.getLevelFile());
+		bridgesGrid.setPosition(0, 0);
 		stage.addActor(bridgesGrid);
 		
 		Table table = new Table(Assets.skin);
@@ -113,7 +113,7 @@ public class GridScreen implements Screen{
 		rightButton = new TextButton("right", Assets.skin);
 		InputListener buttonListener = new InputListener() {
 			
-			int caretX = 10, caretY = 10;
+			int caretX = level.getStartX(), caretY = level.getStartY();
 			@Override
 			public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
 				Actor actor = event.getListenerActor();
