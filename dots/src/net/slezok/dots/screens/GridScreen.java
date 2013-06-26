@@ -125,13 +125,14 @@ public class GridScreen implements Screen{
 		rightButton.addListener(buttonListener);
 
 		table.setFillParent(true);
+		table.defaults().width(100).height(80);
 		table.debug();
-		table.add(upButton).width(100).height(80).colspan(2).align(BaseTableLayout.CENTER);
+		table.add(upButton).colspan(2).align(BaseTableLayout.CENTER);
 		table.row();
-		table.add(leftButton).width(100).height(80).padRight(100);
-		table.add(rightButton).width(100).height(80).padLeft(100);
+		table.add(leftButton).padRight(100);
+		table.add(rightButton).padLeft(100);
 		table.row();
-		table.add(downButton).width(100).height(80).colspan(2).align(BaseTableLayout.CENTER);
+		table.add(downButton).colspan(2).align(BaseTableLayout.CENTER);
 		
 		Image bgrImage = new Image(Assets.backgroundTexture);
 		bgrImage.setFillParent(true);
