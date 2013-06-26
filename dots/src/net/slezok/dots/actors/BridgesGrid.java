@@ -18,6 +18,8 @@ public class BridgesGrid extends Group {
 	private static final String TAG = "Bridges";
 
 	private static final float FIELD_WIDTH = 100;
+
+	private static final float DOT_HALF_SIZE = 0.1F;
 	private final float FIELD_HEIGHT = 100;
 	private final float SCREEN_WIDTH;
 	private final float SCREEN_HEIGHT;
@@ -83,7 +85,7 @@ public class BridgesGrid extends Group {
 		float scale = SCREEN_WIDTH / FIELD_WIDTH;
 
 		Image image = new Image(Assets.platform);
-		image.setPosition(bridge.getX() * scale, bridge.getY() * scale);
+		image.setPosition((bridge.getX() - 0.5F) * scale, (bridge.getY() - 0.5F) * scale);
 		image.setWidth(bridge.getWidth() * scale);
 		image.setHeight(bridge.getLength() * scale);
 		image.setRotation(bridge.getDirection());
@@ -97,11 +99,11 @@ public class BridgesGrid extends Group {
 		float scale = SCREEN_WIDTH / FIELD_WIDTH;
 
 		Image dot = new Image(Assets.platform);
-		float xPos = (float) (x * scale - 0.5);
-		float yPos = (float) (y * scale - 0.5);
+		float xPos = (float) ((x - DOT_HALF_SIZE) * scale);
+		float yPos = (float) ((y - DOT_HALF_SIZE) * scale);
 		dot.setPosition(xPos, yPos);
-		dot.setWidth(1);
-		dot.setHeight(1);
+		dot.setWidth(DOT_HALF_SIZE * scale * 2);
+		dot.setHeight(DOT_HALF_SIZE * scale * 2);
 		dot.setRotation(0);
 
 		createPlatformBody(xPos, yPos, 1, 1);
