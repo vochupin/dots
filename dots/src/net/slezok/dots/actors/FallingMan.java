@@ -42,7 +42,6 @@ public class FallingMan extends Actor {
 	
 	@Override
 	public void act(float delta) {
-		// TODO Auto-generated method stub
 		super.act(delta);		
 		stateTime += delta;
 		

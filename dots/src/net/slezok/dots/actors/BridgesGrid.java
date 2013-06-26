@@ -82,15 +82,15 @@ public class BridgesGrid extends Group {
 	public void addBridge(Bridge bridge) {
 		float scale = SCREEN_WIDTH / FIELD_WIDTH;
 
-		Image platform = new Image(Assets.platform);
-		platform.setPosition(bridge.getX() * scale, bridge.getY() * scale);
-		platform.setWidth(bridge.getWidth() * scale);
-		platform.setHeight(bridge.getLength() * scale);
-		platform.setRotation(bridge.getDirection());
+		Image image = new Image(Assets.platform);
+		image.setPosition(bridge.getX() * scale, bridge.getY() * scale);
+		image.setWidth(bridge.getWidth() * scale);
+		image.setHeight(bridge.getLength() * scale);
+		image.setRotation(bridge.getDirection());
 
-		createPlatformBody(bridge.getX(), bridge.getY(), platform.getWidth(), platform.getHeight());
+		createPlatformBody(bridge.getX(), bridge.getY(), image.getWidth(), image.getHeight());
 
-		addActor(platform);
+		addActor(image);
 	}
 
 	public void addDot(int x, int y) {

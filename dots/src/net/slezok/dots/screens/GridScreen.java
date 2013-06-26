@@ -17,6 +17,10 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.esotericsoftware.tablelayout.BaseTableLayout;
+
 import net.slezok.dots.Assets;
 import net.slezok.dots.Bridge;
 import net.slezok.dots.BridgesGestureHandler;
@@ -43,6 +47,11 @@ public class GridScreen implements Screen{
 	
 	Box2DDebugRenderer debugRenderer = new Box2DDebugRenderer();
 	
+	TextButton upButton;
+	TextButton downButton;
+	TextButton leftButton;
+	TextButton rightButton;
+	
 	public GridScreen(Dots game) {
 		this.game = game;
 	}
@@ -57,6 +66,8 @@ public class GridScreen implements Screen{
 		
 		staticStage.act(delta);
         staticStage.draw();
+        Table.drawDebug(staticStage);
+
         stage.act(delta);
         stage.draw();
         
@@ -72,6 +83,7 @@ public class GridScreen implements Screen{
 		}
 	}
 
+	
 	@Override
 	public void show() {
 		world = new World(new Vector2(0f, -1), true);
@@ -85,10 +97,47 @@ public class GridScreen implements Screen{
 		
 		stage.addActor(bridgesGrid);
 		
+		Table table = new Table(Assets.skin);
+		upButton = new TextButton("up", Assets.skin);
+		downButton = new TextButton("down", Assets.skin);
+		leftButton = new TextButton("left", Assets.skin);
+		rightButton = new TextButton("right", Assets.skin);
+		InputListener buttonListener = new InputListener() {
+			@Override
+			public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+				Actor actor = event.getListenerActor();
+				if(actor.equals(upButton)){
+					Gdx.app.log(TAG, "up pressed");
+				}else if(actor.equals(downButton)){
+					Gdx.app.log(TAG, "down pressed");
+				}else if(actor.equals(leftButton)){
+					Gdx.app.log(TAG, "left pressed");
+				}else if(actor.equals(rightButton)){
+					Gdx.app.log(TAG, "right pressed");
+				}
+				return true;
+			}
+			
+		};
+		upButton.addListener(buttonListener);
+		downButton.addListener(buttonListener);
+		leftButton.addListener(buttonListener);
+		rightButton.addListener(buttonListener);
+
+		table.setFillParent(true);
+		table.debug();
+		table.add(upButton).width(100).height(80).colspan(2).align(BaseTableLayout.CENTER);
+		table.row();
+		table.add(leftButton).width(100).height(80).padRight(100);
+		table.add(rightButton).width(100).height(80).padLeft(100);
+		table.row();
+		table.add(downButton).width(100).height(80).colspan(2).align(BaseTableLayout.CENTER);
+		
 		Image bgrImage = new Image(Assets.backgroundTexture);
 		bgrImage.setFillParent(true);
 		bgrImage.setPosition(0,  0);
 		staticStage.addActor(bgrImage);
+		staticStage.addActor(table);
 		
 		Gdx.input.setInputProcessor(staticStage);
 	}
