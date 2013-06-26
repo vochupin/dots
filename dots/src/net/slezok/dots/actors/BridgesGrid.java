@@ -39,7 +39,6 @@ public class BridgesGrid extends Group {
 		WORLD_HEIGHT = SCREEN_HEIGHT * 2;
 		WORLD_WIDTH = SCREEN_WIDTH * 1;
 		
-//		VIEW_HEIGHT = VIEW_WIDTH * SCREEN_HEIGHT / SCREEN_WIDTH;
 		Gdx.app.log(TAG, "Screen width: " + SCREEN_WIDTH + " Screen height: " + SCREEN_HEIGHT);
 		Gdx.app.log(TAG, "Field width: " + FIELD_WIDTH + " Field height: " + FIELD_HEIGHT);
 		

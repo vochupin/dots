@@ -1,0 +1,8 @@
+[
+{
+	class: net.slezok.dots.Level,
+	startX: 5,
+	startY: 5,
+	levelFile: "data/grid.json"
+}
+]

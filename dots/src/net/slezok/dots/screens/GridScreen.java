@@ -4,6 +4,7 @@ import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
@@ -19,6 +20,8 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.utils.Json;
 import com.esotericsoftware.tablelayout.BaseTableLayout;
 
 import net.slezok.dots.Assets;
@@ -26,6 +29,7 @@ import net.slezok.dots.Bridge;
 import net.slezok.dots.BridgesGestureHandler;
 import net.slezok.dots.InputHandler;
 import net.slezok.dots.Dots;
+import net.slezok.dots.Level;
 import net.slezok.dots.OverlapTester;
 import net.slezok.dots.actors.BridgesGrid;
 import net.slezok.dots.actors.FallingMan;
@@ -94,6 +98,11 @@ public class GridScreen implements Screen{
 
 		bridgesGrid = new BridgesGrid(world);
 		bridgesGrid.setPosition(0, 0);
+		
+		FileHandle file =  Gdx.files.internal("data/levels.json");
+		Json json = new Json();
+		@SuppressWarnings("unchecked")
+		Array<Level> levels = json.fromJson(Array.class, Level.class, file);
 		
 		stage.addActor(bridgesGrid);
 		
