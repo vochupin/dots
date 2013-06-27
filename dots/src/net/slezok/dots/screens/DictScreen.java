@@ -128,6 +128,9 @@ public class DictScreen implements Screen{
 		downButton = new TextButton("down", Assets.skin);
 		leftButton = new TextButton("left", Assets.skin);
 		rightButton = new TextButton("right", Assets.skin);
+		
+		repeatButton = new TextButton("repeat", Assets.skin);
+		
 		InputListener buttonListener = new InputListener() {
 			
 			int caretX = level.getStartX(), caretY = level.getStartY();
@@ -155,28 +158,36 @@ public class DictScreen implements Screen{
 					direction = Bridge.DIRECTION_RIGHT;
 					nextCaretX = caretX + STEP_SIZE;
 					nextCaretY = caretY;
-				}
-				if(directions[step] != direction){
-					Gdx.app.log(TAG, "WRONG STEP");
-					errors++;
-					errorsLabel.setText("Errors: " + errors);
-					laughSound.play();
-				}else{
-					Gdx.app.log(TAG, "GOOD STEP");
-					bridgesGrid.addBridge(new Bridge(caretX, caretY, direction, 1, STEP_SIZE));
-					caretX = nextCaretX; caretY = nextCaretY;
-					step++;
-					okSound.play();
-				}
-				if(step >= directions.length){
-					Gdx.app.log(TAG, "GAME COMPLETED");
-					table.removeActor(upButton);
-					table.removeActor(downButton);
-					table.removeActor(leftButton);
-					table.removeActor(rightButton);
-					okSound.stop();
-					laughSound.stop();
+				}else if(actor.equals(repeatButton)){
 					wowSound.play();
+				}
+				
+				if(direction >= 0){
+					if(directions[step] != direction){
+						Gdx.app.log(TAG, "WRONG STEP");
+						errors++;
+						errorsLabel.setText("Errors: " + errors);
+						laughSound.play();
+					}else{
+						Gdx.app.log(TAG, "GOOD STEP");
+						bridgesGrid.addBridge(new Bridge(caretX, caretY, direction, 1, STEP_SIZE));
+						caretX = nextCaretX; caretY = nextCaretY;
+						step++;
+						okSound.play();
+					}
+					
+					if(step >= directions.length){
+						Gdx.app.log(TAG, "GAME COMPLETED");
+						table.removeActor(upButton);
+						table.removeActor(downButton);
+						table.removeActor(leftButton);
+						table.removeActor(rightButton);
+						table.removeActor(repeatButton);
+						
+						okSound.stop();
+						laughSound.stop();
+						wowSound.play();
+					}
 				}
 				return true;
 			}
@@ -186,6 +197,8 @@ public class DictScreen implements Screen{
 		downButton.addListener(buttonListener);
 		leftButton.addListener(buttonListener);
 		rightButton.addListener(buttonListener);
+		
+		repeatButton.addListener(buttonListener);
 
 		errorsLabel = new Label("Errors: 0", Assets.skin);
 		errorsLabel.setFontScale(2);
@@ -195,12 +208,13 @@ public class DictScreen implements Screen{
 		table.debug();
 		table.add(errorsLabel);
 		table.row();
-		table.add(upButton).padBottom(50).colspan(2).align(BaseTableLayout.CENTER);
+		table.add(upButton).padBottom(50).colspan(3).align(BaseTableLayout.CENTER);
 		table.row();
 		table.add(leftButton).padRight(100);
+		table.add(repeatButton).align(BaseTableLayout.CENTER);
 		table.add(rightButton).padLeft(100);
 		table.row();
-		table.add(downButton).padTop(50).colspan(2).align(BaseTableLayout.CENTER);
+		table.add(downButton).padTop(50).colspan(3).align(BaseTableLayout.CENTER);
 		
 		Image bgrImage = new Image(Assets.backgroundTexture);
 		bgrImage.setFillParent(true);
