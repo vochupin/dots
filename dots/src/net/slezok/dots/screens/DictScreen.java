@@ -4,6 +4,7 @@ import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.GL10;
@@ -64,6 +65,10 @@ public class DictScreen implements Screen{
 	private Label errorsLabel;
 	private int errors = 0;
 	
+	private Sound okSound;
+	private Sound wowSound;
+	private Sound laughSound;
+	
 	public DictScreen(Dots game) {
 		this.game = game;
 	}
@@ -98,6 +103,10 @@ public class DictScreen implements Screen{
 	
 	@Override
 	public void show() {
+		okSound = Gdx.audio.newSound(Gdx.files.internal("data/ok.mp3"));
+		wowSound = Gdx.audio.newSound(Gdx.files.internal("data/wow.mp3"));
+		laughSound = Gdx.audio.newSound(Gdx.files.internal("data/laugh.mp3"));
+		
 		world = new World(new Vector2(0f, -1), true);
 		
 		stage = new Stage();
@@ -151,11 +160,13 @@ public class DictScreen implements Screen{
 					Gdx.app.log(TAG, "WRONG STEP");
 					errors++;
 					errorsLabel.setText("Errors: " + errors);
+					laughSound.play();
 				}else{
 					Gdx.app.log(TAG, "GOOD STEP");
 					bridgesGrid.addBridge(new Bridge(caretX, caretY, direction, 1, STEP_SIZE));
 					caretX = nextCaretX; caretY = nextCaretY;
 					step++;
+					okSound.play();
 				}
 				if(step >= directions.length){
 					Gdx.app.log(TAG, "GAME COMPLETED");
@@ -163,6 +174,9 @@ public class DictScreen implements Screen{
 					table.removeActor(downButton);
 					table.removeActor(leftButton);
 					table.removeActor(rightButton);
+					okSound.stop();
+					laughSound.stop();
+					wowSound.play();
 				}
 				return true;
 			}
@@ -218,6 +232,9 @@ public class DictScreen implements Screen{
 	@Override
 	public void dispose() {
 		stage.dispose();
+		okSound.dispose();
+		wowSound.dispose();
+		laughSound.dispose();
 	}
 
 	
