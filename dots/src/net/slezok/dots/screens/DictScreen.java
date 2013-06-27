@@ -59,6 +59,8 @@ public class DictScreen implements Screen{
 	private TextButton leftButton;
 	private TextButton rightButton;
 	
+	private TextButton repeatButton;
+	
 	private Label errorsLabel;
 	private int errors = 0;
 	
