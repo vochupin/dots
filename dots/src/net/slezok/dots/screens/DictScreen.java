@@ -18,6 +18,7 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.utils.Array;
@@ -40,10 +41,10 @@ public class DictScreen implements Screen{
 
 	protected static final int STEP_SIZE = 5;
 
-	World world;
-	Dots game;
-	Stage stage;
-	Stage staticStage;
+	private World world;
+	private Dots game;
+	private Stage stage;
+	private Stage staticStage;
 	private DictField bridgesGrid;
 	private DictGestureHandler inputHandler;
 
@@ -51,12 +52,15 @@ public class DictScreen implements Screen{
 	private float oldInitialDistance = 0;
 	private float initialScale = 0;
 	
-	Box2DDebugRenderer debugRenderer = new Box2DDebugRenderer();
+	private Box2DDebugRenderer debugRenderer = new Box2DDebugRenderer();
 	
-	TextButton upButton;
-	TextButton downButton;
-	TextButton leftButton;
-	TextButton rightButton;
+	private TextButton upButton;
+	private TextButton downButton;
+	private TextButton leftButton;
+	private TextButton rightButton;
+	
+	private Label errorsLabel;
+	private int errors = 0;
 	
 	public DictScreen(Dots game) {
 		this.game = game;
@@ -143,6 +147,8 @@ public class DictScreen implements Screen{
 				}
 				if(directions[step] != direction){
 					Gdx.app.log(TAG, "WRONG STEP");
+					errors++;
+					errorsLabel.setText("Errors: " + errors);
 				}else{
 					Gdx.app.log(TAG, "GOOD STEP");
 					bridgesGrid.addBridge(new Bridge(caretX, caretY, direction, 1, STEP_SIZE));
@@ -151,7 +157,10 @@ public class DictScreen implements Screen{
 				}
 				if(step >= directions.length){
 					Gdx.app.log(TAG, "GAME COMPLETED");
-					staticStage.getRoot().removeActor(table);
+					table.removeActor(upButton);
+					table.removeActor(downButton);
+					table.removeActor(leftButton);
+					table.removeActor(rightButton);
 				}
 				return true;
 			}
@@ -162,9 +171,14 @@ public class DictScreen implements Screen{
 		leftButton.addListener(buttonListener);
 		rightButton.addListener(buttonListener);
 
+		errorsLabel = new Label("Errors: 0", Assets.skin);
+		errorsLabel.setFontScale(2);
+		
 		table.setFillParent(true);
 		table.defaults().width(100).height(80);
 		table.debug();
+		table.add(errorsLabel);
+		table.row();
 		table.add(upButton).padBottom(50).colspan(2).align(BaseTableLayout.CENTER);
 		table.row();
 		table.add(leftButton).padRight(100);
