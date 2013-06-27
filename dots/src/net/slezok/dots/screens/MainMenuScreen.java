@@ -50,7 +50,7 @@ public class MainMenuScreen implements Screen {
 		Table table = new Table(Assets.skin);
 		
 		startGameButton = new TextButton("New Game", Assets.skin);
-		gridButton = new TextButton("Grid", Assets.skin);
+		gridButton = new TextButton("Dict", Assets.skin);
 		exitButton = new TextButton("Exit", Assets.skin);
 		Image backImage = new Image(Assets.backgroundTexture);
 		backImage.setFillParent(true);
@@ -69,7 +69,7 @@ public class MainMenuScreen implements Screen {
 
 			@Override
 			public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-				game.setScreen(new GridScreen(game));
+				game.setScreen(new DictScreen(game));
 				return true;
 			}
 			

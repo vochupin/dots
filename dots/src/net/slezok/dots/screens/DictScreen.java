@@ -26,16 +26,16 @@ import com.esotericsoftware.tablelayout.BaseTableLayout;
 
 import net.slezok.dots.Assets;
 import net.slezok.dots.Bridge;
-import net.slezok.dots.BridgesGestureHandler;
+import net.slezok.dots.DictGestureHandler;
 import net.slezok.dots.InputHandler;
 import net.slezok.dots.Dots;
 import net.slezok.dots.Level;
 import net.slezok.dots.OverlapTester;
-import net.slezok.dots.actors.BridgesGrid;
+import net.slezok.dots.actors.DictField;
 import net.slezok.dots.actors.FallingMan;
 import net.slezok.dots.actors.Platforms;
 
-public class GridScreen implements Screen{
+public class DictScreen implements Screen{
 	private static final String TAG = "GridScreen";
 
 	protected static final int STEP_SIZE = 5;
@@ -44,8 +44,8 @@ public class GridScreen implements Screen{
 	Dots game;
 	Stage stage;
 	Stage staticStage;
-	private BridgesGrid bridgesGrid;
-	private BridgesGestureHandler inputHandler;
+	private DictField bridgesGrid;
+	private DictGestureHandler inputHandler;
 
 	//for zoom
 	private float oldInitialDistance = 0;
@@ -58,7 +58,7 @@ public class GridScreen implements Screen{
 	TextButton leftButton;
 	TextButton rightButton;
 	
-	public GridScreen(Dots game) {
+	public DictScreen(Dots game) {
 		this.game = game;
 	}
 
@@ -96,7 +96,7 @@ public class GridScreen implements Screen{
 		
 		stage = new Stage();
 		staticStage = new Stage();	
-		staticStage.addListener(new BridgesGestureHandler(this));
+		staticStage.addListener(new DictGestureHandler(this));
 
 		FileHandle file =  Gdx.files.internal("data/levels.json");
 		Json json = new Json();
@@ -104,7 +104,7 @@ public class GridScreen implements Screen{
 		Array<Level> levels = json.fromJson(Array.class, Level.class, file);
 		final Level level = levels.get(0);
 		
-		bridgesGrid = new BridgesGrid(world, level.getLevelFile());
+		bridgesGrid = new DictField(world, level.getLevelFile());
 		bridgesGrid.setPosition(0, 0);
 		stage.addActor(bridgesGrid);
 		

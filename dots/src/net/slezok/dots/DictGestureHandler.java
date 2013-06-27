@@ -8,14 +8,14 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ActorGestureListener;
 
-import net.slezok.dots.screens.GridScreen;
+import net.slezok.dots.screens.DictScreen;
 
-public class BridgesGestureHandler extends ActorGestureListener{//implements GestureDetector.GestureListener {
+public class DictGestureHandler extends ActorGestureListener{//implements GestureDetector.GestureListener {
 	private static final String TAG = "BridgesInputHandler";
 	
-	GridScreen gridScreen;
+	DictScreen gridScreen;
 	
-	public BridgesGestureHandler(GridScreen gridScreen) {
+	public DictGestureHandler(DictScreen gridScreen) {
 		this.gridScreen = gridScreen;
 	}
 

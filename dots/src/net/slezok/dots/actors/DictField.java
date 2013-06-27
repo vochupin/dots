@@ -14,7 +14,7 @@ import com.badlogic.gdx.utils.Json;
 import net.slezok.dots.Assets;
 import net.slezok.dots.Bridge;
 
-public class BridgesGrid extends Group {
+public class DictField extends Group {
 	private static final String TAG = "Bridges";
 
 	private static final float FIELD_WIDTH = 100;
@@ -30,7 +30,7 @@ public class BridgesGrid extends Group {
 	final int gameUnitConst = 32;
 	private World world;
 	
-	public BridgesGrid(World world, String levelFileName) {
+	public DictField(World world, String levelFileName) {
 		this.world = world;
 		
 		SCREEN_WIDTH = Gdx.graphics.getWidth();
