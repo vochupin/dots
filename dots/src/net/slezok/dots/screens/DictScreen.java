@@ -175,6 +175,11 @@ public class DictScreen implements Screen{
 		downButton = new ImageButton(new TextureRegionDrawable(Assets.down));
 		leftButton = new ImageButton(new TextureRegionDrawable(Assets.left));
 		rightButton = new ImageButton(new TextureRegionDrawable(Assets.right));
+
+		upLeftButton = new ImageButton(new TextureRegionDrawable(Assets.upLeft));
+		downLeftButton = new ImageButton(new TextureRegionDrawable(Assets.downLeft));
+		upRightButton = new ImageButton(new TextureRegionDrawable(Assets.upRight));
+		downRightButton = new ImageButton(new TextureRegionDrawable(Assets.downRight));
 		
 		repeatButton = new ImageButton(new TextureRegionDrawable(Assets.repeat));
 		
@@ -244,6 +249,11 @@ public class DictScreen implements Screen{
 		downButton.addListener(buttonListener);
 		leftButton.addListener(buttonListener);
 		rightButton.addListener(buttonListener);
+
+		upLeftButton.addListener(buttonListener);
+		downLeftButton.addListener(buttonListener);
+		upRightButton.addListener(buttonListener);
+		downRightButton.addListener(buttonListener);
 		
 		repeatButton.addListener(buttonListener);
 
@@ -255,13 +265,17 @@ public class DictScreen implements Screen{
 //		table.debug();
 		table.add(errorsLabel);
 		table.row();
-		table.add(upButton).padBottom(50).colspan(3).align(BaseTableLayout.CENTER);
+		table.add(upLeftButton).padBottom(50).padRight(100);
+		table.add(upButton).padBottom(50).align(BaseTableLayout.CENTER);
+		table.add(upRightButton).padBottom(50).padLeft(100);
 		table.row();
 		table.add(leftButton).padRight(100);
 		table.add(repeatButton).align(BaseTableLayout.CENTER);
 		table.add(rightButton).padLeft(100);
 		table.row();
-		table.add(downButton).padTop(50).colspan(3).align(BaseTableLayout.CENTER);
+		table.add(downLeftButton).padTop(50).padRight(100);
+		table.add(downButton).padTop(50).align(BaseTableLayout.CENTER);
+		table.add(downRightButton).padTop(50).padLeft(100);
 		
 		Image bgrImage = new Image(Assets.backgroundTexture);
 		bgrImage.setFillParent(true);

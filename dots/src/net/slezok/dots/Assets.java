@@ -20,6 +20,11 @@ public class Assets {
 	public static TextureRegion left;
 	public static TextureRegion right;
 	public static TextureRegion repeat;
+
+	public static TextureRegion upLeft;
+	public static TextureRegion downLeft;
+	public static TextureRegion upRight;
+	public static TextureRegion downRight;
 	
 	public static void load () {
 		
@@ -29,12 +34,17 @@ public class Assets {
 		fallingManSplash = textureAtlas.findRegion("rip");
 		backgroundTexture = new Texture(Gdx.files.internal("data/back.jpg"));
 		
-		up = new TextureRegion(new Texture(Gdx.files.internal("data/up.png")));
-		down = new TextureRegion(new Texture(Gdx.files.internal("data/down.png")));
-		left = new TextureRegion(new Texture(Gdx.files.internal("data/left.png")));
-		right = new TextureRegion(new Texture(Gdx.files.internal("data/right.png")));
-		repeat = new TextureRegion(new Texture(Gdx.files.internal("data/repeat.png")));
-		
+		up = new TextureRegion(new Texture(Gdx.files.internal("data/button/up_128.png")));
+		down = new TextureRegion(new Texture(Gdx.files.internal("data/button/down_128.png")));
+		left = new TextureRegion(new Texture(Gdx.files.internal("data/button/left_128.png")));
+		right = new TextureRegion(new Texture(Gdx.files.internal("data/button/right_128.png")));
+		repeat = new TextureRegion(new Texture(Gdx.files.internal("data/button/repeat_128.png")));
+
+		upLeft = new TextureRegion(new Texture(Gdx.files.internal("data/button/up_left_128.png")));
+		downLeft = new TextureRegion(new Texture(Gdx.files.internal("data/button/down_left_128.png")));
+		upRight = new TextureRegion(new Texture(Gdx.files.internal("data/button/up_right_128.png")));
+		downRight = new TextureRegion(new Texture(Gdx.files.internal("data/button/down_right_128.png")));
+
 		skin = new Skin(Gdx.files.internal("data/uiskin.json"));
 		
 	}
