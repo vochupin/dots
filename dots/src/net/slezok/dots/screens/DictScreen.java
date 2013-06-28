@@ -70,6 +70,11 @@ public class DictScreen implements Screen{
 	private Sound wellDoneSound;
 	private Sound gameOverSound;
 	private Sound errorSound;
+
+	private Sound upSound;
+	private Sound downSound;
+	private Sound leftSound;
+	private Sound rightSound;
 	
 	public DictScreen(Dots game) {
 		this.game = game;
@@ -108,6 +113,11 @@ public class DictScreen implements Screen{
 		wellDoneSound = Gdx.audio.newSound(Gdx.files.internal("data/welldone.mp3"));
 		gameOverSound = Gdx.audio.newSound(Gdx.files.internal("data/gameover.mp3"));
 		errorSound = Gdx.audio.newSound(Gdx.files.internal("data/error.mp3"));
+		
+		upSound = Gdx.audio.newSound(Gdx.files.internal("data/up.mp3"));
+		downSound = Gdx.audio.newSound(Gdx.files.internal("data/down.mp3"));
+		leftSound = Gdx.audio.newSound(Gdx.files.internal("data/left.mp3"));
+		rightSound = Gdx.audio.newSound(Gdx.files.internal("data/right.mp3"));
 		
 		world = new World(new Vector2(0f, -1), true);
 		
