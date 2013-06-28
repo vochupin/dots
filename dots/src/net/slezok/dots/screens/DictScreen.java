@@ -75,6 +75,13 @@ public class DictScreen implements Screen{
 	private Sound downSound;
 	private Sound leftSound;
 	private Sound rightSound;
+
+	private Level level;
+	private int caretX, caretY;
+	private int step;
+	private int[] directions;
+
+	private Sound currentSound = null;
 	
 	public DictScreen(Dots game) {
 		this.game = game;
@@ -129,7 +136,12 @@ public class DictScreen implements Screen{
 		Json json = new Json();
 		@SuppressWarnings("unchecked")
 		Array<Level> levels = json.fromJson(Array.class, Level.class, file);
-		final Level level = levels.get(0);
+		level = levels.get(0);
+
+		caretX = level.getStartX();
+		caretY = level.getStartY();
+		step = 0;
+		directions = level.getDirections();
 		
 		bridgesGrid = new DictField(world, level.getLevelFile());
 		bridgesGrid.setPosition(0, 0);
@@ -145,9 +157,6 @@ public class DictScreen implements Screen{
 		
 		InputListener buttonListener = new InputListener() {
 			
-			int caretX = level.getStartX(), caretY = level.getStartY();
-			int step = 0;
-			int[] directions = level.getDirections();
 			@Override
 			public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
 				Actor actor = event.getListenerActor();
@@ -171,7 +180,7 @@ public class DictScreen implements Screen{
 					nextCaretX = caretX + STEP_SIZE;
 					nextCaretY = caretY;
 				}else if(actor.equals(repeatButton)){
-					gameOverSound.play();
+					if(currentSound != null) currentSound.play();
 				}
 				
 				if(direction >= 0){
@@ -185,7 +194,10 @@ public class DictScreen implements Screen{
 						bridgesGrid.addBridge(new Bridge(caretX, caretY, direction, 1, STEP_SIZE));
 						caretX = nextCaretX; caretY = nextCaretY;
 						step++;
-						wellDoneSound.play();
+						if(step < directions.length){
+							wellDoneSound.play();
+							setCurrentSoundAndPlay();
+						}
 					}
 					
 					if(step >= directions.length){
@@ -235,6 +247,26 @@ public class DictScreen implements Screen{
 		staticStage.addActor(table);
 		
 		Gdx.input.setInputProcessor(staticStage);
+		
+		setCurrentSoundAndPlay();
+	}
+
+	private void setCurrentSoundAndPlay() {
+		switch(directions[step]){
+		case Bridge.DIRECTION_UP:
+			currentSound = upSound;
+			break;
+		case Bridge.DIRECTION_DOWN:
+			currentSound = downSound;
+			break;
+		case Bridge.DIRECTION_LEFT:
+			currentSound = leftSound;
+			break;
+		case Bridge.DIRECTION_RIGHT:
+			currentSound = rightSound;
+			break;
+		}
+		if(currentSound != null) currentSound.play();
 	}
 
 	@Override
@@ -262,8 +294,6 @@ public class DictScreen implements Screen{
 		gameOverSound.dispose();
 		errorSound.dispose();
 	}
-
-	
 	
 	public void moveRelatively(float x, float y) {
 		Camera camera = stage.getCamera();
