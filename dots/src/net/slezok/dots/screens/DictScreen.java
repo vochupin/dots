@@ -67,9 +67,9 @@ public class DictScreen implements Screen{
 	private Label errorsLabel;
 	private int errors = 0;
 	
-	private Sound okSound;
-	private Sound wowSound;
-	private Sound laughSound;
+	private Sound wellDoneSound;
+	private Sound gameOverSound;
+	private Sound errorSound;
 	
 	public DictScreen(Dots game) {
 		this.game = game;
@@ -105,9 +105,9 @@ public class DictScreen implements Screen{
 	
 	@Override
 	public void show() {
-		okSound = Gdx.audio.newSound(Gdx.files.internal("data/ok.mp3"));
-		wowSound = Gdx.audio.newSound(Gdx.files.internal("data/wow.mp3"));
-		laughSound = Gdx.audio.newSound(Gdx.files.internal("data/laugh.mp3"));
+		wellDoneSound = Gdx.audio.newSound(Gdx.files.internal("data/welldone.mp3"));
+		gameOverSound = Gdx.audio.newSound(Gdx.files.internal("data/gameover.mp3"));
+		errorSound = Gdx.audio.newSound(Gdx.files.internal("data/error.mp3"));
 		
 		world = new World(new Vector2(0f, -1), true);
 		
@@ -161,7 +161,7 @@ public class DictScreen implements Screen{
 					nextCaretX = caretX + STEP_SIZE;
 					nextCaretY = caretY;
 				}else if(actor.equals(repeatButton)){
-					wowSound.play();
+					gameOverSound.play();
 				}
 				
 				if(direction >= 0){
@@ -169,13 +169,13 @@ public class DictScreen implements Screen{
 						Gdx.app.log(TAG, "WRONG STEP");
 						errors++;
 						errorsLabel.setText("Errors: " + errors);
-						laughSound.play();
+						errorSound.play();
 					}else{
 						Gdx.app.log(TAG, "GOOD STEP");
 						bridgesGrid.addBridge(new Bridge(caretX, caretY, direction, 1, STEP_SIZE));
 						caretX = nextCaretX; caretY = nextCaretY;
 						step++;
-						okSound.play();
+						wellDoneSound.play();
 					}
 					
 					if(step >= directions.length){
@@ -186,9 +186,9 @@ public class DictScreen implements Screen{
 						table.removeActor(rightButton);
 						table.removeActor(repeatButton);
 						
-						okSound.stop();
-						laughSound.stop();
-						wowSound.play();
+						wellDoneSound.stop();
+						errorSound.stop();
+						gameOverSound.play();
 					}
 				}
 				return true;
@@ -248,9 +248,9 @@ public class DictScreen implements Screen{
 	@Override
 	public void dispose() {
 		stage.dispose();
-		okSound.dispose();
-		wowSound.dispose();
-		laughSound.dispose();
+		wellDoneSound.dispose();
+		gameOverSound.dispose();
+		errorSound.dispose();
 	}
 
 	
