@@ -7,6 +7,12 @@ public class Bridge{
 	public static final int DIRECTION_LEFT = 90;
 	public static final int DIRECTION_RIGHT = 270;
 
+	//diagonal directions
+	public static final int DIRECTION_UP_LEFT = 45;
+	public static final int DIRECTION_DOWN_LEFT = 135;
+	public static final int DIRECTION_DOWN_RIGHT = 225;
+	public static final int DIRECTION_UP_RIGHT = 315;
+
 	private int x;
 	private int y;
 	private int direction;

@@ -63,7 +63,12 @@ public class DictScreen implements Screen{
 	private ImageButton downButton;
 	private ImageButton leftButton;
 	private ImageButton rightButton;
-	
+
+	private ImageButton upRightButton;
+	private ImageButton upLeftButton;
+	private ImageButton downRightButton;
+	private ImageButton downLeftButton;
+
 	private ImageButton repeatButton;
 	
 	private Label errorsLabel;
@@ -77,6 +82,11 @@ public class DictScreen implements Screen{
 	private Sound downSound;
 	private Sound leftSound;
 	private Sound rightSound;
+
+	private Sound upRightSound;
+	private Sound upLeftSound;
+	private Sound downRightSound;
+	private Sound downLeftSound;
 
 	private Level level;
 	private int caretX, caretY;
@@ -124,14 +134,20 @@ public class DictScreen implements Screen{
 	
 	@Override
 	public void show() {
-		wellDoneSound = Gdx.audio.newSound(Gdx.files.internal("data/welldone.mp3"));
-		gameOverSound = Gdx.audio.newSound(Gdx.files.internal("data/gameover.mp3"));
-		errorSound = Gdx.audio.newSound(Gdx.files.internal("data/error.mp3"));
+		//TODO move to Assets
+		wellDoneSound = Gdx.audio.newSound(Gdx.files.internal("data/sound/welldone.mp3"));
+		gameOverSound = Gdx.audio.newSound(Gdx.files.internal("data/sound/gameover.mp3"));
+		errorSound = Gdx.audio.newSound(Gdx.files.internal("data/sound/error.mp3"));
 		
-		upSound = Gdx.audio.newSound(Gdx.files.internal("data/up.mp3"));
-		downSound = Gdx.audio.newSound(Gdx.files.internal("data/down.mp3"));
-		leftSound = Gdx.audio.newSound(Gdx.files.internal("data/left.mp3"));
-		rightSound = Gdx.audio.newSound(Gdx.files.internal("data/right.mp3"));
+		upSound = Gdx.audio.newSound(Gdx.files.internal("data/sound/up.mp3"));
+		downSound = Gdx.audio.newSound(Gdx.files.internal("data/sound/down.mp3"));
+		leftSound = Gdx.audio.newSound(Gdx.files.internal("data/sound/left.mp3"));
+		rightSound = Gdx.audio.newSound(Gdx.files.internal("data/sound/right.mp3"));
+
+		upRightSound = Gdx.audio.newSound(Gdx.files.internal("data/sound/up_right.mp3"));
+		upLeftSound = Gdx.audio.newSound(Gdx.files.internal("data/sound/up_left.mp3"));
+		downRightSound = Gdx.audio.newSound(Gdx.files.internal("data/sound/down_right.mp3"));
+		downLeftSound = Gdx.audio.newSound(Gdx.files.internal("data/sound/down_left.mp3"));
 		
 		world = new World(new Vector2(0f, -1), true);
 		
