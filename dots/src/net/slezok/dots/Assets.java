@@ -8,8 +8,6 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 
 
-//Referenca za Tile Sprajtove http://www.netthreads.co.uk/2012/01/31/libgdx-example-of-using-scene2d-actions-and-event-handling/
-
 public class Assets {
 	public static TextureRegion platform;
 	public static TextureRegion fallingManSplash;
