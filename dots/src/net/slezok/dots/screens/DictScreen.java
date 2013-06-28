@@ -19,9 +19,11 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Json;
 import com.esotericsoftware.tablelayout.BaseTableLayout;
@@ -55,12 +57,12 @@ public class DictScreen implements Screen{
 	
 	private Box2DDebugRenderer debugRenderer = new Box2DDebugRenderer();
 	
-	private TextButton upButton;
-	private TextButton downButton;
-	private TextButton leftButton;
-	private TextButton rightButton;
+	private ImageButton upButton;
+	private ImageButton downButton;
+	private ImageButton leftButton;
+	private ImageButton rightButton;
 	
-	private TextButton repeatButton;
+	private ImageButton repeatButton;
 	
 	private Label errorsLabel;
 	private int errors = 0;
@@ -124,12 +126,12 @@ public class DictScreen implements Screen{
 		stage.addActor(bridgesGrid);
 		
 		final Table table = new Table(Assets.skin);
-		upButton = new TextButton("up", Assets.skin);
-		downButton = new TextButton("down", Assets.skin);
-		leftButton = new TextButton("left", Assets.skin);
-		rightButton = new TextButton("right", Assets.skin);
+		upButton = new ImageButton(new TextureRegionDrawable(Assets.up));
+		downButton = new ImageButton(new TextureRegionDrawable(Assets.down));
+		leftButton = new ImageButton(new TextureRegionDrawable(Assets.left));
+		rightButton = new ImageButton(new TextureRegionDrawable(Assets.right));
 		
-		repeatButton = new TextButton("repeat", Assets.skin);
+		repeatButton = new ImageButton(new TextureRegionDrawable(Assets.repeat));
 		
 		InputListener buttonListener = new InputListener() {
 			

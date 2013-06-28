@@ -17,6 +17,12 @@ public class Assets {
 	public static Texture backgroundTexture;
 	public static Skin skin;
 	
+	public static TextureRegion up;
+	public static TextureRegion down;
+	public static TextureRegion left;
+	public static TextureRegion right;
+	public static TextureRegion repeat;
+	
 	public static void load () {
 		
 		TextureAtlas textureAtlas = new TextureAtlas("data/PigTest.pack");
@@ -24,6 +30,12 @@ public class Assets {
 		platform = textureAtlas.findRegion("platform");
 		fallingManSplash = textureAtlas.findRegion("rip");
 		backgroundTexture = new Texture(Gdx.files.internal("data/back.jpg"));
+		
+		up = new TextureRegion(new Texture(Gdx.files.internal("data/up.png")));
+		down = new TextureRegion(new Texture(Gdx.files.internal("data/down.png")));
+		left = new TextureRegion(new Texture(Gdx.files.internal("data/left.png")));
+		right = new TextureRegion(new Texture(Gdx.files.internal("data/right.png")));
+		repeat = new TextureRegion(new Texture(Gdx.files.internal("data/repeat.png")));
 		
 		skin = new Skin(Gdx.files.internal("data/uiskin.json"));
 		
