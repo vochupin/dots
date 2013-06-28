@@ -44,6 +44,8 @@ public class DictScreen implements Screen{
 
 	protected static final int STEP_SIZE = 5;
 
+	private static final long CURRENT_SOUND_DELAY = 1500;
+
 	private World world;
 	private Dots game;
 	private Stage stage;
@@ -82,6 +84,7 @@ public class DictScreen implements Screen{
 	private int[] directions;
 
 	private Sound currentSound = null;
+	private long currentSoundPlayTime = Long.MAX_VALUE;
 	
 	public DictScreen(Dots game) {
 		this.game = game;
@@ -105,6 +108,10 @@ public class DictScreen implements Screen{
         world.step(1/60f, 6, 2);
 //        debugRenderer.render(world, camera.combined);
         
+        if(currentSound != null && currentSoundPlayTime < System.currentTimeMillis()){
+        	currentSound.play();
+        	currentSoundPlayTime = Long.MAX_VALUE;
+        }
 	}
 
 	@Override
@@ -180,7 +187,7 @@ public class DictScreen implements Screen{
 					nextCaretX = caretX + STEP_SIZE;
 					nextCaretY = caretY;
 				}else if(actor.equals(repeatButton)){
-					if(currentSound != null) currentSound.play();
+					setCurrentSoundAndPlay(0);
 				}
 				
 				if(direction >= 0){
@@ -196,7 +203,7 @@ public class DictScreen implements Screen{
 						step++;
 						if(step < directions.length){
 							wellDoneSound.play();
-							setCurrentSoundAndPlay();
+							setCurrentSoundAndPlay(CURRENT_SOUND_DELAY);
 						}
 					}
 					
@@ -248,10 +255,10 @@ public class DictScreen implements Screen{
 		
 		Gdx.input.setInputProcessor(staticStage);
 		
-		setCurrentSoundAndPlay();
+		setCurrentSoundAndPlay(CURRENT_SOUND_DELAY);
 	}
 
-	private void setCurrentSoundAndPlay() {
+	private void setCurrentSoundAndPlay(long delay) {
 		switch(directions[step]){
 		case Bridge.DIRECTION_UP:
 			currentSound = upSound;
@@ -266,7 +273,9 @@ public class DictScreen implements Screen{
 			currentSound = rightSound;
 			break;
 		}
-		if(currentSound != null) currentSound.play();
+		if(currentSound != null){
+			currentSoundPlayTime = System.currentTimeMillis() + delay;
+		}
 	}
 
 	@Override
