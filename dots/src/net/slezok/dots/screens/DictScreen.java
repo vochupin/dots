@@ -100,7 +100,7 @@ public class DictScreen implements Screen{
 		
 		staticStage.act(delta);
         staticStage.draw();
-        Table.drawDebug(staticStage);
+//        Table.drawDebug(staticStage);
 
         stage.act(delta);
         stage.draw();
@@ -236,7 +236,7 @@ public class DictScreen implements Screen{
 		
 		table.setFillParent(true);
 		table.defaults().width(100).height(80);
-		table.debug();
+//		table.debug();
 		table.add(errorsLabel);
 		table.row();
 		table.add(upButton).padBottom(50).colspan(3).align(BaseTableLayout.CENTER);

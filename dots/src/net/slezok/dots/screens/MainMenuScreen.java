@@ -77,11 +77,11 @@ public class MainMenuScreen implements Screen {
 
 		table.setFillParent(true);
 //		table.debug(); 
-		table.add(startGameButton).width(300).height(80);
-		table.row();
+//		table.add(startGameButton).width(300).height(80);
+//		table.row();
 		table.add(gridButton).width(250).height(80).padTop(30);
-		table.row();
-		table.add(exitButton).width(200).height(80).padTop(30);
+//		table.row();
+//		table.add(exitButton).width(200).height(80).padTop(30);
 		
 		stage.addActor(backImage);
 		stage.addActor(table);
