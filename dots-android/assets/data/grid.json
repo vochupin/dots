@@ -17,14 +17,14 @@
 	class: net.slezok.dots.Bridge,
 	x: 100,
 	y: 100,
-	direction: 180,
+	direction: 4,
 	width: 1,
 	length: 100
 },{
 	class: net.slezok.dots.Bridge,
 	x: 100,
 	y: 0,
-	direction: 90,
+	direction: 6,
 	width: 1,
 	length: 100
 }

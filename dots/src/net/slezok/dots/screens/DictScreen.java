@@ -189,24 +189,40 @@ public class DictScreen implements Screen{
 			public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
 				Actor actor = event.getListenerActor();
 				int direction = -1;
-				int nextCaretX = -1, nextCaretY = -1;
+				int stepX = 1, stepY = 1;
 				
 				if(actor.equals(upButton)){
 					direction = Bridge.DIRECTION_UP;
-					nextCaretX = caretX;
-					nextCaretY = caretY + STEP_SIZE;
+					stepX = 0;
+					stepY = STEP_SIZE;
 				}else if(actor.equals(downButton)){
 					direction = Bridge.DIRECTION_DOWN;
-					nextCaretX = caretX;
-					nextCaretY = caretY - STEP_SIZE;
+					stepX = 0;
+					stepY = -STEP_SIZE;
 				}else if(actor.equals(leftButton)){
 					direction = Bridge.DIRECTION_LEFT;
-					nextCaretX = caretX - STEP_SIZE;
-					nextCaretY = caretY;
+					stepX = -STEP_SIZE;
+					stepY = 0;
 				}else if(actor.equals(rightButton)){
 					direction = Bridge.DIRECTION_RIGHT;
-					nextCaretX = caretX + STEP_SIZE;
-					nextCaretY = caretY;
+					stepX = STEP_SIZE;
+					stepY = 0;
+				}else if(actor.equals(upRightButton)){
+					direction = Bridge.DIRECTION_UP_RIGHT;
+					stepX = STEP_SIZE;
+					stepY = STEP_SIZE;
+				}else if(actor.equals(upLeftButton)){
+					direction = Bridge.DIRECTION_UP_LEFT;
+					stepX = -STEP_SIZE;
+					stepY = STEP_SIZE;
+				}else if(actor.equals(downRightButton)){
+					direction = Bridge.DIRECTION_DOWN_RIGHT;
+					stepX = STEP_SIZE;
+					stepY = -STEP_SIZE;
+				}else if(actor.equals(downLeftButton)){
+					direction = Bridge.DIRECTION_DOWN_LEFT;
+					stepX = -STEP_SIZE;
+					stepY = -STEP_SIZE;
 				}else if(actor.equals(repeatButton)){
 					setCurrentSoundAndPlay(0);
 				}
@@ -219,8 +235,8 @@ public class DictScreen implements Screen{
 						errorSound.play();
 					}else{
 						Gdx.app.log(TAG, "GOOD STEP");
-						bridgesGrid.addBridge(new Bridge(caretX, caretY, direction, 1, STEP_SIZE));
-						caretX = nextCaretX; caretY = nextCaretY;
+						bridgesGrid.addBridge(new Bridge(caretX, caretY, direction, 1, (int)Math.sqrt(stepX * stepX + stepY * stepY)));
+						caretX += stepX; caretY += stepY;
 						step++;
 						if(step < directions.length){
 							wellDoneSound.play();
@@ -235,6 +251,10 @@ public class DictScreen implements Screen{
 						table.removeActor(leftButton);
 						table.removeActor(rightButton);
 						table.removeActor(repeatButton);
+						table.removeActor(upLeftButton);
+						table.removeActor(downLeftButton);
+						table.removeActor(upRightButton);
+						table.removeActor(downRightButton);
 						
 						wellDoneSound.stop();
 						errorSound.stop();
@@ -301,6 +321,18 @@ public class DictScreen implements Screen{
 			break;
 		case Bridge.DIRECTION_RIGHT:
 			currentSound = rightSound;
+			break;
+		case Bridge.DIRECTION_UP_LEFT:
+			currentSound = upLeftSound;
+			break;
+		case Bridge.DIRECTION_DOWN_LEFT:
+			currentSound = downLeftSound;
+			break;
+		case Bridge.DIRECTION_UP_RIGHT:
+			currentSound = upRightSound;
+			break;
+		case Bridge.DIRECTION_DOWN_RIGHT:
+			currentSound = downRightSound;
 			break;
 		}
 		if(currentSound != null){

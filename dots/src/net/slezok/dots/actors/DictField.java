@@ -87,7 +87,7 @@ public class DictField extends Group {
 		image.setPosition((bridge.getX() - 0.5F) * scale, (bridge.getY() - 0.5F) * scale);
 		image.setWidth(bridge.getWidth() * scale);
 		image.setHeight(bridge.getLength() * scale);
-		image.setRotation(bridge.getDirection());
+		image.setRotation(bridge.getDirectionAngle());
 
 		createPlatformBody(bridge.getX(), bridge.getY(), image.getWidth(), image.getHeight());
 
