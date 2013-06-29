@@ -5,6 +5,7 @@ public class Level{
 	private int startX;
 	private int startY;
 	private String levelFile;
+	private String description;
 	private int[] directions;
 	
 	public Level(int startX, int startY) {
@@ -46,5 +47,13 @@ public class Level{
 
 	public void setDirections(int[] direction) {
 		this.directions = direction;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
 	}
 }

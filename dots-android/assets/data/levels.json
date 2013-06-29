@@ -1,6 +1,14 @@
 [
 {
 	class: net.slezok.dots.Level,
+	description: "",
+	startX: 60,
+	startY: 100,
+	levelFile: "data/grid.json",
+	directions: [4]
+},{
+	class: net.slezok.dots.Level,
+	description: "Танк",
 	startX: 60,
 	startY: 100,
 	levelFile: "data/grid.json",
@@ -10,11 +18,5 @@
 				6,6,0,6,0,6,0,0,0,2,0,2,0,2,2,2,2,2,2,2,2,2,
 				2,2,0,6,6,6,0,6,6,6,6,6,6,6,6,6,4,6,0,0,0,
 				2,4,2,2,2,2,2,2,2,2,2,0,2,2,0,2,0,2,2,0,2,2,2,2]
-},{
-	class: net.slezok.dots.Level,
-	startX: 50,
-	startY: 50,
-	levelFile: "data/grid.json",
-	directions: [1,2,2]
 }
 ]
