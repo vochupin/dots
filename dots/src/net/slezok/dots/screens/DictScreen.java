@@ -44,7 +44,7 @@ public class DictScreen implements Screen{
 
 	protected static final int STEP_SIZE = 5;
 
-	private static final long CURRENT_SOUND_DELAY = 1500;
+	private static final long CURRENT_SOUND_DELAY = 800;
 
 	private World world;
 	private Dots game;
