@@ -51,8 +51,6 @@ public class LevelsListScreen implements Screen {
 		stage = new Stage();
 		Gdx.input.setInputProcessor(stage);
 		
-		Table table = new Table(Assets.skin);
-
 		FileHandle file =  Gdx.files.internal("data/levels.json");
 		Json json = new Json();
 		@SuppressWarnings("unchecked")
@@ -89,10 +87,12 @@ public class LevelsListScreen implements Screen {
 			}
 		});
 		
+		Table table = new Table(Assets.skin);
 		table.setFillParent(true);
 //		table.debug(); 
-		table.add(scroller).width(320).height(280);
-		table.add(startButton).width(250).height(80).padTop(30);
+		table.add(scroller).fill().expand();
+		table.row();
+		table.add(startButton).width(250).height(80);
 		
 		stage.addActor(backImage);
 		stage.addActor(table);
