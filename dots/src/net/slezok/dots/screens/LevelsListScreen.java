@@ -3,24 +3,20 @@ package net.slezok.dots.screens;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL10;
-import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.scenes.scene2d.ui.List;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import net.slezok.dots.Assets;
 import net.slezok.dots.Dots;
 
-public class MainMenuScreen implements Screen {
+public class LevelsListScreen implements Screen {
 	
 	Dots game;
 	Stage stage;
-	TextButton startGameButton;
-	TextButton gridButton;
-	TextButton exitButton;
+	List levelsList;
 	
-	public MainMenuScreen(Dots game) {
+	public LevelsListScreen(Dots game) {
 		this.game = game;
 	}
 
@@ -49,39 +45,14 @@ public class MainMenuScreen implements Screen {
 		
 		Table table = new Table(Assets.skin);
 		
-		startGameButton = new TextButton("New Game", Assets.skin);
-		gridButton = new TextButton("Dict", Assets.skin);
-		exitButton = new TextButton("Exit", Assets.skin);
+		String[] items = new String[]{"один", "два"};
+		levelsList = new List(items, Assets.skin);
 		Image backImage = new Image(Assets.backgroundTexture);
 		backImage.setFillParent(true);
 		
-		startGameButton.addListener(new InputListener() {
-
-			@Override
-			public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-				game.setScreen(new GameScreen(game));
-				return true;
-			}
-			
-		});
-
-		gridButton.addListener(new InputListener() {
-
-			@Override
-			public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-				game.setScreen(new LevelsListScreen(game));
-				return true;
-			}
-			
-		});
-
 		table.setFillParent(true);
 //		table.debug(); 
-//		table.add(startGameButton).width(300).height(80);
-//		table.row();
-		table.add(gridButton).width(250).height(80).padTop(30);
-//		table.row();
-//		table.add(exitButton).width(200).height(80).padTop(30);
+		table.add(levelsList).width(320).height(280);
 		
 		stage.addActor(backImage);
 		stage.addActor(table);
