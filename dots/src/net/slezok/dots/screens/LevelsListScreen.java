@@ -92,10 +92,10 @@ public class LevelsListScreen implements Screen {
 		table.setFillParent(true);
 //		table.debug(); 
 		table.add(scroller).width(320).height(280);
+		table.add(startButton).width(250).height(80).padTop(30);
 		
 		stage.addActor(backImage);
 		stage.addActor(table);
-		stage.addActor(startButton);
 	}
 
 	@Override
