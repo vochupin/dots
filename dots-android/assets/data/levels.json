@@ -1,7 +1,7 @@
 [
 {
 	class: net.slezok.dots.Level,
-	description: "Самолет",
+	description: "plane",
 	startX: 60,
 	startY: 100,
 	levelFile: "data/grid.json",
@@ -12,7 +12,7 @@
 				0,6,0,6,0,6,0,6,6,6,6,6,6,6,0]
 },{
 	class: net.slezok.dots.Level,
-	description: "Танк",
+	description: "tank",
 	startX: 60,
 	startY: 100,
 	levelFile: "data/grid.json",

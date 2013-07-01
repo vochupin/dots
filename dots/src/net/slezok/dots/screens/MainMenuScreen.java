@@ -26,7 +26,6 @@ public class MainMenuScreen implements Screen {
 
 	@Override
 	public void render(float delta) {
-		// TODO Auto-generated method stub
 		Gdx.gl.glClearColor(0.2f, 0.2f, 0.2f, 1);
 		Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
 
@@ -37,13 +36,10 @@ public class MainMenuScreen implements Screen {
 
 	@Override
 	public void resize(int width, int height) {
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
 	public void show() {
-		// TODO Auto-generated method stub
 		stage = new Stage();
 		Gdx.input.setInputProcessor(stage);
 		
@@ -56,23 +52,19 @@ public class MainMenuScreen implements Screen {
 		backImage.setFillParent(true);
 		
 		startGameButton.addListener(new InputListener() {
-
 			@Override
 			public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
 				game.setScreen(new GameScreen(game));
 				return true;
 			}
-			
 		});
 
 		gridButton.addListener(new InputListener() {
-
 			@Override
 			public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
 				game.setScreen(new LevelsListScreen(game));
 				return true;
 			}
-			
 		});
 
 		table.setFillParent(true);
@@ -89,25 +81,19 @@ public class MainMenuScreen implements Screen {
 
 	@Override
 	public void hide() {
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public void pause() {
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
 	public void resume() {
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
 	public void dispose() {
 		stage.dispose();
 	}
-
 }

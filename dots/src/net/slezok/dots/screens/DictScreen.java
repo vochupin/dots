@@ -1,16 +1,11 @@
 package net.slezok.dots.screens;
 
-import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.GL10;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.badlogic.gdx.input.GestureDetector;
-import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
@@ -22,7 +17,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Json;
@@ -31,13 +25,9 @@ import com.esotericsoftware.tablelayout.BaseTableLayout;
 import net.slezok.dots.Assets;
 import net.slezok.dots.Bridge;
 import net.slezok.dots.DictGestureHandler;
-import net.slezok.dots.InputHandler;
 import net.slezok.dots.Dots;
 import net.slezok.dots.Level;
-import net.slezok.dots.OverlapTester;
 import net.slezok.dots.actors.DictField;
-import net.slezok.dots.actors.FallingMan;
-import net.slezok.dots.actors.Platforms;
 
 public class DictScreen implements Screen{
 	private static final String TAG = "GridScreen";
@@ -47,7 +37,10 @@ public class DictScreen implements Screen{
 	private static final long CURRENT_SOUND_DELAY = 800;
 
 	private World world;
-	private Dots game;
+	
+	private final Dots game;
+	private final Level level;
+	
 	private Stage stage;
 	private Stage staticStage;
 	private DictField bridgesGrid;
@@ -88,7 +81,6 @@ public class DictScreen implements Screen{
 	private Sound downRightSound;
 	private Sound downLeftSound;
 
-	private Level level;
 	private int caretX, caretY;
 	private int step;
 	private int[] directions;
@@ -96,8 +88,9 @@ public class DictScreen implements Screen{
 	private Sound currentSound = null;
 	private long currentSoundPlayTime = Long.MAX_VALUE;
 	
-	public DictScreen(Dots game) {
+	public DictScreen(Dots game, Level level) {
 		this.game = game;
+		this.level = level;
 	}
 
 	@Override
@@ -154,12 +147,6 @@ public class DictScreen implements Screen{
 		stage = new Stage();
 		staticStage = new Stage();	
 		staticStage.addListener(new DictGestureHandler(this));
-
-		FileHandle file =  Gdx.files.internal("data/levels.json");
-		Json json = new Json();
-		@SuppressWarnings("unchecked")
-		Array<Level> levels = json.fromJson(Array.class, Level.class, file);
-		level = levels.get(0);
 
 		caretX = level.getStartX();
 		caretY = level.getStartY();
@@ -342,20 +329,14 @@ public class DictScreen implements Screen{
 
 	@Override
 	public void hide() {
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
 	public void pause() {
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
 	public void resume() {
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
