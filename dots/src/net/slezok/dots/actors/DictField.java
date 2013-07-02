@@ -64,24 +64,6 @@ public class DictField extends Group {
 		super.draw(batch, parentAlpha);
 	}
 	
-	private void createPlatformBody(float x, float y, float width, float height) {
-		// Create our body definition
-		BodyDef groundBodyDef = new BodyDef();
-		// Set its world position
-		groundBodyDef.position.set(x + width/2, y + height/2);
-		
-		// Create a body from the defintion and add it to the world
-		Body platformBody = world.createBody(groundBodyDef);
-
-		// Create a polygon shape
-		PolygonShape groundBox = new PolygonShape();
-		// Set the polygon shape as a box which is twice the size of our view
-		// port and 10 high
-		groundBox.setAsBox(width/2, 0.5f);
-		// Create a fixture from our polygon shape and add it to our ground body
-		platformBody.createFixture(groundBox, 0.0f);
-	}
-
 	public void addBridge(Bridge bridge) {
 		float scale = SCREEN_WIDTH / FIELD_WIDTH;
 
@@ -90,8 +72,6 @@ public class DictField extends Group {
 		image.setWidth(bridge.getWidth() * scale);
 		image.setHeight(bridge.getLength() * scale);
 		image.setRotation(bridge.getDirectionAngle());
-
-		createPlatformBody(bridge.getX(), bridge.getY(), image.getWidth(), image.getHeight());
 
 		addActor(image);
 	}
@@ -106,8 +86,6 @@ public class DictField extends Group {
 		dot.setWidth(DOT_HALF_SIZE * scale * 2);
 		dot.setHeight(DOT_HALF_SIZE * scale * 2);
 		dot.setRotation(0);
-
-		createPlatformBody(xPos, yPos, 1, 1);
 
 		addActor(dot);
 	}
