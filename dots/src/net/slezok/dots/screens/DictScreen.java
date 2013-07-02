@@ -121,7 +121,6 @@ public class DictScreen implements Screen{
 			stage.setViewport(bridgesGrid.getScreenWidth(), bridgesGrid.getScreenHeight(), false);
 		}
 	}
-
 	
 	@Override
 	public void show() {
@@ -340,35 +339,49 @@ public class DictScreen implements Screen{
 	};
 
 	private void setCurrentSoundAndPlay(long delay) {
-		switch(directions[step]){
-		case Bridge.DIRECTION_UP:
-			currentSound = Assets.upSound;
-			break;
-		case Bridge.DIRECTION_DOWN:
-			currentSound = Assets.downSound;
-			break;
-		case Bridge.DIRECTION_LEFT:
-			currentSound = Assets.leftSound;
-			break;
-		case Bridge.DIRECTION_RIGHT:
-			currentSound = Assets.rightSound;
-			break;
-		case Bridge.DIRECTION_UP_LEFT:
-			currentSound = Assets.upLeftSound;
-			break;
-		case Bridge.DIRECTION_DOWN_LEFT:
-			currentSound = Assets.downLeftSound;
-			break;
-		case Bridge.DIRECTION_UP_RIGHT:
-			currentSound = Assets.upRightSound;
-			break;
-		case Bridge.DIRECTION_DOWN_RIGHT:
-			currentSound = Assets.downRightSound;
-			break;
+		
+		currentSound = null;
+		
+		checkForIdenticalSteps();
+		
+		if(currentSound == null){
+			switch(directions[step]){
+			case Bridge.DIRECTION_UP:
+				currentSound = Assets.upSound;
+				break;
+			case Bridge.DIRECTION_DOWN:
+				currentSound = Assets.downSound;
+				break;
+			case Bridge.DIRECTION_LEFT:
+				currentSound = Assets.leftSound;
+				break;
+			case Bridge.DIRECTION_RIGHT:
+				currentSound = Assets.rightSound;
+				break;
+			case Bridge.DIRECTION_UP_LEFT:
+				currentSound = Assets.upLeftSound;
+				break;
+			case Bridge.DIRECTION_DOWN_LEFT:
+				currentSound = Assets.downLeftSound;
+				break;
+			case Bridge.DIRECTION_UP_RIGHT:
+				currentSound = Assets.upRightSound;
+				break;
+			case Bridge.DIRECTION_DOWN_RIGHT:
+				currentSound = Assets.downRightSound;
+				break;
+			}
 		}
 		if(currentSound != null){
 			currentSoundPlayTime = System.currentTimeMillis() + delay;
 		}
+	}
+
+	private void checkForIdenticalSteps() {
+		int index = step + 1;
+		int identicalSteps = 0;
+		while(index < directions.length && directions[step] == directions[index++]) identicalSteps++;
+		if(identicalSteps > 0) currentSound = Assets.stepSounds[identicalSteps];
 	}
 
 	@Override
