@@ -2,6 +2,7 @@ package net.slezok.dots.actors;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
@@ -9,6 +10,7 @@ import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Json;
 import net.slezok.dots.Assets;
@@ -52,10 +54,12 @@ public class DictField extends Group {
 		for (Bridge bridge : bridges) {
 			addBridge(bridge);
 		}
-		for(int x = 0; x < FIELD_WIDTH; x++){
-			for(int y = 0; y < FIELD_HEIGHT; y++){
-				addDot(x,y);
-			}
+		for(int x = 0; x < FIELD_WIDTH; x += DictScreen.STEP_SIZE){
+			addLine(x, 0, (int)FIELD_HEIGHT, 0);
+		}
+
+		for(int y = 0; y < FIELD_HEIGHT; y += DictScreen.STEP_SIZE){
+			addLine(0, y, (int)FIELD_WIDTH, 270);
 		}
 	}
 
@@ -80,6 +84,7 @@ public class DictField extends Group {
 		float scale = SCREEN_WIDTH / FIELD_WIDTH;
 
 		Image dot = new Image(Assets.platform);
+		
 		float xPos = (float) ((x - DOT_HALF_SIZE) * scale);
 		float yPos = (float) ((y - DOT_HALF_SIZE) * scale);
 		dot.setPosition(xPos, yPos);
@@ -88,6 +93,22 @@ public class DictField extends Group {
 		dot.setRotation(0);
 
 		addActor(dot);
+	}
+
+	public void addLine(int x, int y, int length, int rotation) {
+		float scale = SCREEN_WIDTH / FIELD_WIDTH;
+
+		Image line = new Image(Assets.platform);
+		
+		float xPos = (float) ((x - DOT_HALF_SIZE) * scale);
+		float yPos = (float) ((y - DOT_HALF_SIZE) * scale);
+		line.setPosition(xPos, yPos);
+		line.setWidth(DOT_HALF_SIZE * scale * 2);
+		line.setHeight(length * scale);
+		line.setRotation(rotation);
+		line.setColor(new Color(0f, 0f, 0.5f, 0.4f));
+
+		addActor(line);
 	}
 
 	public float getScreenWidth() {
