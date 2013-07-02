@@ -56,7 +56,6 @@ public class DictScreen implements Screen{
 	private ImageButton downButton;
 	private ImageButton leftButton;
 	private ImageButton rightButton;
-
 	private ImageButton upRightButton;
 	private ImageButton upLeftButton;
 	private ImageButton downRightButton;
@@ -87,6 +86,20 @@ public class DictScreen implements Screen{
 
 	private Sound currentSound = null;
 	private long currentSoundPlayTime = Long.MAX_VALUE;
+	
+	private Table table;
+	
+	private int[] magicSequence = new int[]{
+		Bridge.DIRECTION_UP,
+		Bridge.DIRECTION_DOWN,
+		Bridge.DIRECTION_UP,
+		Bridge.DIRECTION_DOWN,
+		Bridge.DIRECTION_RIGHT,
+		Bridge.DIRECTION_LEFT,
+		Bridge.DIRECTION_RIGHT,
+		Bridge.DIRECTION_LEFT
+	};
+	private int magicSeqCounter = 0;
 	
 	public DictScreen(Dots game, Level level) {
 		this.game = game;
@@ -127,20 +140,7 @@ public class DictScreen implements Screen{
 	
 	@Override
 	public void show() {
-		//TODO move to Assets
-		wellDoneSound = Gdx.audio.newSound(Gdx.files.internal("data/sound/welldone.mp3"));
-		gameOverSound = Gdx.audio.newSound(Gdx.files.internal("data/sound/gameover.mp3"));
-		errorSound = Gdx.audio.newSound(Gdx.files.internal("data/sound/error.mp3"));
-		
-		upSound = Gdx.audio.newSound(Gdx.files.internal("data/sound/up.mp3"));
-		downSound = Gdx.audio.newSound(Gdx.files.internal("data/sound/down.mp3"));
-		leftSound = Gdx.audio.newSound(Gdx.files.internal("data/sound/left.mp3"));
-		rightSound = Gdx.audio.newSound(Gdx.files.internal("data/sound/right.mp3"));
-
-		upRightSound = Gdx.audio.newSound(Gdx.files.internal("data/sound/up_right.mp3"));
-		upLeftSound = Gdx.audio.newSound(Gdx.files.internal("data/sound/up_left.mp3"));
-		downRightSound = Gdx.audio.newSound(Gdx.files.internal("data/sound/down_right.mp3"));
-		downLeftSound = Gdx.audio.newSound(Gdx.files.internal("data/sound/down_left.mp3"));
+		loadSounds();
 		
 		world = new World(new Vector2(0f, -1), true);
 		
@@ -157,112 +157,8 @@ public class DictScreen implements Screen{
 		bridgesGrid.setPosition(0, 0);
 		stage.addActor(bridgesGrid);
 		
-		final Table table = new Table(Assets.skin);
-		upButton = new ImageButton(new TextureRegionDrawable(Assets.up));
-		downButton = new ImageButton(new TextureRegionDrawable(Assets.down));
-		leftButton = new ImageButton(new TextureRegionDrawable(Assets.left));
-		rightButton = new ImageButton(new TextureRegionDrawable(Assets.right));
-
-		upLeftButton = new ImageButton(new TextureRegionDrawable(Assets.upLeft));
-		downLeftButton = new ImageButton(new TextureRegionDrawable(Assets.downLeft));
-		upRightButton = new ImageButton(new TextureRegionDrawable(Assets.upRight));
-		downRightButton = new ImageButton(new TextureRegionDrawable(Assets.downRight));
-		
-		repeatButton = new ImageButton(new TextureRegionDrawable(Assets.repeat));
-		
-		InputListener buttonListener = new InputListener() {
-			
-			@Override
-			public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-				Actor actor = event.getListenerActor();
-				int direction = -1;
-				int stepX = 1, stepY = 1;
-				
-				if(actor.equals(upButton)){
-					direction = Bridge.DIRECTION_UP;
-					stepX = 0;
-					stepY = STEP_SIZE;
-				}else if(actor.equals(downButton)){
-					direction = Bridge.DIRECTION_DOWN;
-					stepX = 0;
-					stepY = -STEP_SIZE;
-				}else if(actor.equals(leftButton)){
-					direction = Bridge.DIRECTION_LEFT;
-					stepX = -STEP_SIZE;
-					stepY = 0;
-				}else if(actor.equals(rightButton)){
-					direction = Bridge.DIRECTION_RIGHT;
-					stepX = STEP_SIZE;
-					stepY = 0;
-				}else if(actor.equals(upRightButton)){
-					direction = Bridge.DIRECTION_UP_RIGHT;
-					stepX = STEP_SIZE;
-					stepY = STEP_SIZE;
-				}else if(actor.equals(upLeftButton)){
-					direction = Bridge.DIRECTION_UP_LEFT;
-					stepX = -STEP_SIZE;
-					stepY = STEP_SIZE;
-				}else if(actor.equals(downRightButton)){
-					direction = Bridge.DIRECTION_DOWN_RIGHT;
-					stepX = STEP_SIZE;
-					stepY = -STEP_SIZE;
-				}else if(actor.equals(downLeftButton)){
-					direction = Bridge.DIRECTION_DOWN_LEFT;
-					stepX = -STEP_SIZE;
-					stepY = -STEP_SIZE;
-				}else if(actor.equals(repeatButton)){
-					setCurrentSoundAndPlay(0);
-				}
-				
-				if(direction >= 0){
-					if(directions[step] != direction){
-						Gdx.app.log(TAG, "WRONG STEP");
-						errors++;
-						errorsLabel.setText("Errors: " + errors);
-						errorSound.play();
-					}else{
-						Gdx.app.log(TAG, "GOOD STEP");
-						bridgesGrid.addBridge(new Bridge(caretX, caretY, direction, 1, (int)Math.sqrt(stepX * stepX + stepY * stepY)));
-						caretX += stepX; caretY += stepY;
-						step++;
-						if(step < directions.length){
-							wellDoneSound.play();
-							setCurrentSoundAndPlay(CURRENT_SOUND_DELAY);
-						}
-					}
-					
-					if(step >= directions.length){
-						Gdx.app.log(TAG, "GAME COMPLETED");
-						table.removeActor(upButton);
-						table.removeActor(downButton);
-						table.removeActor(leftButton);
-						table.removeActor(rightButton);
-						table.removeActor(repeatButton);
-						table.removeActor(upLeftButton);
-						table.removeActor(downLeftButton);
-						table.removeActor(upRightButton);
-						table.removeActor(downRightButton);
-						
-						wellDoneSound.stop();
-						errorSound.stop();
-						gameOverSound.play();
-					}
-				}
-				return true;
-			}
-			
-		};
-		upButton.addListener(buttonListener);
-		downButton.addListener(buttonListener);
-		leftButton.addListener(buttonListener);
-		rightButton.addListener(buttonListener);
-
-		upLeftButton.addListener(buttonListener);
-		downLeftButton.addListener(buttonListener);
-		upRightButton.addListener(buttonListener);
-		downRightButton.addListener(buttonListener);
-		
-		repeatButton.addListener(buttonListener);
+		table = new Table(Assets.skin);
+		createButtons();
 
 		errorsLabel = new Label("Errors: 0", Assets.skin);
 		errorsLabel.setFontScale(2);
@@ -294,6 +190,140 @@ public class DictScreen implements Screen{
 		
 		setCurrentSoundAndPlay(CURRENT_SOUND_DELAY);
 	}
+
+	private void loadSounds() {
+		//TODO move to Assets
+		wellDoneSound = Gdx.audio.newSound(Gdx.files.internal("data/sound/welldone.mp3"));
+		gameOverSound = Gdx.audio.newSound(Gdx.files.internal("data/sound/gameover.mp3"));
+		errorSound = Gdx.audio.newSound(Gdx.files.internal("data/sound/error.mp3"));
+		
+		upSound = Gdx.audio.newSound(Gdx.files.internal("data/sound/up.mp3"));
+		downSound = Gdx.audio.newSound(Gdx.files.internal("data/sound/down.mp3"));
+		leftSound = Gdx.audio.newSound(Gdx.files.internal("data/sound/left.mp3"));
+		rightSound = Gdx.audio.newSound(Gdx.files.internal("data/sound/right.mp3"));
+
+		upRightSound = Gdx.audio.newSound(Gdx.files.internal("data/sound/up_right.mp3"));
+		upLeftSound = Gdx.audio.newSound(Gdx.files.internal("data/sound/up_left.mp3"));
+		downRightSound = Gdx.audio.newSound(Gdx.files.internal("data/sound/down_right.mp3"));
+		downLeftSound = Gdx.audio.newSound(Gdx.files.internal("data/sound/down_left.mp3"));
+	}
+
+	private void createButtons() {
+		upButton = new ImageButton(new TextureRegionDrawable(Assets.up));
+		downButton = new ImageButton(new TextureRegionDrawable(Assets.down));
+		leftButton = new ImageButton(new TextureRegionDrawable(Assets.left));
+		rightButton = new ImageButton(new TextureRegionDrawable(Assets.right));
+		upLeftButton = new ImageButton(new TextureRegionDrawable(Assets.upLeft));
+		downLeftButton = new ImageButton(new TextureRegionDrawable(Assets.downLeft));
+		upRightButton = new ImageButton(new TextureRegionDrawable(Assets.upRight));
+		downRightButton = new ImageButton(new TextureRegionDrawable(Assets.downRight));
+		
+		repeatButton = new ImageButton(new TextureRegionDrawable(Assets.repeat));
+		
+		upButton.addListener(buttonListener);
+		downButton.addListener(buttonListener);
+		leftButton.addListener(buttonListener);
+		rightButton.addListener(buttonListener);
+
+		upLeftButton.addListener(buttonListener);
+		downLeftButton.addListener(buttonListener);
+		upRightButton.addListener(buttonListener);
+		downRightButton.addListener(buttonListener);
+		
+		repeatButton.addListener(buttonListener);
+	}
+
+	private InputListener buttonListener = new InputListener() {
+		
+		@Override
+		public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+			Actor actor = event.getListenerActor();
+			int direction = -1;
+			int stepX = 1, stepY = 1;
+			
+			if(actor.equals(upButton)){
+				direction = Bridge.DIRECTION_UP;
+				stepX = 0;
+				stepY = STEP_SIZE;
+			}else if(actor.equals(downButton)){
+				direction = Bridge.DIRECTION_DOWN;
+				stepX = 0;
+				stepY = -STEP_SIZE;
+			}else if(actor.equals(leftButton)){
+				direction = Bridge.DIRECTION_LEFT;
+				stepX = -STEP_SIZE;
+				stepY = 0;
+			}else if(actor.equals(rightButton)){
+				direction = Bridge.DIRECTION_RIGHT;
+				stepX = STEP_SIZE;
+				stepY = 0;
+			}else if(actor.equals(upRightButton)){
+				direction = Bridge.DIRECTION_UP_RIGHT;
+				stepX = STEP_SIZE;
+				stepY = STEP_SIZE;
+			}else if(actor.equals(upLeftButton)){
+				direction = Bridge.DIRECTION_UP_LEFT;
+				stepX = -STEP_SIZE;
+				stepY = STEP_SIZE;
+			}else if(actor.equals(downRightButton)){
+				direction = Bridge.DIRECTION_DOWN_RIGHT;
+				stepX = STEP_SIZE;
+				stepY = -STEP_SIZE;
+			}else if(actor.equals(downLeftButton)){
+				direction = Bridge.DIRECTION_DOWN_LEFT;
+				stepX = -STEP_SIZE;
+				stepY = -STEP_SIZE;
+			}else if(actor.equals(repeatButton)){
+				setCurrentSoundAndPlay(0);
+			}
+			
+			if(direction >= 0){
+				if(directions[step] != direction){
+					Gdx.app.log(TAG, "WRONG STEP");
+					errors++;
+					errorsLabel.setText("Errors: " + errors);
+					errorSound.play();
+				}else{
+					Gdx.app.log(TAG, "GOOD STEP");
+					bridgesGrid.addBridge(new Bridge(caretX, caretY, direction, 1, (int)Math.sqrt(stepX * stepX + stepY * stepY)));
+					caretX += stepX; caretY += stepY;
+					step++;
+					if(step < directions.length){
+						wellDoneSound.play();
+						setCurrentSoundAndPlay(CURRENT_SOUND_DELAY);
+					}
+				}
+				
+				if(step >= directions.length){
+					Gdx.app.log(TAG, "GAME COMPLETED");
+					table.removeActor(upButton);
+					table.removeActor(downButton);
+					table.removeActor(leftButton);
+					table.removeActor(rightButton);
+					table.removeActor(repeatButton);
+					table.removeActor(upLeftButton);
+					table.removeActor(downLeftButton);
+					table.removeActor(upRightButton);
+					table.removeActor(downRightButton);
+					
+					wellDoneSound.stop();
+					errorSound.stop();
+					gameOverSound.play();
+				}
+				
+				if(magicSequence[magicSeqCounter] == direction){
+					magicSeqCounter++;
+					if(magicSeqCounter >= magicSequence.length){
+						errorsLabel.setText("גמכרובסעגמ וסעü");
+					}
+				}else{
+					magicSeqCounter = 0;
+				}
+			}
+			return true;
+		}
+		
+	};
 
 	private void setCurrentSoundAndPlay(long delay) {
 		switch(directions[step]){
