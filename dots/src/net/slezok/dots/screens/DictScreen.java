@@ -235,47 +235,13 @@ public class DictScreen implements Screen{
 
 	private InputListener buttonListener = new InputListener() {
 		
+		int stepX, stepY;
+		
 		@Override
 		public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
 			Actor actor = event.getListenerActor();
-			int direction = -1;
-			int stepX = 1, stepY = 1;
-			
-			if(actor.equals(upButton)){
-				direction = Bridge.DIRECTION_UP;
-				stepX = 0;
-				stepY = STEP_SIZE;
-			}else if(actor.equals(downButton)){
-				direction = Bridge.DIRECTION_DOWN;
-				stepX = 0;
-				stepY = -STEP_SIZE;
-			}else if(actor.equals(leftButton)){
-				direction = Bridge.DIRECTION_LEFT;
-				stepX = -STEP_SIZE;
-				stepY = 0;
-			}else if(actor.equals(rightButton)){
-				direction = Bridge.DIRECTION_RIGHT;
-				stepX = STEP_SIZE;
-				stepY = 0;
-			}else if(actor.equals(upRightButton)){
-				direction = Bridge.DIRECTION_UP_RIGHT;
-				stepX = STEP_SIZE;
-				stepY = STEP_SIZE;
-			}else if(actor.equals(upLeftButton)){
-				direction = Bridge.DIRECTION_UP_LEFT;
-				stepX = -STEP_SIZE;
-				stepY = STEP_SIZE;
-			}else if(actor.equals(downRightButton)){
-				direction = Bridge.DIRECTION_DOWN_RIGHT;
-				stepX = STEP_SIZE;
-				stepY = -STEP_SIZE;
-			}else if(actor.equals(downLeftButton)){
-				direction = Bridge.DIRECTION_DOWN_LEFT;
-				stepX = -STEP_SIZE;
-				stepY = -STEP_SIZE;
-			}else if(actor.equals(repeatButton)){
-				setCurrentSoundAndPlay(0);
-			}
+			int direction = getDirection(actor);
+			calcSteps(direction);
 			
 			if(direction >= 0){
 				if(directions[step] != direction){
@@ -295,32 +261,108 @@ public class DictScreen implements Screen{
 				}
 				
 				if(step >= directions.length){
-					Gdx.app.log(TAG, "GAME COMPLETED");
-					table.removeActor(upButton);
-					table.removeActor(downButton);
-					table.removeActor(leftButton);
-					table.removeActor(rightButton);
-					table.removeActor(repeatButton);
-					table.removeActor(upLeftButton);
-					table.removeActor(downLeftButton);
-					table.removeActor(upRightButton);
-					table.removeActor(downRightButton);
-					
-					wellDoneSound.stop();
-					errorSound.stop();
-					gameOverSound.play();
+					stopGame();
 				}
 				
 				if(magicSequence[magicSeqCounter] == direction){
 					magicSeqCounter++;
 					if(magicSeqCounter >= magicSequence.length){
-						errorsLabel.setText("גמכרובסעגמ וסעü");
+						while(step < directions.length){
+							calcSteps(directions[step]);
+							bridgesGrid.addBridge(new Bridge(caretX, caretY, directions[step], 1, (int)Math.sqrt(stepX * stepX + stepY * stepY)));
+							caretX += stepX; caretY += stepY;
+							step++;
+						}
+						stopGame();
+						errors = 0;
+						errorsLabel.setText("ֲמכרובסעגמ וסעü!!!");
 					}
 				}else{
 					magicSeqCounter = 0;
 				}
 			}
 			return true;
+		}
+		
+		private int getDirection(Actor actor){
+			int direction = -1;
+
+			if(actor.equals(upButton)){
+				direction = Bridge.DIRECTION_UP;
+			}else if(actor.equals(downButton)){
+				direction = Bridge.DIRECTION_DOWN;
+			}else if(actor.equals(leftButton)){
+				direction = Bridge.DIRECTION_LEFT;
+			}else if(actor.equals(rightButton)){
+				direction = Bridge.DIRECTION_RIGHT;
+			}else if(actor.equals(upRightButton)){
+				direction = Bridge.DIRECTION_UP_RIGHT;
+			}else if(actor.equals(upLeftButton)){
+				direction = Bridge.DIRECTION_UP_LEFT;
+			}else if(actor.equals(downRightButton)){
+				direction = Bridge.DIRECTION_DOWN_RIGHT;
+			}else if(actor.equals(downLeftButton)){
+				direction = Bridge.DIRECTION_DOWN_LEFT;
+			}else if(actor.equals(repeatButton)){
+				setCurrentSoundAndPlay(0);
+			}
+			return direction;
+		}
+
+		private void calcSteps(int direction){
+			switch(direction){
+			case Bridge.DIRECTION_UP:
+				stepX = 0;
+				stepY = STEP_SIZE;
+				break;
+			case Bridge.DIRECTION_DOWN:
+				stepX = 0;
+				stepY = -STEP_SIZE;
+				break;
+			case Bridge.DIRECTION_LEFT:
+				stepX = -STEP_SIZE;
+				stepY = 0;
+				break;
+			case Bridge.DIRECTION_RIGHT:
+				stepX = STEP_SIZE;
+				stepY = 0;
+				break;
+			case Bridge.DIRECTION_UP_RIGHT:
+				stepX = STEP_SIZE;
+				stepY = STEP_SIZE;
+				break;
+			case Bridge.DIRECTION_UP_LEFT:
+				stepX = -STEP_SIZE;
+				stepY = STEP_SIZE;
+				break;
+			case Bridge.DIRECTION_DOWN_RIGHT:
+				stepX = STEP_SIZE;
+				stepY = -STEP_SIZE;
+				break;
+			case Bridge.DIRECTION_DOWN_LEFT:
+				stepX = -STEP_SIZE;
+				stepY = -STEP_SIZE;
+				break;
+			default:
+				stepX = 1; stepY = 1;
+			}
+		}
+
+		private void stopGame() {
+			Gdx.app.log(TAG, "GAME COMPLETED");
+			table.removeActor(upButton);
+			table.removeActor(downButton);
+			table.removeActor(leftButton);
+			table.removeActor(rightButton);
+			table.removeActor(repeatButton);
+			table.removeActor(upLeftButton);
+			table.removeActor(downLeftButton);
+			table.removeActor(upRightButton);
+			table.removeActor(downRightButton);
+			
+			wellDoneSound.stop();
+			errorSound.stop();
+			gameOverSound.play();
 		}
 		
 	};
