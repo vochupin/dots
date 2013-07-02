@@ -20,7 +20,8 @@ import net.slezok.dots.screens.DictScreen;
 
 public class DictField extends Group {
 	private static final String TAG = "Bridges";
-	private static final float DOT_HALF_SIZE = 0.1F;
+	public static final float DOT_HALF_SIZE = 0.02F;
+	public static final float LINE_HALF_WIDTH = 0.1F;
 
 	private final float FIELD_WIDTH;
 	private final float FIELD_HEIGHT;
@@ -33,8 +34,8 @@ public class DictField extends Group {
 	
 	public DictField(World world, Level level) {
 		
-		FIELD_HEIGHT = level.getHeight() * DictScreen.STEP_SIZE;
-		FIELD_WIDTH = level.getWidth() * DictScreen.STEP_SIZE;
+		FIELD_HEIGHT = level.getHeight();
+		FIELD_WIDTH = level.getWidth();
 		this.world = world;
 		
 		SCREEN_WIDTH = Gdx.graphics.getWidth();
@@ -54,12 +55,12 @@ public class DictField extends Group {
 		for (Bridge bridge : bridges) {
 			addBridge(bridge);
 		}
-		for(int x = 0; x < FIELD_WIDTH; x += DictScreen.STEP_SIZE){
-			addLine(x, 0, (int)FIELD_HEIGHT, 0);
+		for(int x = 0; x < FIELD_WIDTH; x++){
+			addLine(x, 0, FIELD_HEIGHT, 0);
 		}
 
-		for(int y = 0; y < FIELD_HEIGHT; y += DictScreen.STEP_SIZE){
-			addLine(0, y, (int)FIELD_WIDTH, 270);
+		for(int y = 0; y < FIELD_HEIGHT; y++){
+			addLine(0, y, FIELD_WIDTH, 270);
 		}
 	}
 
@@ -71,11 +72,14 @@ public class DictField extends Group {
 	public void addBridge(Bridge bridge) {
 		float scale = SCREEN_WIDTH / FIELD_WIDTH;
 
+		float halfWidth = bridge.getWidth() / 2;		
+		
 		Image image = new Image(Assets.platform);
-		image.setPosition((bridge.getX() - 0.5F) * scale, (bridge.getY() - 0.5F) * scale);
+		image.setPosition((bridge.getX() - halfWidth) * scale, (bridge.getY() - halfWidth) * scale);
 		image.setWidth(bridge.getWidth() * scale);
 		image.setHeight(bridge.getLength() * scale);
 		image.setRotation(bridge.getDirectionAngle());
+		image.setOrigin(halfWidth * scale, halfWidth * scale);
 
 		addActor(image);
 	}
@@ -95,7 +99,7 @@ public class DictField extends Group {
 		addActor(dot);
 	}
 
-	public void addLine(int x, int y, int length, int rotation) {
+	public void addLine(float x, float y, float length, int rotation) {
 		float scale = SCREEN_WIDTH / FIELD_WIDTH;
 
 		Image line = new Image(Assets.platform);

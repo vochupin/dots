@@ -32,8 +32,6 @@ import net.slezok.dots.actors.DictField;
 public class DictScreen implements Screen{
 	private static final String TAG = "GridScreen";
 
-	public static final int STEP_SIZE = 5;
-
 	private static final long CURRENT_SOUND_DELAY = 800;
 
 	private World world;
@@ -132,8 +130,8 @@ public class DictScreen implements Screen{
 		staticStage = new Stage();	
 		staticStage.addListener(new DictGestureHandler(this));
 
-		caretX = level.getStartX() * STEP_SIZE;
-		caretY = level.getStartY() * STEP_SIZE;
+		caretX = level.getStartX();
+		caretY = level.getStartY();
 		step = 0;
 		directions = level.getDirections();
 		
@@ -218,7 +216,7 @@ public class DictScreen implements Screen{
 					Assets.errorSound.play();
 				}else{
 					Gdx.app.log(TAG, "GOOD STEP");
-					bridgesGrid.addBridge(new Bridge(caretX, caretY, direction, 1, (int)Math.sqrt(stepX * stepX + stepY * stepY)));
+					bridgesGrid.addBridge(new Bridge(caretX, caretY, direction, DictField.LINE_HALF_WIDTH * 2, getLength(stepX, stepY)));
 					caretX += stepX; caretY += stepY;
 					step++;
 					if(step < directions.length){
@@ -236,7 +234,7 @@ public class DictScreen implements Screen{
 					if(magicSeqCounter >= magicSequence.length){
 						while(step < directions.length){
 							calcSteps(directions[step]);
-							bridgesGrid.addBridge(new Bridge(caretX, caretY, directions[step], 1, (int)Math.sqrt(stepX * stepX + stepY * stepY)));
+							bridgesGrid.addBridge(new Bridge(caretX, caretY, directions[step], DictField.LINE_HALF_WIDTH * 2, getLength(stepX, stepY)));
 							caretX += stepX; caretY += stepY;
 							step++;
 						}
@@ -251,6 +249,12 @@ public class DictScreen implements Screen{
 			return true;
 		}
 		
+		private float getLength(int stepX, int stepY) {
+			float x = (stepX >= 0 ? stepX + 2 * DictField.LINE_HALF_WIDTH : stepX - 2 * DictField.LINE_HALF_WIDTH);
+			float y = (stepY >= 0 ? stepY + 2 * DictField.LINE_HALF_WIDTH : stepY - 2 * DictField.LINE_HALF_WIDTH);
+			return (float) Math.sqrt(x * x + y * y);
+		}
+
 		private int getDirection(Actor actor){
 			int direction = -1;
 
@@ -280,35 +284,35 @@ public class DictScreen implements Screen{
 			switch(direction){
 			case Bridge.DIRECTION_UP:
 				stepX = 0;
-				stepY = STEP_SIZE;
+				stepY = 1;
 				break;
 			case Bridge.DIRECTION_DOWN:
 				stepX = 0;
-				stepY = -STEP_SIZE;
+				stepY = -1;
 				break;
 			case Bridge.DIRECTION_LEFT:
-				stepX = -STEP_SIZE;
+				stepX = -1;
 				stepY = 0;
 				break;
 			case Bridge.DIRECTION_RIGHT:
-				stepX = STEP_SIZE;
+				stepX = 1;
 				stepY = 0;
 				break;
 			case Bridge.DIRECTION_UP_RIGHT:
-				stepX = STEP_SIZE;
-				stepY = STEP_SIZE;
+				stepX = 1;
+				stepY = 1;
 				break;
 			case Bridge.DIRECTION_UP_LEFT:
-				stepX = -STEP_SIZE;
-				stepY = STEP_SIZE;
+				stepX = -1;
+				stepY = 1;
 				break;
 			case Bridge.DIRECTION_DOWN_RIGHT:
-				stepX = STEP_SIZE;
-				stepY = -STEP_SIZE;
+				stepX = 1;
+				stepY = -1;
 				break;
 			case Bridge.DIRECTION_DOWN_LEFT:
-				stepX = -STEP_SIZE;
-				stepY = -STEP_SIZE;
+				stepX = -1;
+				stepY = -1;
 				break;
 			default:
 				stepX = 1; stepY = 1;

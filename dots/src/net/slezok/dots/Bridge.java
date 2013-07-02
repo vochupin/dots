@@ -13,13 +13,13 @@ public class Bridge{
 
 	//diagonal directions
 
-	private int x;
-	private int y;
+	private float x;
+	private float y;
 	private int direction;
-	private int width;
-	private int length;
+	private float width;
+	private float length;
 	
-	public Bridge(int x, int y, int direction, int width, int length) {
+	public Bridge(float x, float y, int direction, float width, float length) {
 		super();
 		this.x = x;
 		this.y = y;
@@ -33,19 +33,19 @@ public class Bridge{
 		width = 1; length = 5;
 	}
 
-	public int getX() {
+	public float getX() {
 		return x;
 	}
 
-	public void setX(int x) {
+	public void setX(float x) {
 		this.x = x;
 	}
 
-	public int getY() {
+	public float getY() {
 		return y;
 	}
 
-	public void setY(int y) {
+	public void setY(float y) {
 		this.y = y;
 	}
 
@@ -53,7 +53,7 @@ public class Bridge{
 		return direction;
 	}
 
-	public int getDirectionAngle() {
+	public float getDirectionAngle() {
 		switch(direction){
 		case DIRECTION_UP:
 			return 0;
@@ -80,19 +80,19 @@ public class Bridge{
 		this.direction = direction;
 	}
 
-	public int getWidth() {
+	public float getWidth() {
 		return width;
 	}
 
-	public void setWidth(int width) {
+	public void setWidth(float width) {
 		this.width = width;
 	}
 
-	public int getLength() {
+	public float getLength() {
 		return length;
 	}
 
-	public void setLength(int height) {
+	public void setLength(float height) {
 		this.length = height;
 	}
 }
