@@ -13,24 +13,25 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Json;
 import net.slezok.dots.Assets;
 import net.slezok.dots.Bridge;
+import net.slezok.dots.Level;
 
 public class DictField extends Group {
 	private static final String TAG = "Bridges";
-
-	private static final float FIELD_WIDTH = 100;
-
 	private static final float DOT_HALF_SIZE = 0.1F;
-	private final float FIELD_HEIGHT = 100;
+
+	private final float FIELD_WIDTH;
+	private final float FIELD_HEIGHT;
 	private final float SCREEN_WIDTH;
 	private final float SCREEN_HEIGHT;
 	private final float WORLD_WIDTH;
 	private final float WORLD_HEIGHT;
-
 		
-	final int gameUnitConst = 32;
 	private World world;
 	
-	public DictField(World world, String levelFileName) {
+	public DictField(World world, Level level) {
+		
+		FIELD_HEIGHT = level.getHeight();
+		FIELD_WIDTH = level.getWidth();
 		this.world = world;
 		
 		SCREEN_WIDTH = Gdx.graphics.getWidth();
@@ -42,7 +43,7 @@ public class DictField extends Group {
 		Gdx.app.log(TAG, "Screen width: " + SCREEN_WIDTH + " Screen height: " + SCREEN_HEIGHT);
 		Gdx.app.log(TAG, "Field width: " + FIELD_WIDTH + " Field height: " + FIELD_HEIGHT);
 		
-		FileHandle file =  Gdx.files.internal(levelFileName);
+		FileHandle file =  Gdx.files.internal(level.getLevelFile());
 		Json json = new Json();
 		@SuppressWarnings("unchecked")
 		Array<Bridge> bridges = json.fromJson(Array.class, Bridge.class, file);	

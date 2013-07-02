@@ -137,7 +137,7 @@ public class DictScreen implements Screen{
 		step = 0;
 		directions = level.getDirections();
 		
-		bridgesGrid = new DictField(world, level.getLevelFile());
+		bridgesGrid = new DictField(world, level);
 		bridgesGrid.setPosition(0, 0);
 		stage.addActor(bridgesGrid);
 		

@@ -2,35 +2,39 @@ package net.slezok.dots;
 
 public class Level{
 	
-	private int startX;
-	private int startY;
 	private String levelFile;
 	private String description;
 	private int[] directions;
 	
+	private boolean extentsCalculated = false;
+	
+	private int startX, startY, height, width;
+	
 	public Level(int startX, int startY) {
 		super();
-		this.startX = startX;
-		this.startY = startY;
 	}
 
 	public Level() {
 	}
 
 	public int getStartX() {
+		if(!extentsCalculated) calculateExtents();
 		return startX;
 	}
 
-	public void setStartX(int startX) {
-		this.startX = startX;
-	}
-
 	public int getStartY() {
+		if(!extentsCalculated) calculateExtents();
 		return startY;
 	}
 
-	public void setStartY(int startY) {
-		this.startY = startY;
+	public int getHeight() {
+		if(!extentsCalculated) calculateExtents();
+		return height;
+	}
+
+	public int getWidth() {
+		if(!extentsCalculated) calculateExtents();
+		return width;
 	}
 
 	public String getLevelFile() {
@@ -55,5 +59,10 @@ public class Level{
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	private void calculateExtents() {
+		startX = 0; startY = 0; height = 50; width = 130;
+		
 	}
 }
