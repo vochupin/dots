@@ -14,6 +14,7 @@ import com.badlogic.gdx.utils.Json;
 import net.slezok.dots.Assets;
 import net.slezok.dots.Bridge;
 import net.slezok.dots.Level;
+import net.slezok.dots.screens.DictScreen;
 
 public class DictField extends Group {
 	private static final String TAG = "Bridges";
@@ -30,8 +31,8 @@ public class DictField extends Group {
 	
 	public DictField(World world, Level level) {
 		
-		FIELD_HEIGHT = level.getHeight();
-		FIELD_WIDTH = level.getWidth();
+		FIELD_HEIGHT = level.getHeight() * DictScreen.STEP_SIZE;
+		FIELD_WIDTH = level.getWidth() * DictScreen.STEP_SIZE;
 		this.world = world;
 		
 		SCREEN_WIDTH = Gdx.graphics.getWidth();

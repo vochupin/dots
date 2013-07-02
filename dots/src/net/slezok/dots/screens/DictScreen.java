@@ -32,7 +32,7 @@ import net.slezok.dots.actors.DictField;
 public class DictScreen implements Screen{
 	private static final String TAG = "GridScreen";
 
-	protected static final int STEP_SIZE = 5;
+	public static final int STEP_SIZE = 5;
 
 	private static final long CURRENT_SOUND_DELAY = 800;
 
@@ -132,8 +132,8 @@ public class DictScreen implements Screen{
 		staticStage = new Stage();	
 		staticStage.addListener(new DictGestureHandler(this));
 
-		caretX = level.getStartX();
-		caretY = level.getStartY();
+		caretX = level.getStartX() * STEP_SIZE;
+		caretY = level.getStartY() * STEP_SIZE;
 		step = 0;
 		directions = level.getDirections();
 		

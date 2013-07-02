@@ -1,15 +1,16 @@
 package net.slezok.dots;
 
 public class Level{
-	
+	private static int MARGIN = 2;
+
 	private String levelFile;
 	private String description;
 	private int[] directions;
-	
+
 	private boolean extentsCalculated = false;
-	
+
 	private int startX, startY, height, width;
-	
+
 	public Level(int startX, int startY) {
 		super();
 	}
@@ -62,7 +63,50 @@ public class Level{
 	}
 
 	private void calculateExtents() {
-		startX = 0; startY = 0; height = 50; width = 130;
+		int currX = 0, currY = 0;
+		int maxX = 0, maxY = 0;
+		int minX = 0, minY = 0;
+		for(int direction : directions){
+			switch(direction){
+			case Bridge.DIRECTION_UP:
+				currY++;
+				break;
+			case Bridge.DIRECTION_DOWN:
+				currY--;
+				break;
+			case Bridge.DIRECTION_LEFT:
+				currX--;
+				break;
+			case Bridge.DIRECTION_RIGHT:
+				currX++;
+				break;
+			case Bridge.DIRECTION_UP_RIGHT:
+				currX++; currY++;
+				break;
+			case Bridge.DIRECTION_UP_LEFT:
+				currX--; currY++;
+				break;
+			case Bridge.DIRECTION_DOWN_RIGHT:
+				currX++; currY--;
+				break;
+			case Bridge.DIRECTION_DOWN_LEFT:
+				currX--; currY--;
+				break;
+
+			default: throw new IllegalArgumentException("Unknown move type: " + direction);
+			}
+			
+			if(maxX < currX) maxX = currX;
+			if(maxY < currY) maxY = currY;
+			if(minX > currX) minX = currX;
+			if(minY > currY) minY = currY;
+		}
+		maxX += MARGIN; maxY += MARGIN;
+		minX -= MARGIN; minY -= MARGIN;
 		
+		width = maxX - minX;
+		height = maxY - minY;
+
+		startX = -minX; startY = -minY; 
 	}
 }
