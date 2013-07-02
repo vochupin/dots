@@ -63,6 +63,8 @@ public class LevelsListScreen implements Screen {
 		}
 
 		levelsList = new List(levelNames, Assets.skin);
+		levelsList.setSelectedIndex(0);
+		level = levels.get(0);
 		levelsList.addListener(new EventListener(){
 			@Override
 			public boolean handle(Event event) {
