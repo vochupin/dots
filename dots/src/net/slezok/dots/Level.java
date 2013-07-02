@@ -1,6 +1,10 @@
 package net.slezok.dots;
 
+import com.badlogic.gdx.Gdx;
+
 public class Level{
+	private static final String TAG = "Level";
+
 	private static int MARGIN = 2;
 
 	private String levelFile;
@@ -10,6 +14,8 @@ public class Level{
 	private boolean extentsCalculated = false;
 
 	private int startX, startY, height, width;
+
+	private int maxIdenticalSteps;
 
 	public Level(int startX, int startY) {
 		super();
@@ -66,7 +72,19 @@ public class Level{
 		int currX = 0, currY = 0;
 		int maxX = 0, maxY = 0;
 		int minX = 0, minY = 0;
+		
+		int oldDirection = -1, identicalSteps = 0;
+		
 		for(int direction : directions){
+			
+			if(oldDirection == direction){
+				identicalSteps++;
+			}else{
+				oldDirection = direction;
+				if(maxIdenticalSteps < identicalSteps) maxIdenticalSteps = identicalSteps;
+				identicalSteps = 0;
+			}
+			
 			switch(direction){
 			case Bridge.DIRECTION_UP:
 				currY++;
@@ -108,5 +126,11 @@ public class Level{
 		height = maxY - minY;
 
 		startX = -minX; startY = -minY; 
+	}
+
+	public int getMaximumIdenticalSteps() {
+		if(!extentsCalculated) calculateExtents();
+		Gdx.app.log(TAG, "Max identical steps: " + maxIdenticalSteps);
+		return maxIdenticalSteps;
 	}
 }

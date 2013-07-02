@@ -41,6 +41,7 @@ public class Assets {
 	public static Sound downRightSound;
 	public static Sound downLeftSound;
 
+	public static Sound[] stepSounds;
 	
 	public static void load () {
 		
@@ -63,6 +64,10 @@ public class Assets {
 
 		skin = new Skin(Gdx.files.internal("data/uiskin.json"));
 		
+		loadSounds();
+	}
+
+	private static void loadSounds() {
 		wellDoneSound = Gdx.audio.newSound(Gdx.files.internal("data/sound/welldone.mp3"));
 		gameOverSound = Gdx.audio.newSound(Gdx.files.internal("data/sound/gameover.mp3"));
 		errorSound = Gdx.audio.newSound(Gdx.files.internal("data/sound/error.mp3"));
@@ -76,5 +81,13 @@ public class Assets {
 		upLeftSound = Gdx.audio.newSound(Gdx.files.internal("data/sound/up_left.mp3"));
 		downRightSound = Gdx.audio.newSound(Gdx.files.internal("data/sound/down_right.mp3"));
 		downLeftSound = Gdx.audio.newSound(Gdx.files.internal("data/sound/down_left.mp3"));
+	}
+	
+	public static void loadStepSounds(int maximumSteps) {
+		stepSounds = new Sound[maximumSteps];
+		for(int i = 1; i <= maximumSteps; i++){
+			stepSounds[i - 1] = Gdx.audio.newSound(Gdx.files.internal("data/sound/" + i + "steps.mp3"));
+		}
+				
 	}
 }

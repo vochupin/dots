@@ -88,6 +88,7 @@ public class DictScreen implements Screen{
 	public DictScreen(Dots game, Level level) {
 		this.game = game;
 		this.level = level;
+		Assets.loadStepSounds(level.getMaximumIdenticalSteps());
 	}
 
 	@Override
