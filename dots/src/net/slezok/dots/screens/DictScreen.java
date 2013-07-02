@@ -66,20 +66,6 @@ public class DictScreen implements Screen{
 	private Label errorsLabel;
 	private int errors = 0;
 	
-	private Sound wellDoneSound;
-	private Sound gameOverSound;
-	private Sound errorSound;
-
-	private Sound upSound;
-	private Sound downSound;
-	private Sound leftSound;
-	private Sound rightSound;
-
-	private Sound upRightSound;
-	private Sound upLeftSound;
-	private Sound downRightSound;
-	private Sound downLeftSound;
-
 	private int caretX, caretY;
 	private int step;
 	private int[] directions;
@@ -140,8 +126,6 @@ public class DictScreen implements Screen{
 	
 	@Override
 	public void show() {
-		loadSounds();
-		
 		world = new World(new Vector2(0f, -1), true);
 		
 		stage = new Stage();
@@ -191,23 +175,6 @@ public class DictScreen implements Screen{
 		setCurrentSoundAndPlay(CURRENT_SOUND_DELAY);
 	}
 
-	private void loadSounds() {
-		//TODO move to Assets
-		wellDoneSound = Gdx.audio.newSound(Gdx.files.internal("data/sound/welldone.mp3"));
-		gameOverSound = Gdx.audio.newSound(Gdx.files.internal("data/sound/gameover.mp3"));
-		errorSound = Gdx.audio.newSound(Gdx.files.internal("data/sound/error.mp3"));
-		
-		upSound = Gdx.audio.newSound(Gdx.files.internal("data/sound/up.mp3"));
-		downSound = Gdx.audio.newSound(Gdx.files.internal("data/sound/down.mp3"));
-		leftSound = Gdx.audio.newSound(Gdx.files.internal("data/sound/left.mp3"));
-		rightSound = Gdx.audio.newSound(Gdx.files.internal("data/sound/right.mp3"));
-
-		upRightSound = Gdx.audio.newSound(Gdx.files.internal("data/sound/up_right.mp3"));
-		upLeftSound = Gdx.audio.newSound(Gdx.files.internal("data/sound/up_left.mp3"));
-		downRightSound = Gdx.audio.newSound(Gdx.files.internal("data/sound/down_right.mp3"));
-		downLeftSound = Gdx.audio.newSound(Gdx.files.internal("data/sound/down_left.mp3"));
-	}
-
 	private void createButtons() {
 		upButton = new ImageButton(new TextureRegionDrawable(Assets.up));
 		downButton = new ImageButton(new TextureRegionDrawable(Assets.down));
@@ -248,14 +215,14 @@ public class DictScreen implements Screen{
 					Gdx.app.log(TAG, "WRONG STEP");
 					errors++;
 					errorsLabel.setText("Errors: " + errors);
-					errorSound.play();
+					Assets.errorSound.play();
 				}else{
 					Gdx.app.log(TAG, "GOOD STEP");
 					bridgesGrid.addBridge(new Bridge(caretX, caretY, direction, 1, (int)Math.sqrt(stepX * stepX + stepY * stepY)));
 					caretX += stepX; caretY += stepY;
 					step++;
 					if(step < directions.length){
-						wellDoneSound.play();
+						Assets.wellDoneSound.play();
 						setCurrentSoundAndPlay(CURRENT_SOUND_DELAY);
 					}
 				}
@@ -360,9 +327,9 @@ public class DictScreen implements Screen{
 			table.removeActor(upRightButton);
 			table.removeActor(downRightButton);
 			
-			wellDoneSound.stop();
-			errorSound.stop();
-			gameOverSound.play();
+			Assets.wellDoneSound.stop();
+			Assets.errorSound.stop();
+			Assets.gameOverSound.play();
 		}
 		
 	};
@@ -370,28 +337,28 @@ public class DictScreen implements Screen{
 	private void setCurrentSoundAndPlay(long delay) {
 		switch(directions[step]){
 		case Bridge.DIRECTION_UP:
-			currentSound = upSound;
+			currentSound = Assets.upSound;
 			break;
 		case Bridge.DIRECTION_DOWN:
-			currentSound = downSound;
+			currentSound = Assets.downSound;
 			break;
 		case Bridge.DIRECTION_LEFT:
-			currentSound = leftSound;
+			currentSound = Assets.leftSound;
 			break;
 		case Bridge.DIRECTION_RIGHT:
-			currentSound = rightSound;
+			currentSound = Assets.rightSound;
 			break;
 		case Bridge.DIRECTION_UP_LEFT:
-			currentSound = upLeftSound;
+			currentSound = Assets.upLeftSound;
 			break;
 		case Bridge.DIRECTION_DOWN_LEFT:
-			currentSound = downLeftSound;
+			currentSound = Assets.downLeftSound;
 			break;
 		case Bridge.DIRECTION_UP_RIGHT:
-			currentSound = upRightSound;
+			currentSound = Assets.upRightSound;
 			break;
 		case Bridge.DIRECTION_DOWN_RIGHT:
-			currentSound = downRightSound;
+			currentSound = Assets.downRightSound;
 			break;
 		}
 		if(currentSound != null){
@@ -414,9 +381,9 @@ public class DictScreen implements Screen{
 	@Override
 	public void dispose() {
 		stage.dispose();
-		wellDoneSound.dispose();
-		gameOverSound.dispose();
-		errorSound.dispose();
+		Assets.wellDoneSound.dispose();
+		Assets.gameOverSound.dispose();
+		Assets.errorSound.dispose();
 	}
 	
 	public void moveRelatively(float x, float y) {

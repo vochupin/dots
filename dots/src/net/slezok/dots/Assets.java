@@ -1,6 +1,7 @@
 package net.slezok.dots;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
@@ -26,6 +27,21 @@ public class Assets {
 	public static TextureRegion upRight;
 	public static TextureRegion downRight;
 	
+	public static Sound wellDoneSound;
+	public static Sound gameOverSound;
+	public static Sound errorSound;
+
+	public static Sound upSound;
+	public static Sound downSound;
+	public static Sound leftSound;
+	public static Sound rightSound;
+
+	public static Sound upRightSound;
+	public static Sound upLeftSound;
+	public static Sound downRightSound;
+	public static Sound downLeftSound;
+
+	
 	public static void load () {
 		
 		TextureAtlas textureAtlas = new TextureAtlas("data/PigTest.pack");
@@ -47,5 +63,18 @@ public class Assets {
 
 		skin = new Skin(Gdx.files.internal("data/uiskin.json"));
 		
+		wellDoneSound = Gdx.audio.newSound(Gdx.files.internal("data/sound/welldone.mp3"));
+		gameOverSound = Gdx.audio.newSound(Gdx.files.internal("data/sound/gameover.mp3"));
+		errorSound = Gdx.audio.newSound(Gdx.files.internal("data/sound/error.mp3"));
+		
+		upSound = Gdx.audio.newSound(Gdx.files.internal("data/sound/up.mp3"));
+		downSound = Gdx.audio.newSound(Gdx.files.internal("data/sound/down.mp3"));
+		leftSound = Gdx.audio.newSound(Gdx.files.internal("data/sound/left.mp3"));
+		rightSound = Gdx.audio.newSound(Gdx.files.internal("data/sound/right.mp3"));
+
+		upRightSound = Gdx.audio.newSound(Gdx.files.internal("data/sound/up_right.mp3"));
+		upLeftSound = Gdx.audio.newSound(Gdx.files.internal("data/sound/up_left.mp3"));
+		downRightSound = Gdx.audio.newSound(Gdx.files.internal("data/sound/down_right.mp3"));
+		downLeftSound = Gdx.audio.newSound(Gdx.files.internal("data/sound/down_left.mp3"));
 	}
 }
