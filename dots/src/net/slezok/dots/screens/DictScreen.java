@@ -6,6 +6,7 @@ import java.util.List;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Camera;
@@ -150,6 +151,12 @@ public class DictScreen implements Screen{
 	@Override
 	public void show() {
 		world = new World(new Vector2(0f, -1), true);
+		
+		Music music = Assets.backMusic;
+		
+		music.setVolume(0.3f);
+		music.setLooping(true);
+		music.play();
 
 		stage = new Stage();
 		staticStage = new Stage();	
@@ -406,7 +413,7 @@ public class DictScreen implements Screen{
 		int identicalSteps = 0;
 		while(index < directions.length && directions[step] == directions[index++]) identicalSteps++;
 		if(identicalSteps > 0) {
-			soundMessages.add(new SoundMessage(Assets.stepSounds[identicalSteps], delay));
+			soundMessages.add(new SoundMessage(Assets.getStepSound(identicalSteps), delay));
 		}
 	}
 

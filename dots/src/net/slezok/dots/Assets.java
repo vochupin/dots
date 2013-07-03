@@ -1,6 +1,7 @@
 package net.slezok.dots;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
@@ -43,7 +44,9 @@ public class Assets {
 	public static Sound downRightSound;
 	public static Sound downLeftSound;
 
-	public static Sound[] stepSounds;
+	private static Sound[] stepSounds;
+	
+	public static Music backMusic;
 	
 	public static void load () {
 		
@@ -85,13 +88,24 @@ public class Assets {
 		upLeftSound = Gdx.audio.newSound(Gdx.files.internal("data/sound/up_left.mp3"));
 		downRightSound = Gdx.audio.newSound(Gdx.files.internal("data/sound/down_right.mp3"));
 		downLeftSound = Gdx.audio.newSound(Gdx.files.internal("data/sound/down_left.mp3"));
+		
+		backMusic = Gdx.audio.newMusic(Gdx.files.internal("data/bluevagon.mp3"));
 	}
 	
 	public static void loadStepSounds(int maximumSteps) {
+		if(maximumSteps > 20) maximumSteps = 20;
 		stepSounds = new Sound[maximumSteps];
 		for(int i = 1; i <= maximumSteps; i++){
 			stepSounds[i - 1] = Gdx.audio.newSound(Gdx.files.internal("data/sound/" + i + "steps.mp3"));
 		}
 				
+	}
+	
+	public static Sound getStepSound(int numberOfSteps){
+		if(numberOfSteps < 20){
+			return stepSounds[numberOfSteps];
+		}else{
+			return stepSounds[19];
+		}
 	}
 }
