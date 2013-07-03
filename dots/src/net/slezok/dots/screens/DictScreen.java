@@ -88,6 +88,8 @@ public class DictScreen implements Screen{
 
 	private List<SoundMessage> soundMessages = new LinkedList<SoundMessage>();
 
+	private int identicalSteps = 0;
+
 	private Table table;
 
 	private int[] magicSequence = new int[]{
@@ -151,9 +153,9 @@ public class DictScreen implements Screen{
 	@Override
 	public void show() {
 		world = new World(new Vector2(0f, -1), true);
-		
+
 		Music music = Assets.backMusic;
-		
+
 		music.setVolume(0.3f);
 		music.setLooping(true);
 		music.play();
@@ -245,15 +247,19 @@ public class DictScreen implements Screen{
 					Gdx.app.log(TAG, "WRONG STEP");
 					errors++;
 					errorsLabel.setText("Errors: " + errors);
-					Assets.errorSound.play();
+					soundMessages.add(new SoundMessage(Assets.errorSound, 0));
 				}else{
 					Gdx.app.log(TAG, "GOOD STEP");
 					bridgesGrid.addBridge(new Bridge(caretX, caretY, direction, DictField.LINE_HALF_WIDTH * 2, getLength(stepX, stepY)));
 					caretX += stepX; caretY += stepY;
 					step++;
 					if(step < directions.length){
-						Assets.wellDoneSound.play();
 						soundMessages.clear();
+						if(identicalSteps != 0){
+							soundMessages.add(new SoundMessage(Assets.moveSound, 0));
+						}else{
+							soundMessages.add(new SoundMessage(Assets.wellDoneSound, 0));
+						}
 						setCurrentSoundAndPlay(CURRENT_SOUND_DELAY);
 					}
 				}
@@ -364,14 +370,17 @@ public class DictScreen implements Screen{
 			table.removeActor(upRightButton);
 			table.removeActor(downRightButton);
 
-			Assets.wellDoneSound.stop();
-			Assets.errorSound.stop();
-			Assets.gameOverSound.play();
+			soundMessages.add(new SoundMessage(Assets.gameOverSound, CURRENT_SOUND_DELAY));;
 		}
 
 	};
 
 	private void setCurrentSoundAndPlay(long delay) {
+		
+		if(this.identicalSteps != 0) {
+			identicalSteps--;
+			return;
+		}
 
 		Sound currentSound = null;
 
@@ -412,6 +421,12 @@ public class DictScreen implements Screen{
 		int index = step + 1;
 		int identicalSteps = 0;
 		while(index < directions.length && directions[step] == directions[index++]) identicalSteps++;
+
+		Gdx.app.log(TAG, "Calculated identical steps: " + identicalSteps);
+
+		if(identicalSteps >= Assets.MAXIMUM_STEPS_NUMBER) identicalSteps = Assets.MAXIMUM_STEPS_NUMBER - 1;
+		this.identicalSteps = identicalSteps;
+
 		if(identicalSteps > 0) {
 			soundMessages.add(new SoundMessage(Assets.getStepSound(identicalSteps), delay));
 		}

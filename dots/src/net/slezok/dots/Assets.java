@@ -46,6 +46,8 @@ public class Assets {
 	public static Sound downRightSound;
 	public static Sound downLeftSound;
 	
+	public static Sound moveSound;
+	
 	private static Sound[] stepSounds;
 	
 	public static Music backMusic;
@@ -90,6 +92,8 @@ public class Assets {
 		upLeftSound = Gdx.audio.newSound(Gdx.files.internal("data/sound/up_left.mp3"));
 		downRightSound = Gdx.audio.newSound(Gdx.files.internal("data/sound/down_right.mp3"));
 		downLeftSound = Gdx.audio.newSound(Gdx.files.internal("data/sound/down_left.mp3"));
+		
+		moveSound = Gdx.audio.newSound(Gdx.files.internal("data/sound/cup-drop.mp3"));
 		
 		backMusic = Gdx.audio.newMusic(Gdx.files.internal("data/bluevagon.mp3"));
 	}
