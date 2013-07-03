@@ -11,6 +11,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 
 
 public class Assets {
+	private static final int MAXIMUM_STEPS_NUMBER = 10;
+	
 	public static TextureRegion platform;
 	public static TextureRegion fallingManSplash;
 	public static Animation fallingManAnim;
@@ -43,7 +45,7 @@ public class Assets {
 	public static Sound upLeftSound;
 	public static Sound downRightSound;
 	public static Sound downLeftSound;
-
+	
 	private static Sound[] stepSounds;
 	
 	public static Music backMusic;
@@ -93,7 +95,7 @@ public class Assets {
 	}
 	
 	public static void loadStepSounds(int maximumSteps) {
-		if(maximumSteps > 20) maximumSteps = 20;
+		if(maximumSteps > MAXIMUM_STEPS_NUMBER) maximumSteps = MAXIMUM_STEPS_NUMBER;
 		stepSounds = new Sound[maximumSteps];
 		for(int i = 1; i <= maximumSteps; i++){
 			stepSounds[i - 1] = Gdx.audio.newSound(Gdx.files.internal("data/sound/" + i + "steps.mp3"));
@@ -102,10 +104,10 @@ public class Assets {
 	}
 	
 	public static Sound getStepSound(int numberOfSteps){
-		if(numberOfSteps < 20){
+		if(numberOfSteps < MAXIMUM_STEPS_NUMBER){
 			return stepSounds[numberOfSteps];
 		}else{
-			return stepSounds[19];
+			return stepSounds[MAXIMUM_STEPS_NUMBER - 1];
 		}
 	}
 }
