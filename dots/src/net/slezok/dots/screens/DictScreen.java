@@ -204,7 +204,7 @@ public class DictScreen implements Screen{
 
 		Gdx.input.setInputProcessor(staticStage);
 
-		setCurrentSoundAndPlay(CURRENT_SOUND_DELAY);
+		recalculateIdenticalStepsAndPlaySound();
 	}
 
 	private void createButtons() {
@@ -255,12 +255,11 @@ public class DictScreen implements Screen{
 					step++;
 					if(step < directions.length){
 						soundMessages.clear();
-						if(identicalSteps != 0){
-							soundMessages.add(new SoundMessage(Assets.moveSound, 0));
-						}else{
-							soundMessages.add(new SoundMessage(Assets.wellDoneSound, 0));
+						soundMessages.add(new SoundMessage(Assets.moveSound, 0));
+						if(identicalSteps == 0){
+							soundMessages.add(new SoundMessage(Assets.wellDoneSound, 500));
 						}
-						setCurrentSoundAndPlay(CURRENT_SOUND_DELAY);
+						recalculateIdenticalStepsAndPlaySound();
 					}
 				}
 
@@ -314,7 +313,8 @@ public class DictScreen implements Screen{
 			}else if(actor.equals(downLeftButton)){
 				direction = Bridge.DIRECTION_DOWN_LEFT;
 			}else if(actor.equals(repeatButton)){
-				setCurrentSoundAndPlay(0);
+				soundMessages.add(new SoundMessage(Assets.moveSound, 0));
+				setCurrentSoundAndPlay(CURRENT_SOUND_DELAY);
 			}
 			return direction;
 		}
@@ -370,21 +370,35 @@ public class DictScreen implements Screen{
 			table.removeActor(upRightButton);
 			table.removeActor(downRightButton);
 
-			soundMessages.add(new SoundMessage(Assets.gameOverSound, CURRENT_SOUND_DELAY));;
+			soundMessages.add(new SoundMessage(Assets.gameOverSound, CURRENT_SOUND_DELAY));
 		}
 
 	};
 
+	private void recalculateIdenticalStepsAndPlaySound(){
+		if(this.identicalSteps != 0) {
+			this.identicalSteps--;
+		}else{
+			int index = step + 1;
+			int identicalSteps = 0;
+			while(index < directions.length && directions[step] == directions[index++]) identicalSteps++;
+
+			Gdx.app.log(TAG, "Calculated identical steps: " + identicalSteps);
+
+			if(identicalSteps >= Assets.MAXIMUM_STEPS_NUMBER) identicalSteps = Assets.MAXIMUM_STEPS_NUMBER - 1;
+			this.identicalSteps = identicalSteps;
+			
+			setCurrentSoundAndPlay(CURRENT_SOUND_DELAY);
+		}
+	}
+	
 	private void setCurrentSoundAndPlay(long delay) {
 		
-		if(this.identicalSteps != 0) {
-			identicalSteps--;
-			return;
-		}
-
 		Sound currentSound = null;
 
-		checkForIdenticalSteps(delay);
+		if(identicalSteps > 0) {
+			soundMessages.add(new SoundMessage(Assets.getStepSound(identicalSteps), delay));
+		}
 
 		switch(directions[step]){
 		case Bridge.DIRECTION_UP:
@@ -414,21 +428,6 @@ public class DictScreen implements Screen{
 		}
 		if(currentSound != null){
 			soundMessages.add(new SoundMessage(currentSound, delay));
-		}
-	}
-
-	private void checkForIdenticalSteps(long delay) {
-		int index = step + 1;
-		int identicalSteps = 0;
-		while(index < directions.length && directions[step] == directions[index++]) identicalSteps++;
-
-		Gdx.app.log(TAG, "Calculated identical steps: " + identicalSteps);
-
-		if(identicalSteps >= Assets.MAXIMUM_STEPS_NUMBER) identicalSteps = Assets.MAXIMUM_STEPS_NUMBER - 1;
-		this.identicalSteps = identicalSteps;
-
-		if(identicalSteps > 0) {
-			soundMessages.add(new SoundMessage(Assets.getStepSound(identicalSteps), delay));
 		}
 	}
 
