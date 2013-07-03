@@ -75,7 +75,7 @@ public class LevelsListScreen implements Screen {
 		});
 		ScrollPane scroller = new ScrollPane(levelsList);
 
-		Image backImage = new Image(Assets.backgroundTexture);
+		Image backImage = new Image(Assets.listBackgroundTexture);
 		backImage.setFillParent(true);
 		
 		startButton = new TextButton("Start", Assets.skin);

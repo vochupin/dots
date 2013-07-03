@@ -16,7 +16,6 @@ public class MainMenuScreen implements Screen {
 	
 	Dots game;
 	Stage stage;
-	TextButton startGameButton;
 	TextButton gridButton;
 	TextButton exitButton;
 	
@@ -45,20 +44,11 @@ public class MainMenuScreen implements Screen {
 		
 		Table table = new Table(Assets.skin);
 		
-		startGameButton = new TextButton("New Game", Assets.skin);
 		gridButton = new TextButton("Dict", Assets.skin);
 		exitButton = new TextButton("Exit", Assets.skin);
-		Image backImage = new Image(Assets.backgroundTexture);
+		Image backImage = new Image(Assets.mainBackgroundTexture);
 		backImage.setFillParent(true);
 		
-		startGameButton.addListener(new InputListener() {
-			@Override
-			public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-				game.setScreen(new GameScreen(game));
-				return true;
-			}
-		});
-
 		gridButton.addListener(new InputListener() {
 			@Override
 			public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
@@ -69,8 +59,6 @@ public class MainMenuScreen implements Screen {
 
 		table.setFillParent(true);
 //		table.debug(); 
-//		table.add(startGameButton).width(300).height(80);
-//		table.row();
 		table.add(gridButton).width(250).height(80).padTop(30);
 //		table.row();
 //		table.add(exitButton).width(200).height(80).padTop(30);

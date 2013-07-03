@@ -187,7 +187,7 @@ public class DictScreen implements Screen{
 		table.add(downButton).padTop(50).align(BaseTableLayout.CENTER);
 		table.add(downRightButton).padTop(50).padLeft(100);
 
-		Image bgrImage = new Image(Assets.backgroundTexture);
+		Image bgrImage = new Image(Assets.dictBackgroundTexture);
 		bgrImage.setFillParent(true);
 		bgrImage.setPosition(0,  0);
 		staticStage.addActor(bgrImage);

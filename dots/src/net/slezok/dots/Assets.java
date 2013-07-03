@@ -13,7 +13,9 @@ public class Assets {
 	public static TextureRegion platform;
 	public static TextureRegion fallingManSplash;
 	public static Animation fallingManAnim;
-	public static Texture backgroundTexture;
+	public static Texture mainBackgroundTexture;
+	public static Texture listBackgroundTexture;
+	public static Texture dictBackgroundTexture;
 	public static Skin skin;
 	
 	public static TextureRegion up;
@@ -49,7 +51,9 @@ public class Assets {
 		fallingManAnim = new Animation(0.2f, textureAtlas.findRegion("falling1"), textureAtlas.findRegion("falling2"));
 		platform = textureAtlas.findRegion("platform");
 		fallingManSplash = textureAtlas.findRegion("rip");
-		backgroundTexture = new Texture(Gdx.files.internal("data/back.jpg"));
+		mainBackgroundTexture = new Texture(Gdx.files.internal("data/menuback.jpg"));
+		listBackgroundTexture = new Texture(Gdx.files.internal("data/listback.jpg"));
+		dictBackgroundTexture = new Texture(Gdx.files.internal("data/dictback.jpg"));
 		
 		up = new TextureRegion(new Texture(Gdx.files.internal("data/button/up_128.png")));
 		down = new TextureRegion(new Texture(Gdx.files.internal("data/button/down_128.png")));
