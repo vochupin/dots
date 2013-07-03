@@ -42,29 +42,20 @@ public class MainMenuScreen implements Screen {
 		stage = new Stage();
 		Gdx.input.setInputProcessor(stage);
 		
-		Table table = new Table(Assets.skin);
-		
 		gridButton = new TextButton("Dict", Assets.skin);
 		exitButton = new TextButton("Exit", Assets.skin);
 		Image backImage = new Image(Assets.mainBackgroundTexture);
 		backImage.setFillParent(true);
 		
-		gridButton.addListener(new InputListener() {
+		backImage.addListener(new InputListener() {
 			@Override
 			public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
 				game.setScreen(new LevelsListScreen(game));
 				return true;
 			}
 		});
-
-		table.setFillParent(true);
-//		table.debug(); 
-		table.add(gridButton).width(250).height(80).padTop(30);
-//		table.row();
-//		table.add(exitButton).width(200).height(80).padTop(30);
 		
 		stage.addActor(backImage);
-		stage.addActor(table);
 	}
 
 	@Override
