@@ -81,6 +81,7 @@ public class Level{
 				identicalSteps++;
 			}else{
 				oldDirection = direction;
+				identicalSteps++;
 				if(maxIdenticalSteps < identicalSteps) maxIdenticalSteps = identicalSteps;
 				identicalSteps = 0;
 			}
