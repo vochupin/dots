@@ -11,7 +11,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 
 
 public class Assets {
-	private static final int MAXIMUM_STEPS_NUMBER = 10;
+	public static final int MAXIMUM_STEPS_NUMBER = 10;
 	
 	public static TextureRegion platform;
 	public static TextureRegion fallingManSplash;
