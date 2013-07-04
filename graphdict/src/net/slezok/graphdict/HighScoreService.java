@@ -1,0 +1,10 @@
+package net.slezok.graphdict;
+
+
+import java.util.List;
+
+public interface HighScoreService {
+	public List<String> getAllApplications();
+	public List<HighScore> getAllHighScores(String application);
+	public void addHighScores(HighScore highscore);
+}
