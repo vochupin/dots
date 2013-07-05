@@ -82,7 +82,7 @@ public class HighScoreServiceImpl implements HighScoreService {
 
 	@Override
 	public List<String> getAllApplications() {
-		String[] list = { "othellolegends" };
+		String[] list = { "graphdict" };
 		return Arrays.asList(list);
 	}
 }
