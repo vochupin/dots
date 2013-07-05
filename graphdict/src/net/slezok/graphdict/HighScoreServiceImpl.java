@@ -48,13 +48,13 @@ public class HighScoreServiceImpl implements HighScoreService {
 	public void addHighScores(HighScore highscore) {
 		if (getAllApplications().contains(highscore.getApplication())) {
 
-			DatastoreService datastore = DatastoreServiceFactory
-					.getDatastoreService();
+			DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
 
 			// The Query interface assembles a query
 			Query q = new Query("HighScore");
 			q.addFilter("application", Query.FilterOperator.EQUAL, highscore.getApplication());
 			q.addFilter("owner", Query.FilterOperator.EQUAL, highscore.getOwner());
+			q.addFilter("level", Query.FilterOperator.EQUAL, highscore.getLevel());
 
 			// PreparedQuery contains the methods for fetching query results
 			// from the datastore
