@@ -50,7 +50,8 @@ public class MainMenuScreen implements Screen {
 		backImage.addListener(new InputListener() {
 			@Override
 			public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-				game.setScreen(new LevelsListScreen(game));
+//				game.setScreen(new LevelsListScreen(game));
+				game.setScreen(new PropertiesScreen(game));
 				return true;
 			}
 		});

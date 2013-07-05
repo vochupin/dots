@@ -446,6 +446,7 @@ public class DictScreen implements Screen{
 	@Override
 	public void dispose() {
 		stage.dispose();
+		staticStage.dispose();
 		Assets.wellDoneSound.dispose();
 		Assets.gameOverSound.dispose();
 		Assets.errorSound.dispose();
