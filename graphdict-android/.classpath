@@ -4,10 +4,10 @@
 	<classpathentry kind="src" path="gen"/>
 	<classpathentry combineaccessrules="false" exported="true" kind="src" path="/graphdict"/>
 	<classpathentry kind="con" path="com.android.ide.eclipse.adt.ANDROID_FRAMEWORK"/>
-	<classpathentry kind="lib" path="C:/Documents and Settings/vc/git/graphdict/dots/libs/gdx.jar" sourcepath="/dots/libs/gdx-sources.jar"/>
+	<classpathentry kind="lib" path="C:/Documents and Settings/vc/git/graphdict/graphdict/libs/gdx.jar" sourcepath="/dots/libs/gdx-sources.jar"/>
 	<classpathentry exported="true" kind="lib" path="libs/gdx-backend-android.jar" sourcepath="libs/gdx-backend-android-sources.jar"/>
-	<classpathentry kind="lib" path="C:/Documents and Settings/vc/git/graphdict/dots/libs/bodyeditor-loader.jar" sourcepath="/dots/libs/bodyeditor-loader-sources.jar"/>
-	<classpathentry kind="lib" path="C:/Documents and Settings/vc/git/graphdict/dots/libs/tween-engine-api.jar" sourcepath="/dots/libs/tween-engine-api-sources.jar"/>
+	<classpathentry kind="lib" path="C:/Documents and Settings/vc/git/graphdict/graphdict/libs/bodyeditor-loader.jar" sourcepath="/dots/libs/bodyeditor-loader-sources.jar"/>
+	<classpathentry kind="lib" path="C:/Documents and Settings/vc/git/graphdict/graphdict/libs/tween-engine-api.jar" sourcepath="/dots/libs/tween-engine-api-sources.jar"/>
 	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.LIBRARIES"/>
 	<classpathentry kind="con" path="com.android.ide.eclipse.adt.DEPENDENCIES"/>
 	<classpathentry kind="output" path="bin/classes"/>
