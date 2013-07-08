@@ -26,11 +26,20 @@ public class Assets {
 	public static TextureRegion left;
 	public static TextureRegion right;
 	public static TextureRegion repeat;
-
 	public static TextureRegion upLeft;
 	public static TextureRegion downLeft;
 	public static TextureRegion upRight;
 	public static TextureRegion downRight;
+
+	public static TextureRegion upPressed;
+	public static TextureRegion downPressed;
+	public static TextureRegion leftPressed;
+	public static TextureRegion rightPressed;
+	public static TextureRegion repeatPressed;
+	public static TextureRegion upLeftPressed;
+	public static TextureRegion downLeftPressed;
+	public static TextureRegion upRightPressed;
+	public static TextureRegion downRightPressed;
 	
 	public static Sound wellDoneSound;
 	public static Sound gameOverSound;
@@ -62,16 +71,25 @@ public class Assets {
 		listBackgroundTexture = new Texture(Gdx.files.internal("data/listback.jpg"));
 		dictBackgroundTexture = new Texture(Gdx.files.internal("data/dictback.jpg"));
 		
-		up = new TextureRegion(new Texture(Gdx.files.internal("data/button/up_128.png")));
-		down = new TextureRegion(new Texture(Gdx.files.internal("data/button/down_128.png")));
-		left = new TextureRegion(new Texture(Gdx.files.internal("data/button/left_128.png")));
-		right = new TextureRegion(new Texture(Gdx.files.internal("data/button/right_128.png")));
-		repeat = new TextureRegion(new Texture(Gdx.files.internal("data/button/repeat_128.png")));
+		up = new TextureRegion(new Texture(Gdx.files.internal("data/buttons/up.png")));
+		down = new TextureRegion(new Texture(Gdx.files.internal("data/buttons/down.png")));
+		left = new TextureRegion(new Texture(Gdx.files.internal("data/buttons/left.png")));
+		right = new TextureRegion(new Texture(Gdx.files.internal("data/buttons/right.png")));
+		repeat = new TextureRegion(new Texture(Gdx.files.internal("data/buttons/repeat.png")));
+		upLeft = new TextureRegion(new Texture(Gdx.files.internal("data/buttons/up_left.png")));
+		downLeft = new TextureRegion(new Texture(Gdx.files.internal("data/buttons/down_left.png")));
+		upRight = new TextureRegion(new Texture(Gdx.files.internal("data/buttons/up_right.png")));
+		downRight = new TextureRegion(new Texture(Gdx.files.internal("data/buttons/down_right.png")));
 
-		upLeft = new TextureRegion(new Texture(Gdx.files.internal("data/button/up_left_128.png")));
-		downLeft = new TextureRegion(new Texture(Gdx.files.internal("data/button/down_left_128.png")));
-		upRight = new TextureRegion(new Texture(Gdx.files.internal("data/button/up_right_128.png")));
-		downRight = new TextureRegion(new Texture(Gdx.files.internal("data/button/down_right_128.png")));
+		upPressed = new TextureRegion(new Texture(Gdx.files.internal("data/buttons/up_pressed.png")));
+		downPressed = new TextureRegion(new Texture(Gdx.files.internal("data/buttons/down_pressed.png")));
+		leftPressed = new TextureRegion(new Texture(Gdx.files.internal("data/buttons/left_pressed.png")));
+		rightPressed = new TextureRegion(new Texture(Gdx.files.internal("data/buttons/right_pressed.png")));
+		repeatPressed = new TextureRegion(new Texture(Gdx.files.internal("data/buttons/repeat_pressed.png")));
+		upLeftPressed = new TextureRegion(new Texture(Gdx.files.internal("data/buttons/up_left_pressed.png")));
+		downLeftPressed = new TextureRegion(new Texture(Gdx.files.internal("data/buttons/down_left_pressed.png")));
+		upRightPressed = new TextureRegion(new Texture(Gdx.files.internal("data/buttons/up_right_pressed.png")));
+		downRightPressed = new TextureRegion(new Texture(Gdx.files.internal("data/buttons/down_right_pressed.png")));
 
 		skin = new Skin(Gdx.files.internal("data/uiskin.json"));
 		

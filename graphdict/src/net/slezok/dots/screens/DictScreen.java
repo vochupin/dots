@@ -208,16 +208,16 @@ public class DictScreen implements Screen{
 	}
 
 	private void createButtons() {
-		upButton = new ImageButton(new TextureRegionDrawable(Assets.up));
-		downButton = new ImageButton(new TextureRegionDrawable(Assets.down));
-		leftButton = new ImageButton(new TextureRegionDrawable(Assets.left));
-		rightButton = new ImageButton(new TextureRegionDrawable(Assets.right));
-		upLeftButton = new ImageButton(new TextureRegionDrawable(Assets.upLeft));
-		downLeftButton = new ImageButton(new TextureRegionDrawable(Assets.downLeft));
-		upRightButton = new ImageButton(new TextureRegionDrawable(Assets.upRight));
-		downRightButton = new ImageButton(new TextureRegionDrawable(Assets.downRight));
+		upButton = new ImageButton(new TextureRegionDrawable(Assets.up), new TextureRegionDrawable(Assets.upPressed));
+		downButton = new ImageButton(new TextureRegionDrawable(Assets.down), new TextureRegionDrawable(Assets.downPressed));
+		leftButton = new ImageButton(new TextureRegionDrawable(Assets.left), new TextureRegionDrawable(Assets.leftPressed));
+		rightButton = new ImageButton(new TextureRegionDrawable(Assets.right), new TextureRegionDrawable(Assets.rightPressed));
+		upLeftButton = new ImageButton(new TextureRegionDrawable(Assets.upLeft), new TextureRegionDrawable(Assets.upLeftPressed));
+		downLeftButton = new ImageButton(new TextureRegionDrawable(Assets.downLeft), new TextureRegionDrawable(Assets.downLeftPressed));
+		upRightButton = new ImageButton(new TextureRegionDrawable(Assets.upRight), new TextureRegionDrawable(Assets.upRightPressed));
+		downRightButton = new ImageButton(new TextureRegionDrawable(Assets.downRight), new TextureRegionDrawable(Assets.downRightPressed));
 
-		repeatButton = new ImageButton(new TextureRegionDrawable(Assets.repeat));
+		repeatButton = new ImageButton(new TextureRegionDrawable(Assets.repeat), new TextureRegionDrawable(Assets.repeatPressed));
 
 		upButton.addListener(buttonListener);
 		downButton.addListener(buttonListener);
