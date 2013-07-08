@@ -77,7 +77,7 @@ public class LevelsListScreen implements Screen {
 			}
 		});
 		ScrollPane scroller = new ScrollPane(levelsList);
-		scroller.setScale(2);//FIXME
+		scroller.setScale(1.5f);//FIXME
 
 		Image backImage = new Image(Assets.listBackgroundTexture);
 		backImage.setFillParent(true);
@@ -107,11 +107,10 @@ public class LevelsListScreen implements Screen {
 		Table table = new Table(Assets.skin);
 		table.setFillParent(true);
 //		table.debug(); 
-		table.add(scroller).width(500).height(160);
+		table.add(scroller).width(200).height(160);
 		table.row();
 		table.add(playButton).width(250).height(80);
-		table.row();
-		table.add(propsButton).width(250).height(80).padTop(50);
+		table.add(propsButton).width(250).height(80);
 		
 		stage.addActor(backImage);
 		stage.addActor(table);

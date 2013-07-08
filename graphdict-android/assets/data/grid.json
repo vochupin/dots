@@ -1,10 +1,2 @@
 [
-{
-	class: net.slezok.dots.Bridge,
-	x: 0,
-	y: 0,
-	direction: 0,
-	width: 2,
-	length: 2
-}
 ]
