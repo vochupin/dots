@@ -18,6 +18,8 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.Event;
+import com.badlogic.gdx.scenes.scene2d.EventListener;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -48,6 +50,8 @@ public class PropertiesScreen implements Screen{
 	private final Dots game;
 
 	private Stage staticStage;
+	
+	private Label nameLabel;
 
 	private Box2DDebugRenderer debugRenderer = new Box2DDebugRenderer();
 	
@@ -79,10 +83,24 @@ public class PropertiesScreen implements Screen{
 
 		Table table = new Table(Assets.skin);
 		table.setFillParent(true);
-		Label nameLabel = new Label("Имя", Assets.skin);
+		
+		nameLabel = new Label("Глеб", Assets.skin);
+		nameLabel.setFontScale(3);//FIXME
+		
+		nameLabel.addListener(new InputListener(){
+
+			@Override
+			public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+				MyTextInputListener listener = new MyTextInputListener();
+				Gdx.input.getTextInput(listener, "Имя:", nameLabel.getText().toString());
+				return true;
+			}
+		});
+		
+		table.add(new Label("Имя: ", Assets.skin)).width(100).height(120);//FIXME
 		table.add(nameLabel).width(300).height(120);
 
-		staticStage = new Stage();	
+		staticStage = new Stage();
 
 		Image bgrImage = new Image(Assets.dictBackgroundTexture);
 		bgrImage.setFillParent(true);
@@ -91,14 +109,12 @@ public class PropertiesScreen implements Screen{
 		staticStage.addActor(table);
 		
 		Gdx.input.setInputProcessor(staticStage);
-
-//		MyTextInputListener listener = new MyTextInputListener();
-//		Gdx.input.getTextInput(listener, "Dialog Title", "Initial Textfield Value");
 	}
 
 	public class MyTextInputListener implements TextInputListener {
 		   @Override
 		   public void input (String text) {
+			   if(nameLabel != null) nameLabel.setText(text);
 		   }
 
 		   @Override

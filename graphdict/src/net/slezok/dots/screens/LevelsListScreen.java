@@ -77,6 +77,7 @@ public class LevelsListScreen implements Screen {
 			}
 		});
 		ScrollPane scroller = new ScrollPane(levelsList);
+		scroller.setScale(2);//FIXME
 
 		Image backImage = new Image(Assets.listBackgroundTexture);
 		backImage.setFillParent(true);
