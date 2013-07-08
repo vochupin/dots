@@ -1,66 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="con" path="com.google.appengine.eclipse.core.GAE_CONTAINER"/>
+	<classpathentry kind="output" path="bin"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="lib" path="C:/projects/workspace/graphdict/war/WEB-INF/lib/jackson-all-1.9.2.jar"/>
-	<classpathentry kind="lib" path="C:/projects/workspace/graphdict/war/WEB-INF/lib/spring-aop-4.0.0.M1.jar"/>
-	<classpathentry kind="lib" path="C:/projects/workspace/graphdict/war/WEB-INF/lib/spring-aop-4.0.0.M1-javadoc.jar"/>
-	<classpathentry kind="lib" path="C:/projects/workspace/graphdict/war/WEB-INF/lib/spring-aop-4.0.0.M1-sources.jar"/>
-	<classpathentry kind="lib" path="C:/projects/workspace/graphdict/war/WEB-INF/lib/spring-aspects-4.0.0.M1.jar"/>
-	<classpathentry kind="lib" path="C:/projects/workspace/graphdict/war/WEB-INF/lib/spring-aspects-4.0.0.M1-javadoc.jar"/>
-	<classpathentry kind="lib" path="C:/projects/workspace/graphdict/war/WEB-INF/lib/spring-aspects-4.0.0.M1-sources.jar"/>
-	<classpathentry kind="lib" path="C:/projects/workspace/graphdict/war/WEB-INF/lib/spring-beans-4.0.0.M1.jar"/>
-	<classpathentry kind="lib" path="C:/projects/workspace/graphdict/war/WEB-INF/lib/spring-beans-4.0.0.M1-javadoc.jar"/>
-	<classpathentry kind="lib" path="C:/projects/workspace/graphdict/war/WEB-INF/lib/spring-beans-4.0.0.M1-sources.jar"/>
-	<classpathentry kind="lib" path="C:/projects/workspace/graphdict/war/WEB-INF/lib/spring-build-src-4.0.0.M1.jar"/>
-	<classpathentry kind="lib" path="C:/projects/workspace/graphdict/war/WEB-INF/lib/spring-context-4.0.0.M1.jar"/>
-	<classpathentry kind="lib" path="C:/projects/workspace/graphdict/war/WEB-INF/lib/spring-context-4.0.0.M1-javadoc.jar"/>
-	<classpathentry kind="lib" path="C:/projects/workspace/graphdict/war/WEB-INF/lib/spring-context-4.0.0.M1-sources.jar"/>
-	<classpathentry kind="lib" path="C:/projects/workspace/graphdict/war/WEB-INF/lib/spring-context-support-4.0.0.M1.jar"/>
-	<classpathentry kind="lib" path="C:/projects/workspace/graphdict/war/WEB-INF/lib/spring-context-support-4.0.0.M1-javadoc.jar"/>
-	<classpathentry kind="lib" path="C:/projects/workspace/graphdict/war/WEB-INF/lib/spring-context-support-4.0.0.M1-sources.jar"/>
-	<classpathentry kind="lib" path="C:/projects/workspace/graphdict/war/WEB-INF/lib/spring-core-4.0.0.M1.jar"/>
-	<classpathentry kind="lib" path="C:/projects/workspace/graphdict/war/WEB-INF/lib/spring-core-4.0.0.M1-javadoc.jar"/>
-	<classpathentry kind="lib" path="C:/projects/workspace/graphdict/war/WEB-INF/lib/spring-core-4.0.0.M1-sources.jar"/>
-	<classpathentry kind="lib" path="C:/projects/workspace/graphdict/war/WEB-INF/lib/spring-expression-4.0.0.M1.jar"/>
-	<classpathentry kind="lib" path="C:/projects/workspace/graphdict/war/WEB-INF/lib/spring-expression-4.0.0.M1-javadoc.jar"/>
-	<classpathentry kind="lib" path="C:/projects/workspace/graphdict/war/WEB-INF/lib/spring-expression-4.0.0.M1-sources.jar"/>
-	<classpathentry kind="lib" path="C:/projects/workspace/graphdict/war/WEB-INF/lib/spring-instrument-4.0.0.M1.jar"/>
-	<classpathentry kind="lib" path="C:/projects/workspace/graphdict/war/WEB-INF/lib/spring-instrument-4.0.0.M1-javadoc.jar"/>
-	<classpathentry kind="lib" path="C:/projects/workspace/graphdict/war/WEB-INF/lib/spring-instrument-4.0.0.M1-sources.jar"/>
-	<classpathentry kind="lib" path="C:/projects/workspace/graphdict/war/WEB-INF/lib/spring-instrument-tomcat-4.0.0.M1.jar"/>
-	<classpathentry kind="lib" path="C:/projects/workspace/graphdict/war/WEB-INF/lib/spring-instrument-tomcat-4.0.0.M1-javadoc.jar"/>
-	<classpathentry kind="lib" path="C:/projects/workspace/graphdict/war/WEB-INF/lib/spring-instrument-tomcat-4.0.0.M1-sources.jar"/>
-	<classpathentry kind="lib" path="C:/projects/workspace/graphdict/war/WEB-INF/lib/spring-jdbc-4.0.0.M1.jar"/>
-	<classpathentry kind="lib" path="C:/projects/workspace/graphdict/war/WEB-INF/lib/spring-jdbc-4.0.0.M1-javadoc.jar"/>
-	<classpathentry kind="lib" path="C:/projects/workspace/graphdict/war/WEB-INF/lib/spring-jdbc-4.0.0.M1-sources.jar"/>
-	<classpathentry kind="lib" path="C:/projects/workspace/graphdict/war/WEB-INF/lib/spring-jms-4.0.0.M1.jar"/>
-	<classpathentry kind="lib" path="C:/projects/workspace/graphdict/war/WEB-INF/lib/spring-jms-4.0.0.M1-javadoc.jar"/>
-	<classpathentry kind="lib" path="C:/projects/workspace/graphdict/war/WEB-INF/lib/spring-jms-4.0.0.M1-sources.jar"/>
-	<classpathentry kind="lib" path="C:/projects/workspace/graphdict/war/WEB-INF/lib/spring-orm-4.0.0.M1.jar"/>
-	<classpathentry kind="lib" path="C:/projects/workspace/graphdict/war/WEB-INF/lib/spring-orm-4.0.0.M1-javadoc.jar"/>
-	<classpathentry kind="lib" path="C:/projects/workspace/graphdict/war/WEB-INF/lib/spring-orm-4.0.0.M1-sources.jar"/>
-	<classpathentry kind="lib" path="C:/projects/workspace/graphdict/war/WEB-INF/lib/spring-oxm-4.0.0.M1.jar"/>
-	<classpathentry kind="lib" path="C:/projects/workspace/graphdict/war/WEB-INF/lib/spring-oxm-4.0.0.M1-javadoc.jar"/>
-	<classpathentry kind="lib" path="C:/projects/workspace/graphdict/war/WEB-INF/lib/spring-oxm-4.0.0.M1-sources.jar"/>
-	<classpathentry kind="lib" path="C:/projects/workspace/graphdict/war/WEB-INF/lib/spring-test-4.0.0.M1.jar"/>
-	<classpathentry kind="lib" path="C:/projects/workspace/graphdict/war/WEB-INF/lib/spring-test-4.0.0.M1-javadoc.jar"/>
-	<classpathentry kind="lib" path="C:/projects/workspace/graphdict/war/WEB-INF/lib/spring-test-4.0.0.M1-sources.jar"/>
-	<classpathentry kind="lib" path="C:/projects/workspace/graphdict/war/WEB-INF/lib/spring-tx-4.0.0.M1.jar"/>
-	<classpathentry kind="lib" path="C:/projects/workspace/graphdict/war/WEB-INF/lib/spring-tx-4.0.0.M1-javadoc.jar"/>
-	<classpathentry kind="lib" path="C:/projects/workspace/graphdict/war/WEB-INF/lib/spring-tx-4.0.0.M1-sources.jar"/>
-	<classpathentry kind="lib" path="C:/projects/workspace/graphdict/war/WEB-INF/lib/spring-web-4.0.0.M1.jar"/>
-	<classpathentry kind="lib" path="C:/projects/workspace/graphdict/war/WEB-INF/lib/spring-web-4.0.0.M1-javadoc.jar"/>
-	<classpathentry kind="lib" path="C:/projects/workspace/graphdict/war/WEB-INF/lib/spring-web-4.0.0.M1-sources.jar"/>
-	<classpathentry kind="lib" path="C:/projects/workspace/graphdict/war/WEB-INF/lib/spring-webmvc-4.0.0.M1.jar"/>
-	<classpathentry kind="lib" path="C:/projects/workspace/graphdict/war/WEB-INF/lib/spring-webmvc-4.0.0.M1-javadoc.jar"/>
-	<classpathentry kind="lib" path="C:/projects/workspace/graphdict/war/WEB-INF/lib/spring-webmvc-4.0.0.M1-sources.jar"/>
-	<classpathentry kind="lib" path="C:/projects/workspace/graphdict/war/WEB-INF/lib/spring-webmvc-portlet-4.0.0.M1.jar"/>
-	<classpathentry kind="lib" path="C:/projects/workspace/graphdict/war/WEB-INF/lib/spring-webmvc-portlet-4.0.0.M1-javadoc.jar"/>
-	<classpathentry kind="lib" path="C:/projects/workspace/graphdict/war/WEB-INF/lib/spring-webmvc-portlet-4.0.0.M1-sources.jar"/>
-	<classpathentry kind="lib" path="C:/projects/workspace/graphdict/war/WEB-INF/lib/spring-websocket-4.0.0.M1.jar"/>
-	<classpathentry kind="lib" path="C:/projects/workspace/graphdict/war/WEB-INF/lib/spring-websocket-4.0.0.M1-javadoc.jar"/>
-	<classpathentry kind="lib" path="C:/projects/workspace/graphdict/war/WEB-INF/lib/spring-websocket-4.0.0.M1-sources.jar"/>
-	<classpathentry kind="output" path="war/WEB-INF/classes"/>
+	<classpathentry kind="lib" exported="true" path="libs/gdx.jar" sourcepath="libs/gdx-sources.jar"/>
+	<classpathentry kind="lib" exported="true" path="libs/bodyeditor-loader.jar" sourcepath="libs/bodyeditor-loader-sources.jar"/>
+	<classpathentry kind="lib" exported="true" path="libs/tween-engine-api.jar" sourcepath="libs/tween-engine-api-sources.jar"/>
 </classpath>
