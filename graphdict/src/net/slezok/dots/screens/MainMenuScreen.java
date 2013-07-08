@@ -7,17 +7,18 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
+
 import net.slezok.dots.Assets;
 import net.slezok.dots.Dots;
 
 public class MainMenuScreen implements Screen {
 	
-	Dots game;
-	Stage stage;
-	TextButton gridButton;
-	TextButton exitButton;
+	private Dots game;
+	private Stage stage;
 	
 	public MainMenuScreen(Dots game) {
 		this.game = game;
@@ -42,8 +43,6 @@ public class MainMenuScreen implements Screen {
 		stage = new Stage();
 		Gdx.input.setInputProcessor(stage);
 		
-		gridButton = new TextButton("Dict", Assets.skin);
-		exitButton = new TextButton("Exit", Assets.skin);
 		Image backImage = new Image(Assets.mainBackgroundTexture);
 		backImage.setFillParent(true);
 		

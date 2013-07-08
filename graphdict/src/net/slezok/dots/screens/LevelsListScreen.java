@@ -10,10 +10,12 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.List;
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Json;
 
@@ -25,7 +27,7 @@ public class LevelsListScreen implements Screen {
 	private Dots game;
 	private Stage stage;
 	private List levelsList;
-	private TextButton startButton;
+	private ImageButton playButton;
 	private Level level = null;
 
 	public LevelsListScreen(Dots game) {
@@ -78,8 +80,8 @@ public class LevelsListScreen implements Screen {
 		Image backImage = new Image(Assets.listBackgroundTexture);
 		backImage.setFillParent(true);
 		
-		startButton = new TextButton("Start", Assets.skin);
-		startButton.addListener(new InputListener() {
+		playButton = new ImageButton(new TextureRegionDrawable(Assets.play), new TextureRegionDrawable(Assets.playPressed));
+		playButton.addListener(new InputListener() {
 			@Override
 			public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
 				if(level != null){
@@ -94,7 +96,7 @@ public class LevelsListScreen implements Screen {
 //		table.debug(); 
 		table.add(scroller).width(500).height(160);
 		table.row();
-		table.add(startButton).width(250).height(80);
+		table.add(playButton).width(250).height(80);
 		
 		stage.addActor(backImage);
 		stage.addActor(table);
