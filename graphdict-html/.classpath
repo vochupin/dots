@@ -4,13 +4,13 @@
 	<classpathentry combineaccessrules="false" kind="src" path="/graphdict"/>
 	<classpathentry kind="con" path="com.google.gwt.eclipse.core.GWT_CONTAINER"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="lib" path="C:/Documents and Settings/vc/git/graphdict/graphdict/libs/gdx.jar" sourcepath="/dots/libs/gdx-sources.jar"/>
+	<classpathentry kind="lib" path="C:/Documents and Settings/vc/git/graphdict/graphdict/libs/gdx.jar" sourcepath="/graphdict/libs/gdx-sources.jar"/>
 	<classpathentry kind="lib" path="C:/Documents and Settings/vc/git/graphdict/graphdict/libs/gdx-sources.jar"/>
 	<classpathentry kind="lib" path="war/WEB-INF/lib/gdx-backend-gwt.jar" sourcepath="war/WEB-INF/lib/gdx-backend-gwt-sources.jar"/>
 	<classpathentry kind="lib" path="war/WEB-INF/lib/gdx-backend-gwt-sources.jar"/>
-	<classpathentry kind="lib" path="C:/Documents and Settings/vc/git/graphdict/graphdict/libs/bodyeditor-loader.jar" sourcepath="/dots/libs/bodyeditor-loader-sources.jar"/>
+	<classpathentry kind="lib" path="C:/Documents and Settings/vc/git/graphdict/graphdict/libs/bodyeditor-loader.jar" sourcepath="/graphdict/libs/bodyeditor-loader-sources.jar"/>
 	<classpathentry kind="lib" path="C:/Documents and Settings/vc/git/graphdict/graphdict/libs/bodyeditor-loader-sources.jar"/>
-	<classpathentry kind="lib" path="C:/Documents and Settings/vc/git/graphdict/graphdict/libs/tween-engine-api.jar" sourcepath="/dots/libs/tween-engine-api-sources.jar"/>
+	<classpathentry kind="lib" path="C:/Documents and Settings/vc/git/graphdict/graphdict/libs/tween-engine-api.jar" sourcepath="/graphdict/libs/tween-engine-api-sources.jar"/>
 	<classpathentry kind="lib" path="C:/Documents and Settings/vc/git/graphdict/graphdict/libs/tween-engine-api-sources.jar"/>
 	<classpathentry kind="output" path="war/WEB-INF/classes"/>
 </classpath>
