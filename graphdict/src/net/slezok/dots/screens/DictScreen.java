@@ -66,8 +66,8 @@ public class DictScreen implements Screen{
 
 	private ImageButton repeatButton;
 
-	private Label errorsLabel;
-	private int errors = 0;
+	private Label scoreLabel;
+	private int score = 0;
 
 	private int caretX, caretY;
 	private int step;
@@ -176,13 +176,13 @@ public class DictScreen implements Screen{
 		table = new Table(Assets.skin);
 		createButtons();
 
-		errorsLabel = new Label("Errors: 0", Assets.skin);
-		errorsLabel.setFontScale(2);
+		scoreLabel = new Label("Счет: 0", Assets.skin);
+		scoreLabel.setFontScale(2);
 
 		table.setFillParent(true);
 		table.defaults().width(100).height(80);
 		//		table.debug();
-		table.add(errorsLabel);
+		table.add(scoreLabel);
 		table.row();
 		table.add(upLeftButton).padBottom(50).padRight(100);
 		table.add(upButton).padBottom(50).align(BaseTableLayout.CENTER);
@@ -245,13 +245,20 @@ public class DictScreen implements Screen{
 			if(direction >= 0){
 				if(directions[step] != direction){
 					Gdx.app.log(TAG, "WRONG STEP");
-					errors++;
-					errorsLabel.setText("Errors: " + errors);
+					
+					score -= 5;
+					if(score < 0) score = 0;
+					scoreLabel.setText("Счет: " + score);
+					
 					soundMessages.add(new SoundMessage(Assets.errorSound, 0));
 				}else{
 					Gdx.app.log(TAG, "GOOD STEP");
 					bridgesGrid.addBridge(new Bridge(caretX, caretY, direction, DictField.LINE_HALF_WIDTH * 2, getLength(stepX, stepY)));
 					caretX += stepX; caretY += stepY;
+
+					score += 15;
+					scoreLabel.setText("Счет: " + score);
+
 					step++;
 					if(step < directions.length){
 						soundMessages.clear();
@@ -277,8 +284,8 @@ public class DictScreen implements Screen{
 							step++;
 						}
 						stopGame();
-						errors = 0;
-						errorsLabel.setText("Волшебство есть!!!");
+						score = 0;
+						scoreLabel.setText("Волшебство есть!!!");
 					}
 				}else{
 					magicSeqCounter = 0;
