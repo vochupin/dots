@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>dots-desktop</name>
+	<name>graphdict-desktop</name>
 	<comment></comment>
 	<projects>
 	</projects>
@@ -18,7 +18,13 @@
 		<link>
 			<name>assets</name>
 			<type>2</type>
-			<locationURI>PARENT-1-PROJECT_LOC/dots-android/assets</locationURI>
+			<locationURI>copy_PARENT/dots-android/assets</locationURI>
 		</link>
 	</linkedResources>
+	<variableList>
+		<variable>
+			<name>copy_PARENT</name>
+			<value>$%7BPARENT-2-ECLIPSE_HOME%7D/Documents%20and%20Settings/vc/git/graphdict</value>
+		</variable>
+	</variableList>
 </projectDescription>
