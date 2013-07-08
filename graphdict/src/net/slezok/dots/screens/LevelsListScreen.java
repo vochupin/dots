@@ -28,6 +28,7 @@ public class LevelsListScreen implements Screen {
 	private Stage stage;
 	private List levelsList;
 	private ImageButton playButton;
+	private ImageButton propsButton;
 	private Level level = null;
 
 	public LevelsListScreen(Dots game) {
@@ -90,13 +91,26 @@ public class LevelsListScreen implements Screen {
 				return true;
 			}
 		});
-		
+
+		propsButton = new ImageButton(new TextureRegionDrawable(Assets.props), new TextureRegionDrawable(Assets.propsPressed));
+		propsButton.addListener(new InputListener() {
+			@Override
+			public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+				if(level != null){
+					game.setScreen(new PropertiesScreen(game));
+				}
+				return true;
+			}
+		});
+
 		Table table = new Table(Assets.skin);
 		table.setFillParent(true);
 //		table.debug(); 
 		table.add(scroller).width(500).height(160);
 		table.row();
 		table.add(playButton).width(250).height(80);
+		table.row();
+		table.add(propsButton).width(250).height(80).padTop(50);
 		
 		stage.addActor(backImage);
 		stage.addActor(table);

@@ -38,7 +38,7 @@ import net.slezok.dots.Dots;
 import net.slezok.dots.Level;
 import net.slezok.dots.actors.DictField;
 
-public class PropertiesScreen implements Screen, InputProcessor{
+public class PropertiesScreen implements Screen{
 	private static final String TAG = "PropertiesScreen";
 
 	private static final long CURRENT_SOUND_DELAY = 800;
@@ -51,8 +51,6 @@ public class PropertiesScreen implements Screen, InputProcessor{
 
 	private Box2DDebugRenderer debugRenderer = new Box2DDebugRenderer();
 	
-	private Table table;
-
 	public PropertiesScreen(Dots game) {
 		this.game = game;
 	}
@@ -81,8 +79,8 @@ public class PropertiesScreen implements Screen, InputProcessor{
 
 		Table table = new Table(Assets.skin);
 		table.setFillParent(true);
-		TextField tf = new TextField("Èìÿ", Assets.skin);
-		table.add(tf).width(300).height(120);
+		Label nameLabel = new Label("Èìÿ", Assets.skin);
+		table.add(nameLabel).width(300).height(120);
 
 		staticStage = new Stage();	
 
@@ -92,15 +90,10 @@ public class PropertiesScreen implements Screen, InputProcessor{
 		staticStage.addActor(bgrImage);
 		staticStage.addActor(table);
 		
-//		InputMultiplexer multiplexer = new InputMultiplexer();
-//		multiplexer.addProcessor(this);
-//		multiplexer.addProcessor(staticStage);
+		Gdx.input.setInputProcessor(staticStage);
 
-//		Gdx.input.setOnscreenKeyboardVisible(true);
-//		Gdx.input.setInputProcessor(this);
-
-		MyTextInputListener listener = new MyTextInputListener();
-		Gdx.input.getTextInput(listener, "Dialog Title", "Initial Textfield Value");
+//		MyTextInputListener listener = new MyTextInputListener();
+//		Gdx.input.getTextInput(listener, "Dialog Title", "Initial Textfield Value");
 	}
 
 	public class MyTextInputListener implements TextInputListener {
@@ -138,45 +131,4 @@ public class PropertiesScreen implements Screen, InputProcessor{
 
 	public void setNormalZoom() {
 	}
-
-	@Override
-	public boolean keyDown(int keycode) {
-		Gdx.app.log(TAG, "keydown : " + keycode);
-		return false;
-	}
-
-	@Override
-	public boolean keyUp(int keycode) {
-		return false;
-	}
-
-	@Override
-	public boolean keyTyped(char character) {
-		return false;
-	}
-
-	@Override
-	public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-		return false;
-	}
-
-	@Override
-	public boolean touchUp(int screenX, int screenY, int pointer, int button) {
-		return false;
-	}
-
-	@Override
-	public boolean touchDragged(int screenX, int screenY, int pointer) {
-		return false;
-	}
-
-	@Override
-	public boolean mouseMoved(int screenX, int screenY) {
-		return false;
-	}
-
-	@Override
-	public boolean scrolled(int amount) {
-		return false;
-	}	
 }
