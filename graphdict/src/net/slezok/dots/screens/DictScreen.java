@@ -26,9 +26,11 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Json;
 import com.esotericsoftware.tablelayout.BaseTableLayout;
+import com.swarmconnect.SwarmLeaderboard;
 
 import net.slezok.dots.Assets;
 import net.slezok.dots.Bridge;
+import net.slezok.dots.Constants;
 import net.slezok.dots.DictGestureHandler;
 import net.slezok.dots.Dots;
 import net.slezok.dots.Level;
@@ -378,6 +380,8 @@ public class DictScreen implements Screen{
 			table.removeActor(downRightButton);
 
 			soundMessages.add(new SoundMessage(Assets.gameOverSound, CURRENT_SOUND_DELAY));
+			
+			SwarmLeaderboard.submitScore(Constants.GRAPHDICT_APP_ID, (float)score);
 		}
 
 	};

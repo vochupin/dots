@@ -9,6 +9,7 @@
 	<classpathentry kind="lib" path="C:/Documents and Settings/vc/git/graphdict/graphdict/libs/bodyeditor-loader.jar" sourcepath="/graphdict/libs/bodyeditor-loader-sources.jar"/>
 	<classpathentry kind="lib" path="C:/Documents and Settings/vc/git/graphdict/graphdict/libs/tween-engine-api.jar" sourcepath="/graphdict/libs/tween-engine-api-sources.jar"/>
 	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.LIBRARIES"/>
-	<classpathentry kind="con" path="com.android.ide.eclipse.adt.DEPENDENCIES"/>
+	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.DEPENDENCIES"/>
+	<classpathentry combineaccessrules="false" exported="true" kind="src" path="/SwarmConnect"/>
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>
