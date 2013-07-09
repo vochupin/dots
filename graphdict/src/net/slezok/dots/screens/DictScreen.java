@@ -381,7 +381,7 @@ public class DictScreen implements Screen{
 
 			soundMessages.add(new SoundMessage(Assets.gameOverSound, CURRENT_SOUND_DELAY));
 			
-			SwarmLeaderboard.submitScore(Constants.GRAPHDICT_APP_ID, (float)score);
+			SwarmLeaderboard.submitScore(Constants.GRAPHDICT_LEADERBOARD_ID, (float)score);
 		}
 
 	};

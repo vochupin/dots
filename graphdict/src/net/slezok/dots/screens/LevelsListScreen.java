@@ -18,8 +18,11 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Json;
+import com.swarmconnect.Swarm;
+import com.swarmconnect.SwarmLeaderboard;
 
 import net.slezok.dots.Assets;
+import net.slezok.dots.Constants;
 import net.slezok.dots.Dots;
 import net.slezok.dots.Level;
 
@@ -97,9 +100,8 @@ public class LevelsListScreen implements Screen {
 		propsButton.addListener(new InputListener() {
 			@Override
 			public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-				if(level != null){
-					game.setScreen(new PropertiesScreen(game));
-				}
+//				game.setScreen(new PropertiesScreen(game));
+				Swarm.showLeaderboards();
 				return true;
 			}
 		});
