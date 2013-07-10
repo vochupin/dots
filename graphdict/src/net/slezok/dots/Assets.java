@@ -73,7 +73,7 @@ public class Assets {
 		fallingManAnim = new Animation(0.2f, textureAtlas.findRegion("falling1"), textureAtlas.findRegion("falling2"));
 		platform = textureAtlas.findRegion("platform");
 		fallingManSplash = textureAtlas.findRegion("rip");
-		mainBackgroundTexture = new Texture(Gdx.files.internal("data/menuback.jpg"));
+		mainBackgroundTexture = new Texture(Gdx.files.internal("data/intro_screen.png"));
 		listBackgroundTexture = new Texture(Gdx.files.internal("data/listback.jpg"));
 		dictBackgroundTexture = new Texture(Gdx.files.internal("data/dictback.jpg"));
 		
