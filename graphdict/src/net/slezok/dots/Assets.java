@@ -44,8 +44,8 @@ public class Assets {
 	public static TextureRegion play;
 	public static TextureRegion playPressed;
 	
-	public static TextureRegion props;
-	public static TextureRegion propsPressed;
+	public static TextureRegion records;
+	public static TextureRegion recordsPressed;
 
 	public static Sound wellDoneSound;
 	public static Sound gameOverSound;
@@ -100,8 +100,8 @@ public class Assets {
 		play = new TextureRegion(new Texture(Gdx.files.internal("data/buttons/play.png")));
 		playPressed = new TextureRegion(new Texture(Gdx.files.internal("data/buttons/play_pressed.png")));
 
-		props = new TextureRegion(new Texture(Gdx.files.internal("data/buttons/props.png")));
-		propsPressed = new TextureRegion(new Texture(Gdx.files.internal("data/buttons/props_pressed.png")));
+		records = new TextureRegion(new Texture(Gdx.files.internal("data/buttons/records.png")));
+		recordsPressed = new TextureRegion(new Texture(Gdx.files.internal("data/buttons/records_pressed.png")));
 
 		skin = new Skin(Gdx.files.internal("data/uiskin.json"));
 		

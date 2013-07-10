@@ -31,7 +31,7 @@ public class LevelsListScreen implements Screen {
 	private Stage stage;
 	private List levelsList;
 	private ImageButton playButton;
-	private ImageButton propsButton;
+	private ImageButton recordsButton;
 	private Level level = null;
 
 	public LevelsListScreen(Dots game) {
@@ -96,8 +96,8 @@ public class LevelsListScreen implements Screen {
 			}
 		});
 
-		propsButton = new ImageButton(new TextureRegionDrawable(Assets.props), new TextureRegionDrawable(Assets.propsPressed));
-		propsButton.addListener(new InputListener() {
+		recordsButton = new ImageButton(new TextureRegionDrawable(Assets.records), new TextureRegionDrawable(Assets.recordsPressed));
+		recordsButton.addListener(new InputListener() {
 			@Override
 			public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
 //				game.setScreen(new PropertiesScreen(game));
@@ -112,7 +112,7 @@ public class LevelsListScreen implements Screen {
 		table.add(scroller).width(200).height(160);
 		table.row();
 		table.add(playButton).width(250).height(80);
-		table.add(propsButton).width(250).height(80);
+		table.add(recordsButton).width(250).height(80);
 		
 		stage.addActor(backImage);
 		stage.addActor(table);
