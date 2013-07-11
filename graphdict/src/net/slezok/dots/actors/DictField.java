@@ -32,11 +32,10 @@ public class DictField extends Group {
 		
 	private World world;
 	
-	public DictField(World world, Level level) {
+	public DictField(Level level) {
 		
 		FIELD_HEIGHT = level.getHeight();
 		FIELD_WIDTH = level.getWidth();
-		this.world = world;
 		
 		SCREEN_WIDTH = Gdx.graphics.getWidth();
 		SCREEN_HEIGHT = Gdx.graphics.getHeight();

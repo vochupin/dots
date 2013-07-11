@@ -41,8 +41,6 @@ public class DictScreen implements Screen{
 
 	private static final long CURRENT_SOUND_DELAY = 800;
 
-	private World world;
-
 	private final Dots game;
 	private final Level level;
 
@@ -127,7 +125,6 @@ public class DictScreen implements Screen{
 		stage.act(delta);
 		stage.draw();
 
-		world.step(1/60f, 6, 2);
 		//        debugRenderer.render(world, camera.combined);
 
 		if(soundMessages.size() != 0){
@@ -154,8 +151,6 @@ public class DictScreen implements Screen{
 
 	@Override
 	public void show() {
-		world = new World(new Vector2(0f, -1), true);
-
 		Music music = Assets.backMusic;
 
 		music.setVolume(0.3f);
@@ -171,7 +166,7 @@ public class DictScreen implements Screen{
 		step = 0;
 		directions = level.getDirections();
 
-		bridgesGrid = new DictField(world, level);
+		bridgesGrid = new DictField(level);
 		bridgesGrid.setPosition(0, 0);
 		stage.addActor(bridgesGrid);
 
