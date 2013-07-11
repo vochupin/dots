@@ -30,8 +30,51 @@
                  0,0,0,0,0,6,0,0,0,2,0,2,2,2,2,2,0,0,6,0,0,6,0,0,2,0]	
 },{
 	class: net.slezok.dots.Level,
-	description: "test",
+	description: "car",
 	levelFile: "data/grid.json",
-	directions: [1,2,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,0,6,0]
-}
-]
+	directions: [0,0,0,2,2,2,2,2,2,2,2,2,4,4,4,4,6,6,5,6,7,6,
+                 6,6,6,6,6,6,6,5,6,7,6,6,0,2,0,1,2,2,0,0,1,
+                 2,2,2,4,4,4,4,4,2] 
+},{
+	class: net.slezok.dots.Level,
+	description: "giraffe",
+	levelFile: "data/grid.json",
+	directions: [0,0,0,2,2,2,4,4,4,2,0,0,0,0,0,2,0,6,4,6,6,6,
+	             6,0,0,0,0,0,2,0,4,6,6,6,4,4,2,2,4,4,4,4,4,4,
+	             4,4,2,]
+},{
+	class: net.slezok.dots.Level,
+	description: "house",
+	levelFile: "data/grid.json",
+	directions: [0,0,0,0,0,0,0,0,6,6,0,2,0,2,0,2,0,2,0,2,0,2,0,
+	             2,4,2,4,2,4,2,4,2,4,2,4,2,4,6,6,4,4,4,4,4,4,4,
+	             4,6,6,6,6,6,6,6,6,6,6] 
+},{
+	class: net.slezok.dots.Level,
+	description: "key",
+	levelFile: "data/grid.json",
+	directions: [2,2,2,2,2,2,4,2,4,4,4,4,4,4,4,4,4,6,6,6,4,4,4,
+	             4,4,4,4,4,2,2,2,4,6,4,2,4,6,6,6,4,6,6,0,6,6,6,
+	             0,6,0,2,0,2,2,2,0,0,0,0,0,0,0,0,6,6,6,0,0,0,0,
+	             0,0,0,0,2,0]
+	            
+	            
+	            
+	             
+},{
+	class: net.slezok.dots.Level,
+	description: "horse",
+	levelFile: "data/grid.json",
+	directions: [1,1,1,2,2,2,2,2,3,3,3,1,7,7,0,0,0,2,0,2,0,2,0,
+	             6,4,6,4,6,4,6,6,6,6,6,6,7,7,6,0,0,5,4,5,5,3,1,
+	             2,3,4,5,5,5,3]
+},{
+	class: net.slezok.dots.Level,
+	description: "swan",
+	levelFile: "data/grid.json",
+	directions: [0,0,2,4,2,2,4,2,0,2,0,2,2,2,4,2,0,2,0,2,2,2,4,
+	             2,4,2,4,2,0,0,7,7,0,0,0,2,2,4,3,4,7,6,4,3,3,4,
+	             4,4,6,4,6,4,6,6,6,6,6,6,0,6,0,6,0,6,0,6]
+	 
+}	              
+]                
