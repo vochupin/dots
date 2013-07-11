@@ -67,7 +67,7 @@ public class Assets {
 	
 	public static Music backMusic;
 	
-	public static void load () {
+	public static void load (PlatformDependencies deps) {
 		
 		TextureAtlas textureAtlas = new TextureAtlas("data/PigTest.pack");
 		fallingManAnim = new Animation(0.2f, textureAtlas.findRegion("falling1"), textureAtlas.findRegion("falling2"));
@@ -105,10 +105,10 @@ public class Assets {
 
 		skin = new Skin(Gdx.files.internal("data/uiskin.json"));
 		
-		loadSounds();
+		loadSounds(deps);
 	}
 
-	private static void loadSounds() {
+	private static void loadSounds(PlatformDependencies deps) {
 		wellDoneSound = Gdx.audio.newSound(Gdx.files.internal("data/sound/welldone.mp3"));
 		gameOverSound = Gdx.audio.newSound(Gdx.files.internal("data/sound/gameover.mp3"));
 		errorSound = Gdx.audio.newSound(Gdx.files.internal("data/sound/error.mp3"));
@@ -125,7 +125,7 @@ public class Assets {
 		
 		moveSound = Gdx.audio.newSound(Gdx.files.internal("data/sound/cup-drop.mp3"));
 		
-		backMusic = Gdx.audio.newMusic(Gdx.files.internal("data/bluevagon.mp3"));
+		backMusic = Gdx.audio.newMusic(deps.openAssetFileCopyIfNeeded("data/bluevagon.mp3"));
 	}
 	
 	public static void loadStepSounds(int maximumSteps) {

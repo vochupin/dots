@@ -8,10 +8,15 @@ import net.slezok.dots.screens.SplashScreen;
 
 public class Dots extends Game {
 	
+	private PlatformDependencies deps;
+	
+	public Dots(PlatformDependencies deps) {
+		this.deps = deps;
+	}
+
 	@Override
 	public void create() {
-		// TODO Auto-generated method stub
-		Assets.load();
+		Assets.load(deps);
 		setScreen(new SplashScreen(this));
 		
 		Gdx.app.setLogLevel(Application.LOG_INFO);
