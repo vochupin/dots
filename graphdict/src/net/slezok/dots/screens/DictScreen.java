@@ -108,6 +108,10 @@ public class DictScreen implements Screen{
 	public void render(float delta) {
 
 		Camera camera = stage.getCamera();
+		camera.update();
+		camera.apply(Gdx.gl10);
+		
+        Gdx.gl.glViewport(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 
 		Gdx.gl.glClearColor(0f, 0f, 0f, 1);
 		Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
