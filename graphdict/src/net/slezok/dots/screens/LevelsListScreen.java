@@ -125,10 +125,14 @@ public class LevelsListScreen implements Screen {
 		playButton.addListener(new InputListener() {
 			@Override
 			public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+				return true;
+			}
+
+			@Override
+			public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
 				if(level != null){
 					game.setScreen(new DictScreen(game, level));
 				}
-				return true;
 			}
 		});
 
@@ -136,8 +140,12 @@ public class LevelsListScreen implements Screen {
 		recordsButton.addListener(new InputListener() {
 			@Override
 			public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-				Swarm.showLeaderboards();
 				return true;
+			}
+			
+			@Override
+			public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+				Swarm.showLeaderboards();
 			}
 		});
 
