@@ -146,9 +146,13 @@ public class LevelsListScreen implements Screen {
 		});
 
 		Table table = new Table(Assets.skin);
-		table.setFillParent(true);
+//		table.setFillParent(true);
+		table.setWidth(600);
+		table.setHeight(400);
+		table.setX(500);
+		table.setY(100);
 //		table.debug(); 
-		table.add(scroller).width(200).height(160);
+		table.add(scroller).width(200).height(200);
 		table.row();
 		table.add(playButton).width(250).height(80);
 		table.add(recordsButton).width(250).height(80);
