@@ -37,7 +37,7 @@ import net.slezok.dots.Level;
 import net.slezok.dots.actors.DictField;
 
 public class DictScreen implements Screen{
-	private static final String TAG = "GridScreen";
+	private static final String TAG = "DictScreen";
 
 	private static final long CURRENT_SOUND_DELAY = 800;
 
