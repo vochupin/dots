@@ -74,7 +74,7 @@ public class Assets {
 		platform = textureAtlas.findRegion("platform");
 		fallingManSplash = textureAtlas.findRegion("rip");
 		mainBackgroundTexture = new Texture(Gdx.files.internal("data/intro_screen.png"));
-		listBackgroundTexture = new Texture(Gdx.files.internal("data/listback.jpg"));
+		listBackgroundTexture = new Texture(Gdx.files.internal("data/menu_screen.png"));
 		dictBackgroundTexture = new Texture(Gdx.files.internal("data/dictback.jpg"));
 		
 		up = new TextureRegion(new Texture(Gdx.files.internal("data/buttons/up.png")));
