@@ -56,20 +56,23 @@ public class MainActivity extends AndroidApplication implements PlatformDependen
 
 	@Override
 	public FileHandle openAssetFileCopyIfNeeded(String assetPath) {
-		InputStream is = null; OutputStream os = null;
 		try {
 			AssetManager am = getAssets();
 
 			AssetFileDescriptor afd = am.openFd(assetPath);
-			File copyFile = new File(getFilesDir().getAbsolutePath() + "/" + new File(assetPath).getName());
+			String assetFileName = new File(assetPath).getName();
+			File copyFile = new File(getFilesDir().getAbsolutePath() + "/" + assetFileName);
 
 			if(!copyFile.exists() || copyFile.length() != afd.getLength()){
+				Gdx.app.log(TAG, "Copy asset file to internal storage.");
 				if(!copyFile.createNewFile()) throw new GdxRuntimeException("Can't create asset file copy: " + assetPath);
-				os = new BufferedOutputStream(new FileOutputStream(copyFile));
-				is = am.open(assetPath);
+				OutputStream os = openFileOutput(assetFileName, MODE_PRIVATE);
+				InputStream is = am.open(assetPath);
 				copy(is, os);
 				is.close();
 				os.close();
+			}else{
+				Gdx.app.log(TAG, "Read pre-stored on internal storage asset file.");
 			}
 			return Gdx.files.absolute(copyFile.getAbsolutePath());
 		} catch (IOException e) {
