@@ -149,11 +149,7 @@ public class DictScreen implements Screen{
 
 	@Override
 	public void show() {
-		Music music = Assets.backMusic;
-
-		music.setVolume(0.3f);
-		music.setLooping(true);
-		music.play();
+		startBackgroundMusic();
 
 		stage = new Stage();
 		staticStage = new Stage();	
@@ -200,6 +196,16 @@ public class DictScreen implements Screen{
 		Gdx.input.setInputProcessor(staticStage);
 
 		recalculateIdenticalStepsAndPlaySound();
+	}
+
+	private void startBackgroundMusic() {
+		Music music = Assets.backMusic;
+
+		if(music != null){
+			music.setVolume(0.3f);
+			music.setLooping(true);
+			music.play();
+		}
 	}
 
 	private void createButtons() {

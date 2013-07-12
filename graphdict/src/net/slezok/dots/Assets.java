@@ -12,6 +12,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 
 public class Assets {
 	public static final int MAXIMUM_STEPS_NUMBER = 10;
+
+	private static final String TAG = "Assets";
 	
 	public static TextureRegion platform;
 	public static TextureRegion fallingManSplash;
@@ -65,7 +67,7 @@ public class Assets {
 	
 	private static Sound[] stepSounds;
 	
-	public static Music backMusic;
+	public static Music backMusic = null;
 	
 	public static void load (PlatformDependencies deps) {
 		
@@ -125,7 +127,12 @@ public class Assets {
 		
 		moveSound = Gdx.audio.newSound(Gdx.files.internal("data/sound/cup-drop.mp3"));
 		
-		backMusic = Gdx.audio.newMusic(deps.openAssetFileCopyIfNeeded("data/bluevagon.mp3"));
+		try{
+			backMusic = Gdx.audio.newMusic(deps.openAssetFileCopyIfNeeded("data/bluevagon.mp3"));
+		}catch(Exception e){
+			e.printStackTrace();
+			Gdx.app.error(TAG, "Exception when loading background music: " + e.getMessage());
+		}
 	}
 	
 	public static void loadStepSounds(int maximumSteps) {
