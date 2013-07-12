@@ -28,9 +28,6 @@ public class IntroScreen implements Screen {
 	private static final int VIRTUAL_WIDTH = 1024;
     private static final int VIRTUAL_HEIGHT = 512;
     private static final float ASPECT_RATIO = (float)VIRTUAL_WIDTH/(float)VIRTUAL_HEIGHT;
- 
-    private Camera camera;
-    private Rectangle viewport;
 	
 	private Dots game;
 	private Stage stage;
@@ -41,14 +38,6 @@ public class IntroScreen implements Screen {
 
 	@Override
 	public void render(float delta) {
-		// update camera
-        camera.update();
-        camera.apply(Gdx.gl10);
- 
-        // set viewport
-        Gdx.gl.glViewport((int) viewport.x, (int) viewport.y,
-                          (int) viewport.width, (int) viewport.height);
- 
         // clear previous frame
 		Gdx.gl.glClearColor(0.2f, 0.2f, 1f, 1);
         Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
@@ -60,35 +49,16 @@ public class IntroScreen implements Screen {
 
 	@Override
 	public void resize(int width, int height) {
-		// calculate new viewport
-        float aspectRatio = (float)width/(float)height;
-        float scale = 1f;
-        Vector2 crop = new Vector2(0f, 0f);
-
-        if(aspectRatio > ASPECT_RATIO){
-            scale = (float)height/(float)VIRTUAL_HEIGHT;
-            crop.x = (width - VIRTUAL_WIDTH*scale)/2f;
-        }else if(aspectRatio < ASPECT_RATIO){
-            scale = (float)width/(float)VIRTUAL_WIDTH;
-            crop.y = (height - VIRTUAL_HEIGHT*scale)/2f;
-        }else{
-            scale = (float)width/(float)VIRTUAL_WIDTH;
-        }
- 
-        float w = (float)VIRTUAL_WIDTH*scale;
-        float h = (float)VIRTUAL_HEIGHT*scale;
-        viewport = new Rectangle(crop.x, crop.y, w, h);
 	}
 
 	@Override
 	public void show() {
-        camera = new OrthographicCamera(VIRTUAL_WIDTH, VIRTUAL_HEIGHT);
-		
-		stage = new Stage();
+		stage = new Stage(VIRTUAL_WIDTH, VIRTUAL_HEIGHT, true);
 		Gdx.input.setInputProcessor(stage);
 		
 		Image backImage = new Image(Assets.mainBackgroundTexture);
-		backImage.setFillParent(true);
+		backImage.setX(stage.getGutterWidth());
+		backImage.setY(stage.getGutterHeight());
 		backImage.addAction( Actions.sequence( Actions.fadeOut( 0.001f ), Actions.fadeIn( 1f ) ) );
 		
 		backImage.addListener(new InputListener() {
