@@ -79,31 +79,32 @@ public class Assets {
 		listBackgroundTexture = new Texture(Gdx.files.internal("data/menu_screen.png"));
 		dictBackgroundTexture = new Texture(Gdx.files.internal("data/dictback.jpg"));
 		
-		up = new TextureRegion(new Texture(Gdx.files.internal("data/buttons/up.png")));
-		down = new TextureRegion(new Texture(Gdx.files.internal("data/buttons/down.png")));
-		left = new TextureRegion(new Texture(Gdx.files.internal("data/buttons/left.png")));
-		right = new TextureRegion(new Texture(Gdx.files.internal("data/buttons/right.png")));
-		repeat = new TextureRegion(new Texture(Gdx.files.internal("data/buttons/repeat.png")));
-		upLeft = new TextureRegion(new Texture(Gdx.files.internal("data/buttons/up_left.png")));
-		downLeft = new TextureRegion(new Texture(Gdx.files.internal("data/buttons/down_left.png")));
-		upRight = new TextureRegion(new Texture(Gdx.files.internal("data/buttons/up_right.png")));
-		downRight = new TextureRegion(new Texture(Gdx.files.internal("data/buttons/down_right.png")));
+		TextureAtlas buttonsAtlas = new TextureAtlas("data/buttons/pack.atlas");
+		up = buttonsAtlas.findRegion("up");
+		down = buttonsAtlas.findRegion("down");
+		left = buttonsAtlas.findRegion("left");
+		right = buttonsAtlas.findRegion("right");
+		repeat = buttonsAtlas.findRegion("repeat");
+		upLeft = buttonsAtlas.findRegion("up_left");
+		downLeft = buttonsAtlas.findRegion("down_left");
+		upRight = buttonsAtlas.findRegion("up_right");
+		downRight = buttonsAtlas.findRegion("down_right");
 
-		upPressed = new TextureRegion(new Texture(Gdx.files.internal("data/buttons/up_pressed.png")));
-		downPressed = new TextureRegion(new Texture(Gdx.files.internal("data/buttons/down_pressed.png")));
-		leftPressed = new TextureRegion(new Texture(Gdx.files.internal("data/buttons/left_pressed.png")));
-		rightPressed = new TextureRegion(new Texture(Gdx.files.internal("data/buttons/right_pressed.png")));
-		repeatPressed = new TextureRegion(new Texture(Gdx.files.internal("data/buttons/repeat_pressed.png")));
-		upLeftPressed = new TextureRegion(new Texture(Gdx.files.internal("data/buttons/up_left_pressed.png")));
-		downLeftPressed = new TextureRegion(new Texture(Gdx.files.internal("data/buttons/down_left_pressed.png")));
-		upRightPressed = new TextureRegion(new Texture(Gdx.files.internal("data/buttons/up_right_pressed.png")));
-		downRightPressed = new TextureRegion(new Texture(Gdx.files.internal("data/buttons/down_right_pressed.png")));
+		upPressed = buttonsAtlas.findRegion("up_pressed");
+		downPressed = buttonsAtlas.findRegion("down_pressed");
+		leftPressed = buttonsAtlas.findRegion("left_pressed");
+		rightPressed = buttonsAtlas.findRegion("right_pressed");
+		repeatPressed = buttonsAtlas.findRegion("repeat_pressed");
+		upLeftPressed = buttonsAtlas.findRegion("up_left_pressed");
+		downLeftPressed = buttonsAtlas.findRegion("down_left_pressed");
+		upRightPressed = buttonsAtlas.findRegion("up_right_pressed");
+		downRightPressed = buttonsAtlas.findRegion("down_right_pressed");
 		
-		play = new TextureRegion(new Texture(Gdx.files.internal("data/buttons/play.png")));
-		playPressed = new TextureRegion(new Texture(Gdx.files.internal("data/buttons/play_pressed.png")));
+		play = buttonsAtlas.findRegion("play");
+		playPressed = buttonsAtlas.findRegion("play_pressed");
 
-		records = new TextureRegion(new Texture(Gdx.files.internal("data/buttons/records.png")));
-		recordsPressed = new TextureRegion(new Texture(Gdx.files.internal("data/buttons/records_pressed.png")));
+		records = buttonsAtlas.findRegion("records");
+		recordsPressed = buttonsAtlas.findRegion("records_pressed");
 
 		skin = new Skin(Gdx.files.internal("data/uiskin.json"));
 		
