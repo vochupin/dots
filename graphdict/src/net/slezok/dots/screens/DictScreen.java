@@ -152,7 +152,7 @@ public class DictScreen implements Screen{
 		startBackgroundMusic();
 
 		stage = new Stage();
-		staticStage = new Stage();	
+		staticStage = new Stage(Constants.VIRTUAL_WIDTH, Constants.VIRTUAL_HEIGHT, false);	
 		staticStage.addListener(new DictGestureHandler(this));
 
 		caretX = level.getStartX();

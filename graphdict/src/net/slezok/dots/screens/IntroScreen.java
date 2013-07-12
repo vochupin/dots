@@ -19,16 +19,13 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 
 import net.slezok.dots.Assets;
+import net.slezok.dots.Constants;
 import net.slezok.dots.Dots;
 
 public class IntroScreen implements Screen {
 	
 	private static final String TAG = "MainMenuScreen";
 
-	private static final int VIRTUAL_WIDTH = 1024;
-    private static final int VIRTUAL_HEIGHT = 512;
-    private static final float ASPECT_RATIO = (float)VIRTUAL_WIDTH/(float)VIRTUAL_HEIGHT;
-	
 	private Dots game;
 	private Stage stage;
 	
@@ -53,7 +50,7 @@ public class IntroScreen implements Screen {
 
 	@Override
 	public void show() {
-		stage = new Stage(VIRTUAL_WIDTH, VIRTUAL_HEIGHT, true);
+		stage = new Stage(Constants.VIRTUAL_WIDTH, Constants.VIRTUAL_HEIGHT, true);
 		Gdx.input.setInputProcessor(stage);
 		
 		Image backImage = new Image(Assets.mainBackgroundTexture);

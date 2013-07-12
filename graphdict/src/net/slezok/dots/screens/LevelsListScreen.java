@@ -24,14 +24,11 @@ import com.badlogic.gdx.utils.Json;
 import com.swarmconnect.Swarm;
 
 import net.slezok.dots.Assets;
+import net.slezok.dots.Constants;
 import net.slezok.dots.Dots;
 import net.slezok.dots.Level;
 
 public class LevelsListScreen implements Screen {
-	private static final int VIRTUAL_WIDTH = 1024;
-    private static final int VIRTUAL_HEIGHT = 512;
-    private static final float ASPECT_RATIO = (float)VIRTUAL_WIDTH/(float)VIRTUAL_HEIGHT;
- 
 	private Dots game;
 	private Stage stage;
 	private List levelsList;
@@ -59,7 +56,7 @@ public class LevelsListScreen implements Screen {
 
 	@Override
 	public void show() {
-		stage = new Stage(VIRTUAL_WIDTH, VIRTUAL_HEIGHT, true);
+		stage = new Stage(Constants.VIRTUAL_WIDTH, Constants.VIRTUAL_HEIGHT, true);
 		Gdx.input.setInputProcessor(stage);
 		
 		FileHandle file =  Gdx.files.internal("data/levels.json");
