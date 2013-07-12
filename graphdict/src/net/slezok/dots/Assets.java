@@ -103,8 +103,8 @@ public class Assets {
 		play = buttonsAtlas.findRegion("play");
 		playPressed = buttonsAtlas.findRegion("play_pressed");
 
-		records = buttonsAtlas.findRegion("records");
-		recordsPressed = buttonsAtlas.findRegion("records_pressed");
+		records = buttonsAtlas.findRegion("sett");
+		recordsPressed = buttonsAtlas.findRegion("sett_pressed");
 
 		skin = new Skin(Gdx.files.internal("data/uiskin.json"));
 		
