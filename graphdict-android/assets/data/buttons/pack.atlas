@@ -5,149 +5,93 @@ filter: Nearest,Nearest
 repeat: none
 down
   rotate: false
-  xy: 515, 775
+  xy: 1, 1
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
   index: -1
 down_left
   rotate: false
-  xy: 1, 1
+  xy: 131, 1
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
   index: -1
 down_left_pressed
   rotate: false
-  xy: 515, 645
+  xy: 261, 1
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
   index: -1
 down_pressed
   rotate: false
-  xy: 645, 775
+  xy: 391, 1
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
   index: -1
 down_right
   rotate: false
-  xy: 131, 1
+  xy: 521, 55
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
   index: -1
 down_right_pressed
   rotate: false
-  xy: 515, 515
+  xy: 651, 55
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
   index: -1
 left
   rotate: false
-  xy: 645, 645
-  size: 128, 128
-  orig: 128, 128
-  offset: 0, 0
-  index: -1
-left_pressed
-  rotate: false
-  xy: 775, 775
+  xy: 781, 55
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
   index: -1
 play
   rotate: false
-  xy: 1, 647
-  size: 512, 256
-  orig: 512, 256
+  xy: 1, 701
+  size: 499, 283
+  orig: 499, 283
   offset: 0, 0
   index: -1
 play_pressed
   rotate: false
-  xy: 1, 389
-  size: 512, 256
-  orig: 512, 256
+  xy: 1, 131
+  size: 494, 283
+  orig: 494, 283
   offset: 0, 0
   index: -1
 props
   rotate: false
-  xy: 1, 131
+  xy: 502, 443
   size: 512, 256
   orig: 512, 256
   offset: 0, 0
   index: -1
-repeat
+props_pressed
   rotate: false
-  xy: 261, 1
-  size: 128, 128
-  orig: 128, 128
+  xy: 502, 185
+  size: 512, 256
+  orig: 512, 256
   offset: 0, 0
   index: -1
-repeat_pressed
+records
   rotate: false
-  xy: 515, 385
-  size: 128, 128
-  orig: 128, 128
+  xy: 1, 416
+  size: 499, 283
+  orig: 499, 283
   offset: 0, 0
   index: -1
-right
+records_pressed
   rotate: false
-  xy: 645, 515
-  size: 128, 128
-  orig: 128, 128
-  offset: 0, 0
-  index: -1
-right_pressed
-  rotate: false
-  xy: 775, 645
-  size: 128, 128
-  orig: 128, 128
-  offset: 0, 0
-  index: -1
-up
-  rotate: false
-  xy: 515, 255
-  size: 128, 128
-  orig: 128, 128
-  offset: 0, 0
-  index: -1
-up_left
-  rotate: false
-  xy: 645, 385
-  size: 128, 128
-  orig: 128, 128
-  offset: 0, 0
-  index: -1
-up_left_pressed
-  rotate: false
-  xy: 775, 515
-  size: 128, 128
-  orig: 128, 128
-  offset: 0, 0
-  index: -1
-up_pressed
-  rotate: false
-  xy: 645, 255
-  size: 128, 128
-  orig: 128, 128
-  offset: 0, 0
-  index: -1
-up_right
-  rotate: false
-  xy: 775, 385
-  size: 128, 128
-  orig: 128, 128
-  offset: 0, 0
-  index: -1
-up_right_pressed
-  rotate: false
-  xy: 775, 255
-  size: 128, 128
-  orig: 128, 128
+  xy: 502, 701
+  size: 499, 283
+  orig: 499, 283
   offset: 0, 0
   index: -1
 
@@ -155,43 +99,94 @@ pack2.png
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
-props_pressed
+left_pressed
   rotate: false
-  xy: 1, 517
-  size: 512, 256
-  orig: 512, 256
+  xy: 515, 777
+  size: 128, 128
+  orig: 128, 128
   offset: 0, 0
   index: -1
-records
+repeat
   rotate: false
-  xy: 1, 259
-  size: 512, 256
-  orig: 512, 256
+  xy: 1, 261
+  size: 128, 128
+  orig: 128, 128
   offset: 0, 0
   index: -1
-records_pressed
+repeat_pressed
   rotate: false
-  xy: 1, 1
-  size: 512, 256
-  orig: 512, 256
+  xy: 515, 647
+  size: 128, 128
+  orig: 128, 128
   offset: 0, 0
   index: -1
-
-pack3.png
-format: RGBA8888
-filter: Nearest,Nearest
-repeat: none
+right
+  rotate: false
+  xy: 645, 777
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+right_pressed
+  rotate: false
+  xy: 1, 131
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
 sett
   rotate: false
-  xy: 1, 259
+  xy: 1, 649
   size: 512, 256
   orig: 512, 256
   offset: 0, 0
   index: -1
 sett_pressed
   rotate: false
-  xy: 1, 1
+  xy: 1, 391
   size: 512, 256
   orig: 512, 256
+  offset: 0, 0
+  index: -1
+up
+  rotate: false
+  xy: 131, 261
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+up_left
+  rotate: false
+  xy: 515, 517
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+up_left_pressed
+  rotate: false
+  xy: 645, 647
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+up_pressed
+  rotate: false
+  xy: 775, 777
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+up_right
+  rotate: false
+  xy: 1, 1
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+up_right_pressed
+  rotate: false
+  xy: 131, 131
+  size: 128, 128
+  orig: 128, 128
   offset: 0, 0
   index: -1

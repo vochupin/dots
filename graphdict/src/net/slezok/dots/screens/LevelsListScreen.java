@@ -133,13 +133,13 @@ public class LevelsListScreen implements Screen {
 		Table table = new Table(Assets.skin);
 		table.setWidth(600);
 		table.setHeight(300);
-		table.setX(400 + stage.getGutterWidth());
+		table.setX(350 + stage.getGutterWidth());
 		table.setY(100 + stage.getGutterHeight());
 //		table.debug(); 
 		table.add(scroller).width(200).height(200);
 		table.row();
-		table.add(playButton).width(250).height(80);
-		table.add(recordsButton).width(250).height(80);
+		table.add(playButton).width(250).height(80).padTop(50);
+		table.add(recordsButton).width(250).height(80).padTop(50);
 		
 		stage.addActor(backImage);
 		stage.addActor(table);
