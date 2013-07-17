@@ -46,18 +46,9 @@ public class DictField extends Group {
 		Gdx.app.log(TAG, "Screen width: " + SCREEN_WIDTH + " Screen height: " + SCREEN_HEIGHT);
 		Gdx.app.log(TAG, "Field width: " + FIELD_WIDTH + " Field height: " + FIELD_HEIGHT);
 		
-		FileHandle file =  Gdx.files.internal(level.getLevelFile());
-		Json json = new Json();
-		@SuppressWarnings("unchecked")
-		Array<Bridge> bridges = json.fromJson(Array.class, Bridge.class, file);	
-				
-		for (Bridge bridge : bridges) {
-			addBridge(bridge);
-		}
 		for(int x = 0; x < FIELD_WIDTH; x++){
 			addLine(x, 0, FIELD_HEIGHT, 0);
 		}
-
 		for(int y = 0; y < FIELD_HEIGHT; y++){
 			addLine(0, y, FIELD_WIDTH, 270);
 		}

@@ -7,7 +7,6 @@ public class Level{
 
 	private static int MARGIN = 2;
 
-	private String levelFile;
 	private String description;
 	private int[] directions;
 
@@ -42,14 +41,6 @@ public class Level{
 	public int getWidth() {
 		if(!extentsCalculated) calculateExtents();
 		return width;
-	}
-
-	public String getLevelFile() {
-		return levelFile;
-	}
-
-	public void setLevelFile(String levelFile) {
-		this.levelFile = levelFile;
 	}
 
 	public int[] getDirections() {
