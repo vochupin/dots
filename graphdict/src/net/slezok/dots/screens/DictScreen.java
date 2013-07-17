@@ -3,6 +3,7 @@ package net.slezok.dots.screens;
 import java.util.LinkedList;
 import java.util.List;
 
+import com.badlogic.gdx.Application.ApplicationType;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.Screen;
@@ -399,7 +400,9 @@ public class DictScreen implements Screen{
 
 			soundMessages.add(new SoundMessage(Assets.gameOverSound, CURRENT_SOUND_DELAY));
 			
-			SwarmLeaderboard.submitScore(Constants.GRAPHDICT_LEADERBOARD_ID, (float)score);
+			if(Gdx.app.getType() == ApplicationType.Android){
+				SwarmLeaderboard.submitScore(Constants.GRAPHDICT_LEADERBOARD_ID, (float)score);
+			}
 		}
 
 	};
