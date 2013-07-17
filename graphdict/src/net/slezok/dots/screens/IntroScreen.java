@@ -51,6 +51,7 @@ public class IntroScreen implements Screen {
 	@Override
 	public void show() {
 		stage = new Stage(Constants.VIRTUAL_WIDTH, Constants.VIRTUAL_HEIGHT, true);
+		Gdx.input.setCatchBackKey(true);
 		Gdx.input.setInputProcessor(stage);
 		
 		Image backImage = new Image(Assets.mainBackgroundTexture);

@@ -4,6 +4,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
@@ -19,6 +20,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
+import com.badlogic.gdx.utils.Timer;
+import com.badlogic.gdx.utils.Timer.Task;
 import com.esotericsoftware.tablelayout.BaseTableLayout;
 import com.swarmconnect.SwarmLeaderboard;
 
@@ -138,6 +141,16 @@ public class DictScreen implements Screen{
 					soundMessages.get(0).soundPlaceTime = currentTime;
 				}
 			}
+		}
+		
+		if (Gdx.input.isKeyPressed(Keys.BACK)){ 
+			Gdx.app.log(TAG, "Back key was pressed.");
+			new Timer().scheduleTask(new Task(){
+				@Override
+				public void run() {
+					game.setScreen(new LevelsListScreen(game));
+				}
+			}, 1);
 		}
 	}
 

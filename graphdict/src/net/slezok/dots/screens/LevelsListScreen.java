@@ -2,6 +2,7 @@ package net.slezok.dots.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.GL10;
@@ -21,6 +22,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Json;
+import com.badlogic.gdx.utils.Timer;
+import com.badlogic.gdx.utils.Timer.Task;
 import com.swarmconnect.Swarm;
 
 import net.slezok.dots.Assets;
@@ -29,6 +32,8 @@ import net.slezok.dots.Dots;
 import net.slezok.dots.Level;
 
 public class LevelsListScreen implements Screen {
+	private static final String TAG = "LevelsListScreen";
+	
 	private Dots game;
 	private Stage stage;
 	private List levelsList;
@@ -48,6 +53,16 @@ public class LevelsListScreen implements Screen {
 		stage.act(delta);
 		stage.draw();
 //		Table.drawDebug(stage);
+		
+		if (Gdx.input.isKeyPressed(Keys.BACK)){ 
+			Gdx.app.log(TAG, "Back key was pressed.");
+			new Timer().scheduleTask(new Task(){
+				@Override
+				public void run() {
+					Gdx.app.exit();
+				}
+			}, 1);
+		}
 	}
 
 	@Override
