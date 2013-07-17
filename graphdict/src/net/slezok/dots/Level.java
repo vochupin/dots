@@ -1,9 +1,14 @@
 package net.slezok.dots;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.badlogic.gdx.Gdx;
 
 public class Level{
 	private static final String TAG = "Level";
+	
+	private static final int RLE_CODE = -1;
 
 	private static int MARGIN = 2;
 
@@ -124,5 +129,29 @@ public class Level{
 		if(!extentsCalculated) calculateExtents();
 		Gdx.app.log(TAG, "Max identical steps: " + maxIdenticalSteps);
 		return maxIdenticalSteps;
+	}
+
+	public void unpackDirections() {
+		List<Integer> unpackedDirections = new ArrayList<Integer>();
+		boolean wasPacked = false;
+		for(int i = 0; i < directions.length; i++){
+			int dir = directions[i];
+			if(dir != RLE_CODE){
+				unpackedDirections.add(dir);
+			}else{
+				wasPacked = true;
+				
+				int numberOfSteps = directions[++i];
+				dir = directions[++i];
+				for(int j = 0; j < numberOfSteps; j++) unpackedDirections.add(dir); 
+			}
+		}
+		
+		if(wasPacked){
+			directions = new int[unpackedDirections.size()];
+			for(int i = 0; i < directions.length; i++) {
+				directions[i] = unpackedDirections.get(i);
+			}
+		}
 	}
 }

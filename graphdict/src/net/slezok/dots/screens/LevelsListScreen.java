@@ -67,6 +67,7 @@ public class LevelsListScreen implements Screen {
 		String[] levelNames = new String[levels.size];
 		for(int i = 0; i < levels.size; i++){
 			levelNames[i] = levels.get(i).getDescription();
+			levels.get(i).unpackDirections();
 		}
 
 		levelsList = new List(levelNames, Assets.skin);
