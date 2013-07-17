@@ -1,5 +1,5 @@
 font.name=DejaVu Serif
-font.size=17
+font.size=22
 font.bold=false
 font.italic=false
 
@@ -11,16 +11,16 @@ pad.advance.x=0
 pad.advance.y=0
 
 glyph.native.rendering=false
-glyph.page.width=512
+glyph.page.width=1024
 glyph.page.height=64
 glyph.text=ÀÁÂÃÄÅ¨ÆÇÈÉÊËÌÍÎÏĞÑÒÓÔÕ\nÖ×ØÙÜÛÚİŞß\nàáâãäå¸æçèéêëìíîïğñòóôõö÷øùüûúışÿ\nABCDEFGHIJKLMNOPQRSTUVWXYZ\nabcdefghijklmnopqrstuvwxyz\n1234567890\n"!`?'.,;:()[]{}<>|/@\^$-%+=#_&~*
 
 effect.class=com.badlogic.gdx.tools.hiero.unicodefont.effects.ColorEffect
-effect.Color=ffff00
+effect.Color=0000ff
 
 effect.class=com.badlogic.gdx.tools.hiero.unicodefont.effects.GradientEffect
-effect.Top color=66ff00
-effect.Bottom color=ffff00
+effect.Top color=0000ff
+effect.Bottom color=0066ff
 effect.Offset=0
 effect.Scale=1.0
 effect.Cyclic=false
