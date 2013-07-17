@@ -35,6 +35,8 @@ public class DictScreen implements Screen{
 
 	private static final long CURRENT_SOUND_DELAY = 800;
 
+	protected static final float NORMAL_STEP_TIME = 6000;
+
 	private final Dots game;
 	private final Level level;
 
@@ -61,6 +63,7 @@ public class DictScreen implements Screen{
 	private ImageButton repeatButton;
 
 	private Label scoreLabel;
+	private long prevStepTime;
 	private int score = 0;
 
 	private int caretX, caretY;
@@ -194,6 +197,7 @@ public class DictScreen implements Screen{
 		Gdx.input.setInputProcessor(staticStage);
 
 		recalculateIdenticalStepsAndPlaySound();
+		prevStepTime = System.currentTimeMillis();
 	}
 
 	private void startBackgroundMusic() {
@@ -245,7 +249,7 @@ public class DictScreen implements Screen{
 				if(directions[step] != direction){
 					Gdx.app.log(TAG, "WRONG STEP");
 					
-					score -= 5;
+					score -= 100;
 					if(score < 0) score = 0;
 					scoreLabel.setText("—чет: " + score);
 					
@@ -255,7 +259,11 @@ public class DictScreen implements Screen{
 					bridgesGrid.addBridge(new Bridge(caretX, caretY, direction, DictField.LINE_HALF_WIDTH * 2, getLength(stepX, stepY)));
 					caretX += stepX; caretY += stepY;
 
-					score += 15;
+					long currTime = System.currentTimeMillis();
+					float diff = currTime - prevStepTime;
+					if(diff < CURRENT_SOUND_DELAY) diff = CURRENT_SOUND_DELAY;
+					score += 10 * NORMAL_STEP_TIME / diff;
+					prevStepTime = currTime;
 					scoreLabel.setText("—чет: " + score);
 
 					step++;
