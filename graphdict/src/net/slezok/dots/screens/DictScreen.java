@@ -185,7 +185,7 @@ public class DictScreen implements Screen{
 		table = new Table(Assets.skin);
 		createButtons();
 
-		scoreLabel = new Label("Ñ÷åò: 0", Assets.skin);
+		scoreLabel = new Label("Ð¡Ñ‡ÐµÑ‚: 0", Assets.skin);
 		scoreLabel.setFontScale(2);
 
 		table.setFillParent(true);
@@ -274,7 +274,7 @@ public class DictScreen implements Screen{
 					
 					score -= 100;
 					if(score < 0) score = 0;
-					scoreLabel.setText("Ñ÷åò: " + score);
+					scoreLabel.setText("Ð¡Ñ‡ÐµÑ‚: " + score);
 					
 					soundMessages.add(new SoundMessage(Assets.errorSound, 0));
 				}else{
@@ -287,7 +287,7 @@ public class DictScreen implements Screen{
 					if(diff < CURRENT_SOUND_DELAY) diff = CURRENT_SOUND_DELAY;
 					score += 10 * NORMAL_STEP_TIME / diff;
 					prevStepTime = currTime;
-					scoreLabel.setText("Ñ÷åò: " + score);
+					scoreLabel.setText("Ð¡Ñ‡ÐµÑ‚: " + score);
 
 					step++;
 					if(step < directions.length){
@@ -315,7 +315,7 @@ public class DictScreen implements Screen{
 						}
 						stopGame();
 						score = 0;
-						scoreLabel.setText("Âîëøåáñòâî åñòü!!!");
+						scoreLabel.setText("Ð’Ð¾Ð»ÑˆÐµÐ±ÑÑ‚Ð²Ð¾ ÐµÑÑ‚ÑŒ!!!");
 					}
 				}else{
 					magicSeqCounter = 0;

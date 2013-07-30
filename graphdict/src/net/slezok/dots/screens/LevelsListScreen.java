@@ -1,5 +1,8 @@
 package net.slezok.dots.screens;
 
+import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.Input.Keys;
@@ -22,6 +25,9 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Json;
+import com.badlogic.gdx.utils.JsonReader;
+import com.badlogic.gdx.utils.OrderedMap;
+import com.badlogic.gdx.utils.SerializationException;
 import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.Timer.Task;
 import com.swarmconnect.Swarm;
@@ -74,14 +80,24 @@ public class LevelsListScreen implements Screen {
 		stage = new Stage(Constants.VIRTUAL_WIDTH, Constants.VIRTUAL_HEIGHT, true);
 		Gdx.input.setInputProcessor(stage);
 		
-		FileHandle file =  Gdx.files.internal("data/levels.json");
-		Json json = new Json();
+		FileHandle levelsFile =  Gdx.files.internal("data/levels.json");
+		Json levelsJson = new Json();
 		@SuppressWarnings("unchecked")
-		final Array<Level> levels = json.fromJson(Array.class, Level.class, file);
+		final Array<Level> levels = levelsJson.fromJson(Array.class, Level.class, levelsFile);
+
+		FileHandle namesFile =  Gdx.files.internal("data/level_names_ru.json");
+		Json namesJson = new Json();
+		OrderedMap namesMap;
+		try {
+			Object o = new JsonReader().parse(new InputStreamReader(namesFile.read(), "UTF-8"));
+			namesMap = (OrderedMap) o;
+		} catch (UnsupportedEncodingException e) {
+			throw new SerializationException(e);
+		}
 
 		String[] levelNames = new String[levels.size];
 		for(int i = 0; i < levels.size; i++){
-			levelNames[i] = levels.get(i).getDescription();
+			levelNames[i] = (String) namesMap.get(levels.get(i).getDescription());
 			levels.get(i).unpackDirections();
 		}
 
