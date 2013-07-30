@@ -89,8 +89,7 @@ public class LevelsListScreen implements Screen {
 		Json namesJson = new Json();
 		OrderedMap namesMap;
 		try {
-			Object o = new JsonReader().parse(new InputStreamReader(namesFile.read(), "UTF-8"));
-			namesMap = (OrderedMap) o;
+			namesMap = (OrderedMap)new JsonReader().parse(new InputStreamReader(namesFile.read(), "UTF-8"));
 		} catch (UnsupportedEncodingException e) {
 			throw new SerializationException(e);
 		}
@@ -152,7 +151,7 @@ public class LevelsListScreen implements Screen {
 		table.setX(350 + stage.getGutterWidth());
 		table.setY(100 + stage.getGutterHeight());
 //		table.debug(); 
-		table.add(scroller).width(200).height(200);
+		table.add(scroller).width(200).height(200).padTop(50);
 		table.row();
 		table.add(playButton).width(250).height(80).padTop(50);
 		table.add(recordsButton).width(250).height(80).padTop(50);
