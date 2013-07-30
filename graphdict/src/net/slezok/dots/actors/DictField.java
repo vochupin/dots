@@ -29,6 +29,8 @@ public class DictField extends Group {
 	private final float SCREEN_HEIGHT;
 	private final float WORLD_WIDTH;
 	private final float WORLD_HEIGHT;
+	
+	private final float SCALE;
 		
 	private World world;
 	
@@ -36,9 +38,11 @@ public class DictField extends Group {
 		
 		FIELD_HEIGHT = level.getHeight();
 		FIELD_WIDTH = level.getWidth();
-		
+
 		SCREEN_WIDTH = Gdx.graphics.getWidth();
 		SCREEN_HEIGHT = Gdx.graphics.getHeight();
+		
+		SCALE = SCREEN_WIDTH / FIELD_WIDTH;
 
 		WORLD_HEIGHT = SCREEN_HEIGHT * 2;
 		WORLD_WIDTH = SCREEN_WIDTH * 1;
@@ -46,6 +50,11 @@ public class DictField extends Group {
 		Gdx.app.log(TAG, "Screen width: " + SCREEN_WIDTH + " Screen height: " + SCREEN_HEIGHT);
 		Gdx.app.log(TAG, "Field width: " + FIELD_WIDTH + " Field height: " + FIELD_HEIGHT);
 		
+		drawGrid();
+		drawFrame();
+	}
+
+	private void drawGrid() {
 		for(int x = 0; x < FIELD_WIDTH; x++){
 			addLine(x, 0, FIELD_HEIGHT, 0);
 		}
@@ -54,22 +63,27 @@ public class DictField extends Group {
 		}
 	}
 
+	private void drawFrame() {
+		addLine(0, 0, FIELD_HEIGHT, 0, LINE_HALF_WIDTH * 2);
+		addLine(0, 0, FIELD_WIDTH, 270, LINE_HALF_WIDTH * 2);
+		addLine(FIELD_WIDTH, 0, FIELD_HEIGHT, 0, LINE_HALF_WIDTH * 2);
+		addLine(0, FIELD_HEIGHT, FIELD_WIDTH, 270, LINE_HALF_WIDTH * 2);
+	}
+
 	@Override
 	public void draw(SpriteBatch batch, float parentAlpha) {
 		super.draw(batch, parentAlpha);
 	}
 	
 	public void addBridge(Bridge bridge) {
-		float scale = SCREEN_WIDTH / FIELD_WIDTH;
-
 		float halfWidth = bridge.getWidth() / 2;		
 		
 		Image image = new Image(Assets.platform);
-		image.setPosition((bridge.getX() - halfWidth) * scale, (bridge.getY() - halfWidth) * scale);
-		image.setWidth(bridge.getWidth() * scale);
-		image.setHeight(bridge.getLength() * scale);
+		image.setPosition((bridge.getX() - halfWidth) * SCALE, (bridge.getY() - halfWidth) * SCALE);
+		image.setWidth(bridge.getWidth() * SCALE);
+		image.setHeight(bridge.getLength() * SCALE);
 		image.setRotation(bridge.getDirectionAngle());
-		image.setOrigin(halfWidth * scale, halfWidth * scale);
+		image.setOrigin(halfWidth * SCALE, halfWidth * SCALE);
 
 		addActor(image);
 	}
@@ -90,17 +104,23 @@ public class DictField extends Group {
 	}
 
 	public void addLine(float x, float y, float length, int rotation) {
-		float scale = SCREEN_WIDTH / FIELD_WIDTH;
+		addLine(x, y, length, rotation, DOT_HALF_SIZE * 2);
+	}
 
+	public void addLine(float x, float y, float length, int rotation, float width) {
 		Image line = new Image(Assets.platform);
 		
-		float xPos = (float) ((x - DOT_HALF_SIZE) * scale);
-		float yPos = (float) ((y - DOT_HALF_SIZE) * scale);
+		float scaledWidth = SCALE * width;
+		float scaledHalfWidth = scaledWidth / 2;
+		
+		float xPos = (float) (SCALE * x - scaledHalfWidth);
+		float yPos = (float) (SCALE * y - scaledHalfWidth);
 		line.setPosition(xPos, yPos);
-		line.setWidth(DOT_HALF_SIZE * scale * 2);
-		line.setHeight(length * scale);
+		line.setWidth(scaledWidth);
+		line.setHeight(length * SCALE + scaledWidth);
 		line.setRotation(rotation);
 		line.setColor(new Color(0f, 0f, 0.5f, 0.4f));
+		line.setOrigin(scaledHalfWidth, scaledHalfWidth);
 
 		addActor(line);
 	}
