@@ -119,7 +119,6 @@ public class DictField extends Group {
 		line.setWidth(scaledWidth);
 		line.setHeight(length * SCALE + scaledWidth);
 		line.setRotation(rotation);
-		line.setColor(new Color(0f, 0f, 0.5f, 0.4f));
 		line.setOrigin(scaledHalfWidth, scaledHalfWidth);
 
 		addActor(line);

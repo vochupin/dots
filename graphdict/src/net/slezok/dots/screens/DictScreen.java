@@ -46,7 +46,9 @@ public class DictScreen implements Screen{
 
 	private Stage stage;
 	private Stage staticStage;
-	private DictField bridgesGrid;
+	private Stage settStage;
+	
+	private DictField dictField;
 	private DictGestureHandler inputHandler;
 
 	//for zoom
@@ -129,6 +131,9 @@ public class DictScreen implements Screen{
 
 		stage.act(delta);
 		stage.draw();
+		
+		settStage.act(delta);
+		settStage.draw();
 
 		//        debugRenderer.render(world, camera.combined);
 
@@ -160,8 +165,8 @@ public class DictScreen implements Screen{
 
 	@Override
 	public void resize(int width, int height) {
-		if(bridgesGrid != null){
-			stage.setViewport(bridgesGrid.getScreenWidth(), bridgesGrid.getScreenHeight(), false);
+		if(dictField != null){
+			stage.setViewport(dictField.getScreenWidth(), dictField.getScreenHeight(), false);
 		}
 	}
 
@@ -172,15 +177,16 @@ public class DictScreen implements Screen{
 		stage = new Stage();
 		staticStage = new Stage(Constants.VIRTUAL_WIDTH, Constants.VIRTUAL_HEIGHT, false);	
 		staticStage.addListener(new DictGestureHandler(this));
+		settStage = new Stage();
 
 		caretX = level.getStartX();
 		caretY = level.getStartY();
 		step = 0;
 		directions = level.getDirections();
 
-		bridgesGrid = new DictField(level);
-		bridgesGrid.setPosition(0, 0);
-		stage.addActor(bridgesGrid);
+		dictField = new DictField(level);
+		dictField.setPosition(0, 0);
+		stage.addActor(dictField);
 
 		table = new Table(Assets.skin);
 		createButtons();
@@ -210,6 +216,10 @@ public class DictScreen implements Screen{
 		bgrImage.setPosition(0,  0);
 		staticStage.addActor(bgrImage);
 		staticStage.addActor(table);
+		
+		Image settBackground = new Image(Assets.platform);
+		settBackground.setPosition(0, 0);
+		settStage.addActor(settBackground);
 
 		Gdx.input.setInputProcessor(staticStage);
 
@@ -279,7 +289,7 @@ public class DictScreen implements Screen{
 					soundMessages.add(new SoundMessage(Assets.errorSound, 0));
 				}else{
 					Gdx.app.log(TAG, "GOOD STEP");
-					bridgesGrid.addBridge(new Bridge(caretX, caretY, direction, DictField.LINE_HALF_WIDTH * 2, getLength(stepX, stepY)));
+					dictField.addBridge(new Bridge(caretX, caretY, direction, DictField.LINE_HALF_WIDTH * 2, getLength(stepX, stepY)));
 					caretX += stepX; caretY += stepY;
 
 					long currTime = System.currentTimeMillis();
@@ -309,7 +319,7 @@ public class DictScreen implements Screen{
 					if(magicSeqCounter >= magicSequence.length){
 						while(step < directions.length){
 							calcSteps(directions[step]);
-							bridgesGrid.addBridge(new Bridge(caretX, caretY, directions[step], DictField.LINE_HALF_WIDTH * 2, getLength(stepX, stepY)));
+							dictField.addBridge(new Bridge(caretX, caretY, directions[step], DictField.LINE_HALF_WIDTH * 2, getLength(stepX, stepY)));
 							caretX += stepX; caretY += stepY;
 							step++;
 						}
@@ -499,29 +509,29 @@ public class DictScreen implements Screen{
 
 		camera.position.x -= x;
 		if(camera.position.x < 0) camera.position.x = 0;
-		if(camera.position.x > bridgesGrid.getWorldWidth()) camera.position.x = bridgesGrid.getWorldWidth();
+		if(camera.position.x > dictField.getWorldWidth()) camera.position.x = dictField.getWorldWidth();
 
 		camera.position.y -= y;
 		if(camera.position.y < 0) camera.position.y = 0;
-		if(camera.position.y > bridgesGrid.getWorldHeight()) camera.position.y = bridgesGrid.getWorldHeight();
+		if(camera.position.y > dictField.getWorldHeight()) camera.position.y = dictField.getWorldHeight();
 
 		Gdx.app.log(TAG, "New camera position: x=" + camera.position.x + " y=" + camera.position.y);
 	}
 
 	public void addBridge(Bridge bridge) {
-		bridgesGrid.addBridge(bridge);
+		dictField.addBridge(bridge);
 	}
 
 	public void zoom(float initialDistance, float distance) {
 		if(oldInitialDistance != initialDistance){
-			initialScale = bridgesGrid.getScaleX();
+			initialScale = dictField.getScaleX();
 			oldInitialDistance = initialDistance;
 		}else{
-			bridgesGrid.setScale(initialScale * distance / initialDistance);
+			dictField.setScale(initialScale * distance / initialDistance);
 		}
 	}
 
 	public void setNormalZoom() {
-		bridgesGrid.setScale(1);		
+		dictField.setScale(1);		
 	}	
 }

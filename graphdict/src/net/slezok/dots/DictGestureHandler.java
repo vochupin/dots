@@ -26,6 +26,7 @@ public class DictGestureHandler extends ActorGestureListener{//implements Gestur
 
 	@Override
 	public void pan(InputEvent event, float x, float y, float deltaX, float deltaY) {
+		Gdx.app.log(TAG, "pan: " + x + ", " + y + ", " + deltaX + ", " + deltaY);
 		gridScreen.moveRelatively(deltaX, deltaY);
 	}
 
