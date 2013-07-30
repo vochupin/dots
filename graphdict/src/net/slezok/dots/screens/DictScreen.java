@@ -73,6 +73,8 @@ public class DictScreen implements Screen{
 	private int caretX, caretY;
 	private int step;
 	private int[] directions;
+	
+	private Music music;
 
 	private class SoundMessage{
 		public Sound sound;
@@ -146,12 +148,13 @@ public class DictScreen implements Screen{
 		
 		if (Gdx.input.isKeyPressed(Keys.BACK)){ 
 			Gdx.app.log(TAG, "Back key was pressed.");
+			stopBackgroundMusic();
 			new Timer().scheduleTask(new Task(){
 				@Override
 				public void run() {
 					game.setScreen(new LevelsListScreen(game));
 				}
-			}, 1);
+			}, 0.5F);
 		}
 	}
 
@@ -215,12 +218,18 @@ public class DictScreen implements Screen{
 	}
 
 	private void startBackgroundMusic() {
-		Music music = Assets.backMusic;
+		music = Assets.backMusic;
 
 		if(music != null){
 			music.setVolume(0.3f);
 			music.setLooping(true);
 			music.play();
+		}
+	}
+
+	private void stopBackgroundMusic() {
+		if(music != null){
+			music.stop();
 		}
 	}
 
@@ -482,6 +491,7 @@ public class DictScreen implements Screen{
 		Assets.wellDoneSound.dispose();
 		Assets.gameOverSound.dispose();
 		Assets.errorSound.dispose();
+		stopBackgroundMusic();
 	}
 
 	public void moveRelatively(float x, float y) {
