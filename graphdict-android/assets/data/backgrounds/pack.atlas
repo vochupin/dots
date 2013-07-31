@@ -5,15 +5,15 @@ filter: Nearest,Nearest
 repeat: none
 intro_screen
   rotate: false
-  xy: 1, 403
-  size: 800, 430
-  orig: 800, 430
+  xy: 1, 483
+  size: 800, 480
+  orig: 800, 480
   offset: 0, 0
   index: -1
 menu_screen
   rotate: false
   xy: 1, 1
-  size: 800, 400
-  orig: 800, 400
+  size: 800, 480
+  orig: 800, 480
   offset: 0, 0
   index: -1
