@@ -121,8 +121,12 @@ public class LevelsListScreen implements Screen {
 		ScrollPane scroller = new ScrollPane(levelsList);
 
 		Image backImage = new Image(Assets.listBackgroundTexture);
+		
+		float scale = Constants.VIRTUAL_WIDTH / backImage.getWidth();
+		backImage.setScale(scale);
+
 		backImage.setX(stage.getGutterWidth());
-		backImage.setY(stage.getGutterHeight());
+		backImage.setY(stage.getGutterHeight() + (Constants.VIRTUAL_HEIGHT - backImage.getHeight() * scale) / 2);
 		
 		playButton = new ImageButton(new TextureRegionDrawable(Assets.play), new TextureRegionDrawable(Assets.playPressed));
 		playButton.addListener(new InputListener() {

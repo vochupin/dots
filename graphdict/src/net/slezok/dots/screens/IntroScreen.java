@@ -55,8 +55,12 @@ public class IntroScreen implements Screen {
 		Gdx.input.setInputProcessor(stage);
 		
 		Image backImage = new Image(Assets.mainBackgroundTexture);
+
+		float scale = Constants.VIRTUAL_WIDTH / backImage.getWidth();
+		backImage.setScale(scale);
+
 		backImage.setX(stage.getGutterWidth());
-		backImage.setY(stage.getGutterHeight());
+		backImage.setY(stage.getGutterHeight() + (Constants.VIRTUAL_HEIGHT - backImage.getHeight() * scale) / 2);
 		backImage.addAction( Actions.sequence( Actions.fadeOut( 0.001f ), Actions.fadeIn( 1f ) ) );
 		
 		backImage.addListener(new InputListener() {
