@@ -96,7 +96,14 @@ public class LevelsListScreen implements Screen {
 
 		String[] levelNames = new String[levels.size];
 		for(int i = 0; i < levels.size; i++){
-			levelNames[i] = (String) namesMap.get(levels.get(i).getDescription());
+			String levelDescription = levels.get(i).getDescription();
+			String levelName = (String) namesMap.get(levelDescription);
+			if(levelName != null){
+				levelNames[i] = levelName;
+			}else{
+				levelNames[i] = levelDescription;
+			}
+			
 			levels.get(i).unpackDirections();
 		}
 
