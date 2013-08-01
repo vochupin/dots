@@ -70,7 +70,7 @@ public class DictField extends Group {
 	public void addBridge(Bridge bridge) {
 		float halfWidth = bridge.getWidth() / 2;		
 		
-		Image image = new Image(Assets.bluebar);
+		Image image = new Image(Assets.blackbar);
 		image.setPosition((bridge.getX() - halfWidth) * SCALE, (bridge.getY() - halfWidth) * SCALE);
 		image.setWidth(bridge.getWidth() * SCALE);
 		image.setHeight(bridge.getLength() * SCALE);
