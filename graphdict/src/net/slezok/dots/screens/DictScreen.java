@@ -45,6 +45,11 @@ public class DictScreen extends ActorGestureListener implements Screen {
 	protected static final float NORMAL_STEP_TIME = 6000;
 
 	private static final float SETT_HANDLER_WIDTH = 50;
+	
+	private static final float CONTROL_PANEL_MOVE_TIME = 2;
+	private static final float UNVISIBLE_X_POSITION = -300;
+	private static final float CONTROL_MUSIC_X_POSITION = 0;
+	private static final float CONTROL_MUSIC_Y_POSITION = 400;
 
 	private final Dots game;
 	private final Level level;
@@ -228,7 +233,7 @@ public class DictScreen extends ActorGestureListener implements Screen {
 		settBackground.setY(0);
 		settBackground.setX(SETT_HANDLER_WIDTH - settBackground.getWidth());
 		settStage.addActor(settBackground);
-		controlMusicButton.setPosition(-300, 400);//TODO hardcoding
+		controlMusicButton.setPosition(UNVISIBLE_X_POSITION, CONTROL_MUSIC_Y_POSITION);
 		settStage.addActor(controlMusicButton);
 
 		InputMultiplexer multiplexer = new InputMultiplexer();
@@ -567,13 +572,13 @@ public class DictScreen extends ActorGestureListener implements Screen {
 	}
 
 	private void showSettingsPanel() {
-		settBackground.addAction(Actions.moveTo(-SETT_HANDLER_WIDTH, 0, 2, Interpolation.elasticOut));//TODO hardcoding
-		controlMusicButton.addAction(Actions.moveTo(0, 400, 2, Interpolation.elasticOut));//TODO hardcoding
+		settBackground.addAction(Actions.moveTo(-SETT_HANDLER_WIDTH, 0, CONTROL_PANEL_MOVE_TIME, Interpolation.elasticOut));
+		controlMusicButton.addAction(Actions.moveTo(CONTROL_MUSIC_X_POSITION, CONTROL_MUSIC_Y_POSITION, CONTROL_PANEL_MOVE_TIME, Interpolation.bounceOut));
 	}
 
 	private void hideSettingsPanel() {
-		settBackground.addAction(Actions.moveTo(SETT_HANDLER_WIDTH - settBackground.getWidth(), 0, 2, Interpolation.elasticOut));//TODO hardcoding
-		controlMusicButton.addAction(Actions.moveTo(-300, 400, 2, Interpolation.elasticOut));//TODO hardcoding
+		settBackground.addAction(Actions.moveTo(SETT_HANDLER_WIDTH - settBackground.getWidth(), 0, CONTROL_PANEL_MOVE_TIME, Interpolation.elasticOut));
+		controlMusicButton.addAction(Actions.moveTo(UNVISIBLE_X_POSITION, CONTROL_MUSIC_Y_POSITION, CONTROL_PANEL_MOVE_TIME, Interpolation.exp5Out));
 	}
 	
 	private InputListener settButtonListener = new InputListener() {
