@@ -17,3 +17,10 @@ menu_screen
   orig: 800, 480
   offset: 0, 0
   index: -1
+opt_panel
+  rotate: false
+  xy: 803, 363
+  size: 200, 600
+  orig: 200, 600
+  offset: 0, 0
+  index: -1

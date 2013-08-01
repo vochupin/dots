@@ -3,15 +3,16 @@ package net.slezok.dots.screens;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 
+import net.slezok.dots.Assets;
+import net.slezok.dots.Constants;
+import net.slezok.dots.Dots;
+import net.slezok.dots.Level;
+
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.Input.Keys;
+import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.files.FileHandle;
-import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.GL10;
-import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.math.Rectangle;
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Event;
 import com.badlogic.gdx.scenes.scene2d.EventListener;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -31,11 +32,6 @@ import com.badlogic.gdx.utils.SerializationException;
 import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.Timer.Task;
 import com.swarmconnect.Swarm;
-
-import net.slezok.dots.Assets;
-import net.slezok.dots.Constants;
-import net.slezok.dots.Dots;
-import net.slezok.dots.Level;
 
 public class LevelsListScreen implements Screen {
 	private static final String TAG = "LevelsListScreen";

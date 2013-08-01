@@ -4,7 +4,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
@@ -20,6 +19,7 @@ public class Assets {
 
 	public static TextureRegion mainBackgroundTexture;
 	public static TextureRegion listBackgroundTexture;
+	public static TextureRegion settPanelBackgroundTexture;
 	public static Texture dictBackgroundTexture;
 	public static Skin skin;
 	
@@ -78,6 +78,7 @@ public class Assets {
 		TextureAtlas bgrAtlas = new TextureAtlas("data/backgrounds/pack.atlas");
 		mainBackgroundTexture = bgrAtlas.findRegion("intro_screen");
 		listBackgroundTexture = bgrAtlas.findRegion("menu_screen");
+		settPanelBackgroundTexture = bgrAtlas.findRegion("opt_panel");
 		
 		dictBackgroundTexture = new Texture(Gdx.files.internal("data/dictback.jpg"));
 		

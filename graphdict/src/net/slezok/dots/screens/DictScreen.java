@@ -20,6 +20,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.utils.ActorGestureListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.Timer.Task;
@@ -29,17 +30,18 @@ import com.swarmconnect.SwarmLeaderboard;
 import net.slezok.dots.Assets;
 import net.slezok.dots.Bridge;
 import net.slezok.dots.Constants;
-import net.slezok.dots.DictGestureHandler;
 import net.slezok.dots.Dots;
 import net.slezok.dots.Level;
 import net.slezok.dots.actors.DictField;
 
-public class DictScreen implements Screen{
+public class DictScreen extends ActorGestureListener implements Screen {
 	private static final String TAG = "DictScreen";
 
 	private static final long CURRENT_SOUND_DELAY = 800;
 
 	protected static final float NORMAL_STEP_TIME = 6000;
+
+	private static final float SETT_HANDLER_WIDTH = 50;
 
 	private final Dots game;
 	private final Level level;
@@ -49,7 +51,6 @@ public class DictScreen implements Screen{
 	private Stage settStage;
 	
 	private DictField dictField;
-	private DictGestureHandler inputHandler;
 
 	//for zoom
 	private float oldInitialDistance = 0;
@@ -108,6 +109,8 @@ public class DictScreen implements Screen{
 			Bridge.DIRECTION_LEFT
 	};
 	private int magicSeqCounter = 0;
+	
+	private Image settBackground;
 
 	public DictScreen(Dots game, Level level) {
 		this.game = game;
@@ -176,8 +179,8 @@ public class DictScreen implements Screen{
 
 		stage = new Stage();
 		staticStage = new Stage(Constants.VIRTUAL_WIDTH, Constants.VIRTUAL_HEIGHT, false);	
-		staticStage.addListener(new DictGestureHandler(this));
-		settStage = new Stage();
+		staticStage.addListener(this);
+		settStage = new Stage(Constants.VIRTUAL_WIDTH, Constants.VIRTUAL_HEIGHT, false);
 
 		caretX = level.getStartX();
 		caretY = level.getStartY();
@@ -217,8 +220,9 @@ public class DictScreen implements Screen{
 		staticStage.addActor(bgrImage);
 		staticStage.addActor(table);
 		
-		Image settBackground = new Image(Assets.bluebar);
-		settBackground.setPosition(0, 0);
+		settBackground = new Image(Assets.settPanelBackgroundTexture);
+		settBackground.setY(0);
+		settBackground.setX(SETT_HANDLER_WIDTH - settBackground.getWidth());
 		settStage.addActor(settBackground);
 
 		Gdx.input.setInputProcessor(staticStage);
@@ -423,7 +427,6 @@ public class DictScreen implements Screen{
 				SwarmLeaderboard.submitScore(Constants.GRAPHDICT_LEADERBOARD_ID, (float)score);
 			}
 		}
-
 	};
 
 	private void recalculateIdenticalStepsAndPlaySound(){
@@ -533,5 +536,22 @@ public class DictScreen implements Screen{
 
 	public void setNormalZoom() {
 		dictField.setScale(1);		
-	}	
+	}
+
+	@Override
+	public void pan(InputEvent event, float x, float y, float deltaX, float deltaY) {
+		Gdx.app.debug(TAG, "pan: " + x + ", " + y + ", " + deltaX + ", " + deltaY);
+		moveRelatively(deltaX, deltaY);
+	}
+
+	@Override
+	public boolean longPress(Actor actor, float x, float y) {
+		setNormalZoom();
+		return true;
+	}
+
+	@Override
+	public void zoom(InputEvent event, float initialDistance, float distance) {
+		zoom(initialDistance, distance);
+	}
 }

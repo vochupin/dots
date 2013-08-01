@@ -1,10 +1,10 @@
 package net.slezok.dots;
 
+import net.slezok.dots.screens.IntroScreen;
+
 import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
-
-import net.slezok.dots.screens.IntroScreen;
 
 public class Dots extends Game {
 	
