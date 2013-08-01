@@ -6,16 +6,19 @@ import java.util.List;
 import com.badlogic.gdx.Application.ApplicationType;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
+import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.GL10;
+import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
@@ -111,6 +114,7 @@ public class DictScreen extends ActorGestureListener implements Screen {
 	private int magicSeqCounter = 0;
 	
 	private Image settBackground;
+	private ImageButton controlMusicButton;
 
 	public DictScreen(Dots game, Level level) {
 		this.game = game;
@@ -224,8 +228,13 @@ public class DictScreen extends ActorGestureListener implements Screen {
 		settBackground.setY(0);
 		settBackground.setX(SETT_HANDLER_WIDTH - settBackground.getWidth());
 		settStage.addActor(settBackground);
+		controlMusicButton.setPosition(-300, 400);//TODO hardcoding
+		settStage.addActor(controlMusicButton);
 
-		Gdx.input.setInputProcessor(staticStage);
+		InputMultiplexer multiplexer = new InputMultiplexer();
+		multiplexer.addProcessor(settStage); // WTF if settStage will be added to mux after staticStage then it will not works!!!
+		multiplexer.addProcessor(staticStage);
+		Gdx.input.setInputProcessor(multiplexer);
 
 		recalculateIdenticalStepsAndPlaySound();
 		prevStepTime = System.currentTimeMillis();
@@ -258,7 +267,7 @@ public class DictScreen extends ActorGestureListener implements Screen {
 		downRightButton = new ImageButton(new TextureRegionDrawable(Assets.downRight), new TextureRegionDrawable(Assets.downRightPressed));
 
 		repeatButton = new ImageButton(new TextureRegionDrawable(Assets.repeat), new TextureRegionDrawable(Assets.repeatPressed));
-
+		
 		upButton.addListener(buttonListener);
 		downButton.addListener(buttonListener);
 		leftButton.addListener(buttonListener);
@@ -270,6 +279,10 @@ public class DictScreen extends ActorGestureListener implements Screen {
 		downRightButton.addListener(buttonListener);
 
 		repeatButton.addListener(buttonListener);
+		
+		controlMusicButton = new ImageButton(new TextureRegionDrawable(Assets.up), 
+				new TextureRegionDrawable(Assets.upPressed), new TextureRegionDrawable(Assets.repeat));
+		controlMusicButton.addListener(settButtonListener);
 	}
 
 	private InputListener buttonListener = new InputListener() {
@@ -335,7 +348,8 @@ public class DictScreen extends ActorGestureListener implements Screen {
 					magicSeqCounter = 0;
 				}
 			}
-			return true;
+			
+			return false;
 		}
 
 		private float getLength(int stepX, int stepY) {
@@ -541,8 +555,43 @@ public class DictScreen extends ActorGestureListener implements Screen {
 	@Override
 	public void pan(InputEvent event, float x, float y, float deltaX, float deltaY) {
 		Gdx.app.debug(TAG, "pan: " + x + ", " + y + ", " + deltaX + ", " + deltaY);
-		moveRelatively(deltaX, deltaY);
+		if(x < (settBackground.getWidth() + settBackground.getX())){
+			if(deltaX > 0){
+				showSettingsPanel();
+			}else{
+				hideSettingsPanel();
+			}
+		}else{
+			moveRelatively(deltaX, deltaY);
+		}
 	}
+
+	private void showSettingsPanel() {
+		settBackground.addAction(Actions.moveTo(-SETT_HANDLER_WIDTH, 0, 2, Interpolation.elasticOut));//TODO hardcoding
+		controlMusicButton.addAction(Actions.moveTo(0, 400, 2, Interpolation.elasticOut));//TODO hardcoding
+	}
+
+	private void hideSettingsPanel() {
+		settBackground.addAction(Actions.moveTo(SETT_HANDLER_WIDTH - settBackground.getWidth(), 0, 2, Interpolation.elasticOut));//TODO hardcoding
+		controlMusicButton.addAction(Actions.moveTo(-300, 400, 2, Interpolation.elasticOut));//TODO hardcoding
+	}
+	
+	private InputListener settButtonListener = new InputListener() {
+
+		@Override
+		public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+			Actor actor = event.getListenerActor();
+			
+			if(actor.equals(controlMusicButton)){
+				if(music.isPlaying()){
+					music.pause();
+				}else{
+					music.play();
+				}
+			}
+			return false;
+		}
+	};
 
 	@Override
 	public boolean longPress(Actor actor, float x, float y) {
