@@ -217,7 +217,7 @@ public class DictScreen implements Screen{
 		staticStage.addActor(bgrImage);
 		staticStage.addActor(table);
 		
-		Image settBackground = new Image(Assets.platform);
+		Image settBackground = new Image(Assets.bluebar);
 		settBackground.setPosition(0, 0);
 		settStage.addActor(settBackground);
 

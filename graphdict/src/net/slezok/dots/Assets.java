@@ -15,9 +15,9 @@ public class Assets {
 
 	private static final String TAG = "Assets";
 	
-	public static TextureRegion platform;
-	public static TextureRegion fallingManSplash;
-	public static Animation fallingManAnim;
+	public static TextureRegion bluebar;
+	public static TextureRegion blackbar;
+
 	public static TextureRegion mainBackgroundTexture;
 	public static TextureRegion listBackgroundTexture;
 	public static Texture dictBackgroundTexture;
@@ -71,10 +71,9 @@ public class Assets {
 	
 	public static void load (PlatformDependencies deps) {
 		
-		TextureAtlas textureAtlas = new TextureAtlas("data/PigTest.pack");
-		fallingManAnim = new Animation(0.2f, textureAtlas.findRegion("falling1"), textureAtlas.findRegion("falling2"));
-		platform = textureAtlas.findRegion("platform");
-		fallingManSplash = textureAtlas.findRegion("rip");
+		TextureAtlas textureAtlas = new TextureAtlas("data/primitives/pack.atlas");
+		bluebar = textureAtlas.findRegion("bluebar");
+		blackbar = textureAtlas.findRegion("blackbar");
 		
 		TextureAtlas bgrAtlas = new TextureAtlas("data/backgrounds/pack.atlas");
 		mainBackgroundTexture = bgrAtlas.findRegion("intro_screen");

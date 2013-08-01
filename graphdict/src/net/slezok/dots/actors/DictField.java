@@ -78,7 +78,7 @@ public class DictField extends Group {
 	public void addBridge(Bridge bridge) {
 		float halfWidth = bridge.getWidth() / 2;		
 		
-		Image image = new Image(Assets.platform);
+		Image image = new Image(Assets.bluebar);
 		image.setPosition((bridge.getX() - halfWidth) * SCALE, (bridge.getY() - halfWidth) * SCALE);
 		image.setWidth(bridge.getWidth() * SCALE);
 		image.setHeight(bridge.getLength() * SCALE);
@@ -91,7 +91,7 @@ public class DictField extends Group {
 	public void addDot(int x, int y) {
 		float scale = SCREEN_WIDTH / FIELD_WIDTH;
 
-		Image dot = new Image(Assets.platform);
+		Image dot = new Image(Assets.bluebar);
 		
 		float xPos = (float) ((x - DOT_HALF_SIZE) * scale);
 		float yPos = (float) ((y - DOT_HALF_SIZE) * scale);
@@ -108,7 +108,7 @@ public class DictField extends Group {
 	}
 
 	public void addLine(float x, float y, float length, int rotation, float width) {
-		Image line = new Image(Assets.platform);
+		Image line = new Image(Assets.bluebar);
 		
 		float scaledWidth = SCALE * width;
 		float scaledHalfWidth = scaledWidth / 2;
