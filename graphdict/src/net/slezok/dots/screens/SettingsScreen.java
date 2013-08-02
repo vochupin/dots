@@ -18,11 +18,14 @@ import com.badlogic.gdx.scenes.scene2d.EventListener;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.CheckBox;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.List;
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.utils.Align;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Json;
@@ -38,9 +41,8 @@ public class SettingsScreen implements Screen {
 	
 	private Dots game;
 	private Stage stage;
-	private List levelsList;
-	private ImageButton playButton;
-	private ImageButton recordsButton;
+	private CheckBox enableSwarmButton;
+	private CheckBox backMusicButton;
 	private Level level = null;
 
 	public SettingsScreen(Dots game) {
@@ -76,46 +78,6 @@ public class SettingsScreen implements Screen {
 		stage = new Stage(Constants.VIRTUAL_WIDTH, Constants.VIRTUAL_HEIGHT, true);
 		Gdx.input.setInputProcessor(stage);
 		
-		FileHandle levelsFile =  Gdx.files.internal("data/levels.json");
-		Json levelsJson = new Json();
-		@SuppressWarnings("unchecked")
-		final Array<Level> levels = levelsJson.fromJson(Array.class, Level.class, levelsFile);
-
-		FileHandle namesFile =  Gdx.files.internal("data/level_names_ru.json");
-		Json namesJson = new Json();
-		OrderedMap namesMap;
-		try {
-			namesMap = (OrderedMap)new JsonReader().parse(new InputStreamReader(namesFile.read(), "UTF-8"));
-		} catch (UnsupportedEncodingException e) {
-			throw new SerializationException(e);
-		}
-
-		String[] levelNames = new String[levels.size];
-		for(int i = 0; i < levels.size; i++){
-			String levelDescription = levels.get(i).getDescription();
-			String levelName = (String) namesMap.get(levelDescription);
-			if(levelName != null){
-				levelNames[i] = levelName;
-			}else{
-				levelNames[i] = levelDescription;
-			}
-			
-			levels.get(i).unpackDirections();
-		}
-
-		levelsList = new List(levelNames, Assets.skin);
-		levelsList.setSelectedIndex(0);
-		level = levels.get(0);
-		levelsList.addListener(new EventListener(){
-			@Override
-			public boolean handle(Event event) {
-				List list = (List)event.getListenerActor();
-				level = levels.get(list.getSelectedIndex());
-				return true;
-			}
-		});
-		ScrollPane scroller = new ScrollPane(levelsList);
-
 		Image backImage = new Image(Assets.dictBackgroundTexture);
 		
 		float scale = Constants.VIRTUAL_WIDTH / backImage.getWidth();
@@ -124,8 +86,9 @@ public class SettingsScreen implements Screen {
 		backImage.setX(stage.getGutterWidth());
 		backImage.setY(stage.getGutterHeight() + (Constants.VIRTUAL_HEIGHT - backImage.getHeight() * scale) / 2);
 		
-		playButton = new ImageButton(new TextureRegionDrawable(Assets.play), new TextureRegionDrawable(Assets.playPressed));
-		playButton.addListener(new InputListener() {
+		backMusicButton = new CheckBox("Фоновая музыка", Assets.skin);
+		backMusicButton.scale(2);
+		backMusicButton.addListener(new InputListener() {
 			@Override
 			public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
 				return true;
@@ -139,29 +102,32 @@ public class SettingsScreen implements Screen {
 			}
 		});
 
-		recordsButton = new ImageButton(new TextureRegionDrawable(Assets.records), new TextureRegionDrawable(Assets.recordsPressed));
-		recordsButton.addListener(new InputListener() {
+		enableSwarmButton = new CheckBox("Включить Swarm", Assets.skin);
+		enableSwarmButton.scale(2);
+		enableSwarmButton.addListener(new InputListener() {
 			@Override
 			public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
 				return true;
 			}
-			
+
 			@Override
 			public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-				Swarm.showLeaderboards();
+				if(level != null){
+					game.setScreen(new DictScreen(game, level));
+				}
 			}
 		});
 
+
 		Table table = new Table(Assets.skin);
-		table.setWidth(600);
+		table.setWidth(900);
 		table.setHeight(300);
-		table.setX(350 + stage.getGutterWidth());
-		table.setY(100 + stage.getGutterHeight());
+		table.align(Align.top);
+		table.setX(stage.getGutterWidth());
+		table.setY(stage.getGutterHeight());
 //		table.debug(); 
-		table.add(scroller).width(200).height(200).padTop(50);
-		table.row();
-		table.add(playButton).width(250).height(80).padTop(50);
-		table.add(recordsButton).width(250).height(80).padTop(50);
+		table.add(backMusicButton).width(450).height(200).padTop(50);
+		table.add(enableSwarmButton).width(450).height(200).padTop(50);
 		
 		stage.addActor(backImage);
 		stage.addActor(table);
