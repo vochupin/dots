@@ -18,13 +18,11 @@ import com.badlogic.gdx.scenes.scene2d.EventListener;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.CheckBox;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.List;
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Json;
@@ -35,22 +33,17 @@ import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.Timer.Task;
 import com.swarmconnect.Swarm;
 
-public class LevelsListScreen implements Screen {
+public class SettingsScreen implements Screen {
 	private static final String TAG = "LevelsListScreen";
 	
 	private Dots game;
 	private Stage stage;
 	private List levelsList;
-	
 	private ImageButton playButton;
 	private ImageButton recordsButton;
-
-	private TextButton settButton;
-	private CheckBox showNewOnlyCheckBox;
-
 	private Level level = null;
 
-	public LevelsListScreen(Dots game) {
+	public SettingsScreen(Dots game) {
 		this.game = game;
 	}
 
@@ -123,7 +116,7 @@ public class LevelsListScreen implements Screen {
 		});
 		ScrollPane scroller = new ScrollPane(levelsList);
 
-		Image backImage = new Image(Assets.listBackgroundTexture);
+		Image backImage = new Image(Assets.dictBackgroundTexture);
 		
 		float scale = Constants.VIRTUAL_WIDTH / backImage.getWidth();
 		backImage.setScale(scale);
@@ -158,32 +151,6 @@ public class LevelsListScreen implements Screen {
 				Swarm.showLeaderboards();
 			}
 		});
-		
-		settButton = new TextButton("Настройки", Assets.skin);
-		settButton.addListener(new InputListener() {
-			@Override
-			public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-				return true;
-			}
-			
-			@Override
-			public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-				game.setScreen(new SettingsScreen(game));
-			}
-		});
-
-		showNewOnlyCheckBox = new CheckBox("новые", Assets.skin);
-		showNewOnlyCheckBox.addListener(new InputListener() {
-			@Override
-			public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-				return true;
-			}
-			
-			@Override
-			public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-//				game.setScreen(new SettingsScreen(game));
-			}
-		});
 
 		Table table = new Table(Assets.skin);
 		table.setWidth(600);
@@ -195,9 +162,6 @@ public class LevelsListScreen implements Screen {
 		table.row();
 		table.add(playButton).width(250).height(80).padTop(50);
 		table.add(recordsButton).width(250).height(80).padTop(50);
-		table.row();
-		table.add(showNewOnlyCheckBox).width(250).height(80).padTop(50);
-		table.add(settButton).width(250).height(80).padTop(50);
 		
 		stage.addActor(backImage);
 		stage.addActor(table);
