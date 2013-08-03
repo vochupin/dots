@@ -14,5 +14,8 @@
 	fish : "Рыба",
 	bear : "Медведь",
 	squirrel : "Белка",
-	hippo : "Бегемот"
+	hippo : "Бегемот",
+	elephant : "Слон",
+	crocodile : "Крокодил",
+	sword : "Сабля"
 }	              
