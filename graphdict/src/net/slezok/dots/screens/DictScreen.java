@@ -146,7 +146,7 @@ public class DictScreen extends ActorGestureListener implements Screen {
 		settStage.act(delta);
 		settStage.draw();
 
-		//debugRenderer.render(world, camera.combined);
+		// debugRenderer.render(world, camera.combined);
 
 		if(soundMessages.size() != 0){
 			SoundMessage msg = soundMessages.get(0);
