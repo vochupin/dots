@@ -7,6 +7,7 @@ import com.badlogic.gdx.Application.ApplicationType;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.InputMultiplexer;
+import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
@@ -19,6 +20,7 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
+import com.badlogic.gdx.scenes.scene2d.ui.CheckBox;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
@@ -84,7 +86,7 @@ public class DictScreen extends ActorGestureListener implements Screen {
 	private int step;
 	private int[] directions;
 	
-	private Music music;
+	private Preferences globalPrefs;
 
 	private class SoundMessage{
 		public Sound sound;
@@ -183,7 +185,9 @@ public class DictScreen extends ActorGestureListener implements Screen {
 
 	@Override
 	public void show() {
-		startBackgroundMusic();
+		globalPrefs = Gdx.app.getPreferences(Constants.GLOBAL_PREFS);
+		
+		if(globalPrefs.getBoolean(Constants.PLAY_BACKGROUND_MUSIC)) startBackgroundMusic();
 
 		stage = new Stage();
 		staticStage = new Stage(Constants.VIRTUAL_WIDTH, Constants.VIRTUAL_HEIGHT, false);	
@@ -245,7 +249,7 @@ public class DictScreen extends ActorGestureListener implements Screen {
 	}
 
 	private void startBackgroundMusic() {
-		music = Assets.backMusic;
+		Music music = Assets.backMusic;
 
 		if(music != null){
 			music.setVolume(0.3f);
@@ -254,7 +258,17 @@ public class DictScreen extends ActorGestureListener implements Screen {
 		}
 	}
 
+	private void pauseBackgroundMusic() {
+		Music music = Assets.backMusic;
+		
+		if(music != null){
+			music.pause();
+		}
+	}
+
 	private void stopBackgroundMusic() {
+		Music music = Assets.backMusic;
+		
 		if(music != null){
 			music.stop();
 		}
@@ -284,10 +298,12 @@ public class DictScreen extends ActorGestureListener implements Screen {
 
 		repeatButton.addListener(buttonListener);
 		
-		controlMusicButton = new ImageButton(new TextureRegionDrawable(Assets.musicOn), 
-				new TextureRegionDrawable(Assets.musicPressed), new TextureRegionDrawable(Assets.musicOff));
+		controlMusicButton = new ImageButton(new TextureRegionDrawable(Assets.musicOff), 
+				new TextureRegionDrawable(Assets.musicPressed), new TextureRegionDrawable(Assets.musicOn));
 		controlMusicButton.setSize(controlMusicButton.getPrefWidth()*0.5f, controlMusicButton.getPrefHeight()*0.5f);
+		controlMusicButton.setChecked(globalPrefs.getBoolean(Constants.PLAY_BACKGROUND_MUSIC));
 		controlMusicButton.addListener(settButtonListener);
+		
 	}
 
 	private InputListener buttonListener = new InputListener() {
@@ -442,7 +458,7 @@ public class DictScreen extends ActorGestureListener implements Screen {
 
 			soundMessages.add(new SoundMessage(Assets.gameOverSound, CURRENT_SOUND_DELAY));
 			
-			if(Gdx.app.getType() == ApplicationType.Android){
+			if(Gdx.app.getType() == ApplicationType.Android && globalPrefs.getBoolean(Constants.USE_SWARM)){
 				SwarmLeaderboard.submitScore(Constants.GRAPHDICT_LEADERBOARD_ID, (float)score);
 			}
 		}
@@ -589,10 +605,15 @@ public class DictScreen extends ActorGestureListener implements Screen {
 			Actor actor = event.getListenerActor();
 			
 			if(actor.equals(controlMusicButton)){
-				if(music.isPlaying()){
-					music.pause();
+				ImageButton cb = (ImageButton)event.getListenerActor();
+				boolean checked = !cb.isChecked(); //will be inverted in near future
+				globalPrefs.putBoolean(Constants.PLAY_BACKGROUND_MUSIC, checked);
+				globalPrefs.flush();
+
+				if(checked){
+					startBackgroundMusic();
 				}else{
-					music.play();
+					pauseBackgroundMusic();
 				}
 			}
 			return false;

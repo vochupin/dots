@@ -25,6 +25,8 @@ import com.swarmconnect.Swarm;
 public class MainActivity extends AndroidApplication implements PlatformDependencies{
 	private static final String TAG = null;
 	private static final int IO_BUFFER_SIZE = 4 * 1024;
+	
+	private boolean swarmEnabled = false;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -37,21 +39,27 @@ public class MainActivity extends AndroidApplication implements PlatformDependen
 		initialize(new Dots(this), cfg);
 
 		//Initialize swarm
-		Swarm.setActive(this);
+		if(swarmEnabled){
+			Swarm.setActive(this);
+		}
 	}
 
 	@Override
 	protected void onResume() {
 		super.onResume();
 
-		Swarm.setActive(this);
-		Swarm.init(this, Constants.GRAPHDICT_APP_ID, Constants.GRAPHDICT_APP_KEY);
+		if(swarmEnabled){
+			Swarm.setActive(this);
+			Swarm.init(this, Constants.GRAPHDICT_APP_ID, Constants.GRAPHDICT_APP_KEY);
+		}
 	}
 
 	@Override
 	protected void onPause() {
 		super.onPause();
-		Swarm.setInactive(this);
+		if(swarmEnabled){
+			Swarm.setInactive(this);
+		}
 	}
 
 	@Override
@@ -88,5 +96,14 @@ public class MainActivity extends AndroidApplication implements PlatformDependen
 			out.write(b, 0, read);  
 		}
 		out.flush();
+	}
+
+	@Override
+	public void enableSwarm(boolean enable) {
+		if(enable){
+			Swarm.setActive(this);
+			Swarm.init(this, Constants.GRAPHDICT_APP_ID, Constants.GRAPHDICT_APP_KEY);
+		}
+		swarmEnabled = enable;
 	}  
 }

@@ -21,4 +21,9 @@ public class Main implements PlatformDependencies{
 		
 		new LwjglApplication(new Dots(new Main()), cfg);
 	}
+
+	@Override
+	public void enableSwarm(boolean enable) {
+		//nothing to do, because desktop is not swarmable
+	}
 }

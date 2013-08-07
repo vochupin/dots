@@ -16,6 +16,7 @@ import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.GL10;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Event;
 import com.badlogic.gdx.scenes.scene2d.EventListener;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -45,7 +46,7 @@ public class LevelsListScreen implements Screen {
 
 	private Dots game;
 	private Stage stage;
-	private List levelsList;
+	private ScrollPane scroller = null;
 
 	private ImageButton playButton;
 	private ImageButton recordsButton;
@@ -98,18 +99,13 @@ public class LevelsListScreen implements Screen {
 		levels = loadLevels(globalPrefs.getBoolean(Constants.ONLY_NEW_LEVELS));
 		String[] levelNames = loadLevelNames(levels);
 
-		levelsList = new List(levelNames, Assets.skin);
-		levelsList.setSelectedIndex(0);
-		level = levels.length > 0 ? levels[0] : null;
-		levelsList.addListener(new EventListener(){
-			@Override
-			public boolean handle(Event event) {
-				List list = (List)event.getListenerActor();
-				level = levels[list.getSelectedIndex()];
-				return true;
-			}
-		});
-		ScrollPane scroller = new ScrollPane(levelsList);
+		if(levelNames.length != 0){
+			List levelsList = createLevelsList(levelNames);
+			scroller = new ScrollPane(levelsList);
+		}else{
+			Image noNewLevelsImage = new Image(Assets.recordsPressed);
+			scroller = new ScrollPane(noNewLevelsImage);
+		}
 
 		Image backImage = new Image(Assets.listBackgroundTexture);
 
@@ -170,7 +166,17 @@ public class LevelsListScreen implements Screen {
 				CheckBox cb = (CheckBox)event.getListenerActor();
 				boolean checked = !cb.isChecked(); //will be inverted in near future
 				levels = loadLevels(checked);
-				levelsList.setItems(loadLevelNames(levels));
+				String[] levelNames = loadLevelNames(levels);
+				
+				Actor actor = scroller.getWidget();
+				
+				if(actor instanceof List){
+					List levelsList = (List)actor;
+					levelsList.setItems(levelNames);
+				}else{
+					List levelsList = createLevelsList(levelNames);
+					scroller.setWidget(levelsList);
+				}
 				
 				globalPrefs.putBoolean(Constants.ONLY_NEW_LEVELS, checked);
 				globalPrefs.flush();
@@ -198,6 +204,21 @@ public class LevelsListScreen implements Screen {
 
 		stage.addActor(backImage);
 		stage.addActor(table);
+	}
+
+	private List createLevelsList(String[] levelNames) {
+		List levelsList = new List(levelNames, Assets.skin);
+		levelsList.setSelectedIndex(0);
+		level = levels.length > 0 ? levels[0] : null;
+		levelsList.addListener(new EventListener(){
+			@Override
+			public boolean handle(Event event) {
+				List list = (List)event.getListenerActor();
+				level = levels[list.getSelectedIndex()];
+				return true;
+			}
+		});
+		return levelsList;
 	}
 
 	private Level[] loadLevels(boolean newOnly) {
