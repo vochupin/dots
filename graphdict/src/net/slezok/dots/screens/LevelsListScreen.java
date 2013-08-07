@@ -43,12 +43,10 @@ import com.swarmconnect.Swarm;
 public class LevelsListScreen implements Screen {
 	private static final String TAG = "LevelsListScreen";
 
-	private static final String PLAYED_LEVELS = "played";
-	
 	private Dots game;
 	private Stage stage;
 	private List levelsList;
-	
+
 	private ImageButton playButton;
 	private ImageButton recordsButton;
 
@@ -56,10 +54,10 @@ public class LevelsListScreen implements Screen {
 	private CheckBox showNewOnlyCheckBox;
 
 	private Level level = null;
-	private Map<String, Level> playableLevelsMap = new HashMap<String, Level>();
-	
-	private Array<Level> allLevels;
-	private Preferences prefs;
+
+	private Level[] levels;
+	private Preferences globalPrefs;
+	private Preferences playedLevelsPrefs;
 
 	public LevelsListScreen(Dots game) {
 		this.game = game;
@@ -72,8 +70,8 @@ public class LevelsListScreen implements Screen {
 
 		stage.act(delta);
 		stage.draw();
-//		Table.drawDebug(stage);
-		
+		//		Table.drawDebug(stage);
+
 		if (Gdx.input.isKeyPressed(Keys.BACK)){ 
 			Gdx.app.log(TAG, "Back key was pressed.");
 			new Timer().scheduleTask(new Task(){
@@ -91,35 +89,36 @@ public class LevelsListScreen implements Screen {
 
 	@Override
 	public void show() {
-		prefs = Gdx.app.getPreferences(PLAYED_LEVELS);
-		
+		globalPrefs = Gdx.app.getPreferences(Constants.GLOBAL_SETTINGS_PREFS);
+		playedLevelsPrefs = Gdx.app.getPreferences(Constants.PLAYED_LEVELS_PREFS);
+
 		stage = new Stage(Constants.VIRTUAL_WIDTH, Constants.VIRTUAL_HEIGHT, true);
 		Gdx.input.setInputProcessor(stage);
-		
-		allLevels = loadAllLeves();
-		String[] levelNames = getPlayableLevelNames(allLevels, false);
+
+		levels = loadLevels(globalPrefs.getBoolean(Constants.ONLY_NEW_LEVELS));
+		String[] levelNames = loadLevelNames(levels);
 
 		levelsList = new List(levelNames, Assets.skin);
 		levelsList.setSelectedIndex(0);
-		level = playableLevelsMap.get(levelNames[0]);
+		level = levels.length > 0 ? levels[0] : null;
 		levelsList.addListener(new EventListener(){
 			@Override
 			public boolean handle(Event event) {
 				List list = (List)event.getListenerActor();
-				level = playableLevelsMap.get(list.getSelection());
+				level = levels[list.getSelectedIndex()];
 				return true;
 			}
 		});
 		ScrollPane scroller = new ScrollPane(levelsList);
 
 		Image backImage = new Image(Assets.listBackgroundTexture);
-		
+
 		float scale = Constants.VIRTUAL_WIDTH / backImage.getWidth();
 		backImage.setScale(scale);
 
 		backImage.setX(stage.getGutterWidth());
 		backImage.setY(stage.getGutterHeight() + (Constants.VIRTUAL_HEIGHT - backImage.getHeight() * scale) / 2);
-		
+
 		playButton = new ImageButton(new TextureRegionDrawable(Assets.play), new TextureRegionDrawable(Assets.playPressed));
 		playButton.addListener(new InputListener() {
 			@Override
@@ -130,8 +129,8 @@ public class LevelsListScreen implements Screen {
 			@Override
 			public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
 				if(level != null){
-					prefs.putBoolean(level.getId(), true);
-					prefs.flush();
+					playedLevelsPrefs.putBoolean(level.getId(), true);
+					playedLevelsPrefs.flush();
 					game.setScreen(new DictScreen(game, level));
 				}
 			}
@@ -143,20 +142,20 @@ public class LevelsListScreen implements Screen {
 			public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
 				return true;
 			}
-			
+
 			@Override
 			public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
 				Swarm.showLeaderboards();
 			}
 		});
-		
+
 		settButton = new TextButton("Настройки", Assets.skin);
 		settButton.addListener(new InputListener() {
 			@Override
 			public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
 				return true;
 			}
-			
+
 			@Override
 			public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
 				game.setScreen(new SettingsScreen(game));
@@ -164,18 +163,18 @@ public class LevelsListScreen implements Screen {
 		});
 
 		showNewOnlyCheckBox = new CheckBox("Только новые", Assets.skin);
-		showNewOnlyCheckBox.setChecked(false);
+		showNewOnlyCheckBox.setChecked(globalPrefs.getBoolean(Constants.ONLY_NEW_LEVELS));
 		showNewOnlyCheckBox.addListener(new InputListener() {
 			@Override
 			public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
 				CheckBox cb = (CheckBox)event.getListenerActor();
-				levelsList.setItems(getPlayableLevelNames(allLevels, !cb.isChecked()));
+				boolean checked = !cb.isChecked(); //will be checked in near future
+				levels = loadLevels(checked);
+				levelsList.setItems(loadLevelNames(levels));
+				
+				globalPrefs.putBoolean(Constants.ONLY_NEW_LEVELS, checked);
+				globalPrefs.flush();
 				return true;
-			}
-			
-			@Override
-			public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-//				game.setScreen(new SettingsScreen(game));
 			}
 		});
 
@@ -184,24 +183,41 @@ public class LevelsListScreen implements Screen {
 		additionalButtons.addActor(showNewOnlyCheckBox);
 		additionalButtons.addActor(spacer);
 		additionalButtons.addActor(settButton);
-		
+
 		Table table = new Table(Assets.skin);
 		table.setWidth(600);
 		table.setHeight(300);
 		table.setX(350 + stage.getGutterWidth());
 		table.setY(100 + stage.getGutterHeight());
-//		table.debug(); 
+		//		table.debug(); 
 		table.add(scroller).width(200).height(200).padTop(50);
 		table.add(additionalButtons);
 		table.row();
 		table.add(playButton).width(250).height(80).padTop(50);
 		table.add(recordsButton).width(250).height(80).padTop(50);
-		
+
 		stage.addActor(backImage);
 		stage.addActor(table);
 	}
 
-	private String[] getPlayableLevelNames(final Array<Level> levels, boolean newOnly) {
+	private Level[] loadLevels(boolean newOnly) {
+		FileHandle levelsFile =  Gdx.files.internal("data/levels.json");
+		Json levelsJson = new Json();
+		@SuppressWarnings("unchecked")
+		final Array<Level> allLevels = levelsJson.fromJson(Array.class, Level.class, levelsFile);
+
+		java.util.List<Level> levels = new java.util.ArrayList<Level>(); 
+		for(Level level : allLevels){
+			if(newOnly == false || playedLevelsPrefs.getBoolean(level.getId()) == false) {
+				level.unpackDirections();
+				levels.add(level);
+			}
+		}
+
+		return levels.toArray(new Level[levels.size()]);
+	}
+
+	private String[] loadLevelNames(final Level[] levels) {
 		FileHandle namesFile =  Gdx.files.internal("data/level_names_ru.json");
 		Json namesJson = new Json();
 		OrderedMap namesMap;
@@ -210,44 +226,22 @@ public class LevelsListScreen implements Screen {
 		} catch (UnsupportedEncodingException e) {
 			throw new SerializationException(e);
 		}
-		
+
 		java.util.List<String> levelNames = new java.util.ArrayList<String>();
-		playableLevelsMap.clear();
-		
-		for(int i = 0; i < levels.size; i++){
-			Level lev = levels.get(i);
-			String id = lev.getId();
+		for(Level level : levels){
+			String id = level.getId();
 			String levelName = (String) namesMap.get(id);
 
-			if(newOnly == false || prefs.getBoolean(id) == false) {
-				if(levelName != null){
-					levelNames.add(levelName);
-					lev.setName(levelName);
-					playableLevelsMap.put(levelName, lev);
-				}else{
-					levelNames.add(id);
-					lev.setName(id);
-					playableLevelsMap.put(id, lev);
-				}
+			if(levelName != null){
+				levelNames.add(levelName);
+				level.setName(levelName);
+			}else{
+				levelNames.add(id);
+				level.setName(id);
 			}
 		}
-		
-		String[] retval = new String[levelNames.size()];
-		levelNames.toArray(retval);
-		return retval;
-	}
 
-	private Array<Level> loadAllLeves() {
-		FileHandle levelsFile =  Gdx.files.internal("data/levels.json");
-		Json levelsJson = new Json();
-		@SuppressWarnings("unchecked")
-		final Array<Level> levels = levelsJson.fromJson(Array.class, Level.class, levelsFile);
-
-		for(Level level : levels){
-			level.unpackDirections();
-		}
-
-		return levels;
+		return levelNames.toArray(new String[levelNames.size()]);
 	}
 
 	@Override

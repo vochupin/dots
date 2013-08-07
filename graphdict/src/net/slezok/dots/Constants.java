@@ -7,4 +7,8 @@ public class Constants {
 	
 	public static final int VIRTUAL_WIDTH = 1000;
 	public static final int VIRTUAL_HEIGHT = 600;
+	
+	public static final String GLOBAL_SETTINGS_PREFS = "global";
+	public static final String PLAYED_LEVELS_PREFS = "played";
+	public static final String ONLY_NEW_LEVELS = "onlyNewLevels";
 }
