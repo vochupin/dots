@@ -25,6 +25,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.List;
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.ui.VerticalGroup;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Json;
@@ -185,6 +186,10 @@ public class LevelsListScreen implements Screen {
 			}
 		});
 
+		VerticalGroup additionalButtons = new VerticalGroup();
+		additionalButtons.addActor(showNewOnlyCheckBox);
+		additionalButtons.addActor(settButton);
+		
 		Table table = new Table(Assets.skin);
 		table.setWidth(600);
 		table.setHeight(300);
@@ -192,12 +197,10 @@ public class LevelsListScreen implements Screen {
 		table.setY(100 + stage.getGutterHeight());
 //		table.debug(); 
 		table.add(scroller).width(200).height(200).padTop(50);
+		table.add(additionalButtons);
 		table.row();
 		table.add(playButton).width(250).height(80).padTop(50);
 		table.add(recordsButton).width(250).height(80).padTop(50);
-		table.row();
-		table.add(showNewOnlyCheckBox).width(250).height(80).padTop(50);
-		table.add(settButton).width(250).height(80).padTop(50);
 		
 		stage.addActor(backImage);
 		stage.addActor(table);
