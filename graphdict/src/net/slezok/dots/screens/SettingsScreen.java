@@ -37,7 +37,7 @@ import com.badlogic.gdx.utils.Timer.Task;
 import com.swarmconnect.Swarm;
 
 public class SettingsScreen implements Screen {
-	private static final String TAG = "LevelsListScreen";
+	private static final String TAG = "SettingsScreen";
 	
 	private Dots game;
 	private Stage stage;
@@ -59,13 +59,12 @@ public class SettingsScreen implements Screen {
 //		Table.drawDebug(stage);
 		
 		if (Gdx.input.isKeyPressed(Keys.BACK)){ 
-			Gdx.app.log(TAG, "Back key was pressed.");
 			new Timer().scheduleTask(new Task(){
 				@Override
 				public void run() {
-					Gdx.app.exit();
+					game.setScreen(new LevelsListScreen(game));
 				}
-			}, 1);
+			}, 0.5F);
 		}
 	}
 
@@ -91,14 +90,8 @@ public class SettingsScreen implements Screen {
 		backMusicButton.addListener(new InputListener() {
 			@Override
 			public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+				Gdx.app.log(TAG, "MUSIC");
 				return true;
-			}
-
-			@Override
-			public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-				if(level != null){
-					game.setScreen(new DictScreen(game, level));
-				}
 			}
 		});
 
@@ -107,14 +100,8 @@ public class SettingsScreen implements Screen {
 		enableSwarmButton.addListener(new InputListener() {
 			@Override
 			public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+				Gdx.app.log(TAG, "SWARM");
 				return true;
-			}
-
-			@Override
-			public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-				if(level != null){
-					game.setScreen(new DictScreen(game, level));
-				}
 			}
 		});
 
