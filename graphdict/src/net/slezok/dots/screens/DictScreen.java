@@ -48,7 +48,6 @@ public class DictScreen extends ActorGestureListener implements Screen {
 	
 	private static final float CONTROL_PANEL_MOVE_TIME = 2;
 	private static final float UNVISIBLE_X_POSITION = -300;
-	private static final float CONTROL_MUSIC_X_POSITION = 0;
 	private static final float CONTROL_MUSIC_Y_POSITION = 400;
 
 	private final Dots game;
@@ -285,8 +284,9 @@ public class DictScreen extends ActorGestureListener implements Screen {
 
 		repeatButton.addListener(buttonListener);
 		
-		controlMusicButton = new ImageButton(new TextureRegionDrawable(Assets.up), 
-				new TextureRegionDrawable(Assets.upPressed), new TextureRegionDrawable(Assets.repeat));
+		controlMusicButton = new ImageButton(new TextureRegionDrawable(Assets.musicOn), 
+				new TextureRegionDrawable(Assets.musicPressed), new TextureRegionDrawable(Assets.musicOff));
+		controlMusicButton.setSize(controlMusicButton.getPrefWidth()*0.5f, controlMusicButton.getPrefHeight()*0.5f);
 		controlMusicButton.addListener(settButtonListener);
 	}
 
@@ -573,7 +573,8 @@ public class DictScreen extends ActorGestureListener implements Screen {
 
 	private void showSettingsPanel() {
 		settBackground.addAction(Actions.moveTo(-SETT_HANDLER_WIDTH, 0, CONTROL_PANEL_MOVE_TIME, Interpolation.elasticOut));
-		controlMusicButton.addAction(Actions.moveTo(CONTROL_MUSIC_X_POSITION, CONTROL_MUSIC_Y_POSITION, CONTROL_PANEL_MOVE_TIME, Interpolation.bounceOut));
+		float buttonX = (settBackground.getWidth()  - 2 * SETT_HANDLER_WIDTH - controlMusicButton.getWidth()) / 2;
+		controlMusicButton.addAction(Actions.moveTo(buttonX, CONTROL_MUSIC_Y_POSITION, CONTROL_PANEL_MOVE_TIME, Interpolation.bounceOut));
 	}
 
 	private void hideSettingsPanel() {

@@ -43,6 +43,10 @@ public class Assets {
 	public static TextureRegion upRightPressed;
 	public static TextureRegion downRightPressed;
 
+	public static TextureRegion musicOn;
+	public static TextureRegion musicPressed;
+	public static TextureRegion musicOff;
+
 	public static TextureRegion play;
 	public static TextureRegion playPressed;
 	
@@ -102,6 +106,10 @@ public class Assets {
 		downLeftPressed = buttonsAtlas.findRegion("down_left_pressed");
 		upRightPressed = buttonsAtlas.findRegion("up_right_pressed");
 		downRightPressed = buttonsAtlas.findRegion("down_right_pressed");
+
+		musicOn = buttonsAtlas.findRegion("sound_on");
+		musicOff = buttonsAtlas.findRegion("sound_off");
+		musicPressed = buttonsAtlas.findRegion("sound_pressed");
 		
 		play = buttonsAtlas.findRegion("play");
 		playPressed = buttonsAtlas.findRegion("play_pressed");

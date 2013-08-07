@@ -148,44 +148,65 @@ sett_pressed
   orig: 512, 256
   offset: 0, 0
   index: -1
-up
+sound_off
   rotate: false
   xy: 131, 261
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
   index: -1
-up_left
+sound_on
   rotate: false
   xy: 515, 517
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
   index: -1
-up_left_pressed
+sound_pressed
   rotate: false
   xy: 645, 647
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
   index: -1
-up_pressed
+up
   rotate: false
   xy: 775, 777
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
   index: -1
-up_right
+up_left
   rotate: false
   xy: 1, 1
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
   index: -1
-up_right_pressed
+up_left_pressed
   rotate: false
   xy: 131, 131
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+up_pressed
+  rotate: false
+  xy: 261, 261
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+up_right
+  rotate: false
+  xy: 645, 517
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+up_right_pressed
+  rotate: false
+  xy: 775, 647
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
