@@ -2,6 +2,8 @@ package net.slezok.dots.screens;
 
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
+import java.util.HashMap;
+import java.util.Map;
 
 import net.slezok.dots.Assets;
 import net.slezok.dots.Constants;
@@ -10,6 +12,7 @@ import net.slezok.dots.Level;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
+import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.GL10;
@@ -21,6 +24,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.CheckBox;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.List;
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
@@ -38,6 +42,8 @@ import com.swarmconnect.Swarm;
 
 public class LevelsListScreen implements Screen {
 	private static final String TAG = "LevelsListScreen";
+
+	private static final String PLAYED_LEVELS = "played";
 	
 	private Dots game;
 	private Stage stage;
@@ -50,6 +56,10 @@ public class LevelsListScreen implements Screen {
 	private CheckBox showNewOnlyCheckBox;
 
 	private Level level = null;
+	private Map<String, Level> playableLevelsMap = new HashMap<String, Level>();
+	
+	private Array<Level> allLevels;
+	private Preferences prefs;
 
 	public LevelsListScreen(Dots game) {
 		this.game = game;
@@ -81,44 +91,22 @@ public class LevelsListScreen implements Screen {
 
 	@Override
 	public void show() {
+		prefs = Gdx.app.getPreferences(PLAYED_LEVELS);
+		
 		stage = new Stage(Constants.VIRTUAL_WIDTH, Constants.VIRTUAL_HEIGHT, true);
 		Gdx.input.setInputProcessor(stage);
 		
-		FileHandle levelsFile =  Gdx.files.internal("data/levels.json");
-		Json levelsJson = new Json();
-		@SuppressWarnings("unchecked")
-		final Array<Level> levels = levelsJson.fromJson(Array.class, Level.class, levelsFile);
-
-		FileHandle namesFile =  Gdx.files.internal("data/level_names_ru.json");
-		Json namesJson = new Json();
-		OrderedMap namesMap;
-		try {
-			namesMap = (OrderedMap)new JsonReader().parse(new InputStreamReader(namesFile.read(), "UTF-8"));
-		} catch (UnsupportedEncodingException e) {
-			throw new SerializationException(e);
-		}
-
-		String[] levelNames = new String[levels.size];
-		for(int i = 0; i < levels.size; i++){
-			String levelDescription = levels.get(i).getDescription();
-			String levelName = (String) namesMap.get(levelDescription);
-			if(levelName != null){
-				levelNames[i] = levelName;
-			}else{
-				levelNames[i] = levelDescription;
-			}
-			
-			levels.get(i).unpackDirections();
-		}
+		allLevels = loadAllLeves();
+		String[] levelNames = getPlayableLevelNames(allLevels, false);
 
 		levelsList = new List(levelNames, Assets.skin);
 		levelsList.setSelectedIndex(0);
-		level = levels.get(0);
+		level = playableLevelsMap.get(levelNames[0]);
 		levelsList.addListener(new EventListener(){
 			@Override
 			public boolean handle(Event event) {
 				List list = (List)event.getListenerActor();
-				level = levels.get(list.getSelectedIndex());
+				level = playableLevelsMap.get(list.getSelection());
 				return true;
 			}
 		});
@@ -142,6 +130,8 @@ public class LevelsListScreen implements Screen {
 			@Override
 			public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
 				if(level != null){
+					prefs.putBoolean(level.getId(), true);
+					prefs.flush();
 					game.setScreen(new DictScreen(game, level));
 				}
 			}
@@ -173,10 +163,13 @@ public class LevelsListScreen implements Screen {
 			}
 		});
 
-		showNewOnlyCheckBox = new CheckBox("новые", Assets.skin);
+		showNewOnlyCheckBox = new CheckBox("Только новые", Assets.skin);
+		showNewOnlyCheckBox.setChecked(false);
 		showNewOnlyCheckBox.addListener(new InputListener() {
 			@Override
 			public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+				CheckBox cb = (CheckBox)event.getListenerActor();
+				levelsList.setItems(getPlayableLevelNames(allLevels, !cb.isChecked()));
 				return true;
 			}
 			
@@ -186,8 +179,10 @@ public class LevelsListScreen implements Screen {
 			}
 		});
 
+		Label spacer = new Label("  ", Assets.skin);
 		VerticalGroup additionalButtons = new VerticalGroup();
 		additionalButtons.addActor(showNewOnlyCheckBox);
+		additionalButtons.addActor(spacer);
 		additionalButtons.addActor(settButton);
 		
 		Table table = new Table(Assets.skin);
@@ -204,6 +199,55 @@ public class LevelsListScreen implements Screen {
 		
 		stage.addActor(backImage);
 		stage.addActor(table);
+	}
+
+	private String[] getPlayableLevelNames(final Array<Level> levels, boolean newOnly) {
+		FileHandle namesFile =  Gdx.files.internal("data/level_names_ru.json");
+		Json namesJson = new Json();
+		OrderedMap namesMap;
+		try {
+			namesMap = (OrderedMap)new JsonReader().parse(new InputStreamReader(namesFile.read(), "UTF-8"));
+		} catch (UnsupportedEncodingException e) {
+			throw new SerializationException(e);
+		}
+		
+		java.util.List<String> levelNames = new java.util.ArrayList<String>();
+		playableLevelsMap.clear();
+		
+		for(int i = 0; i < levels.size; i++){
+			Level lev = levels.get(i);
+			String id = lev.getId();
+			String levelName = (String) namesMap.get(id);
+
+			if(newOnly == false || prefs.getBoolean(id) == false) {
+				if(levelName != null){
+					levelNames.add(levelName);
+					lev.setName(levelName);
+					playableLevelsMap.put(levelName, lev);
+				}else{
+					levelNames.add(id);
+					lev.setName(id);
+					playableLevelsMap.put(id, lev);
+				}
+			}
+		}
+		
+		String[] retval = new String[levelNames.size()];
+		levelNames.toArray(retval);
+		return retval;
+	}
+
+	private Array<Level> loadAllLeves() {
+		FileHandle levelsFile =  Gdx.files.internal("data/levels.json");
+		Json levelsJson = new Json();
+		@SuppressWarnings("unchecked")
+		final Array<Level> levels = levelsJson.fromJson(Array.class, Level.class, levelsFile);
+
+		for(Level level : levels){
+			level.unpackDirections();
+		}
+
+		return levels;
 	}
 
 	@Override

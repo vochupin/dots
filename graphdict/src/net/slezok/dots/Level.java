@@ -12,7 +12,10 @@ public class Level{
 
 	private static int MARGIN = 2;
 
-	private String description;
+	private String id;
+	
+	private String name;
+
 	private int[] directions;
 
 	private boolean extentsCalculated = false;
@@ -56,12 +59,20 @@ public class Level{
 		this.directions = direction;
 	}
 
-	public String getDescription() {
-		return description;
+	public String getId() {
+		return id;
 	}
 
-	public void setDescription(String description) {
-		this.description = description;
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	private void calculateExtents() {
