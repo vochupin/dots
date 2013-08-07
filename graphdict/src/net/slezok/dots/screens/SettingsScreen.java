@@ -10,6 +10,7 @@ import net.slezok.dots.Level;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
+import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.GL10;
@@ -44,6 +45,8 @@ public class SettingsScreen implements Screen {
 	private CheckBox enableSwarmButton;
 	private CheckBox backMusicButton;
 	private Level level = null;
+	
+	private Preferences globalPrefs;
 
 	public SettingsScreen(Dots game) {
 		this.game = game;
@@ -74,6 +77,8 @@ public class SettingsScreen implements Screen {
 
 	@Override
 	public void show() {
+		globalPrefs = Gdx.app.getPreferences(Constants.GLOBAL_PREFS);
+		
 		stage = new Stage(Constants.VIRTUAL_WIDTH, Constants.VIRTUAL_HEIGHT, true);
 		Gdx.input.setInputProcessor(stage);
 		
@@ -86,21 +91,29 @@ public class SettingsScreen implements Screen {
 		backImage.setY(stage.getGutterHeight() + (Constants.VIRTUAL_HEIGHT - backImage.getHeight() * scale) / 2);
 		
 		backMusicButton = new CheckBox("Фоновая музыка", Assets.skin);
-		backMusicButton.scale(2);
+		backMusicButton.setChecked(globalPrefs.getBoolean(Constants.PLAY_BACKGROUND_MUSIC));
+		backMusicButton.scale(3);
 		backMusicButton.addListener(new InputListener() {
 			@Override
 			public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-				Gdx.app.log(TAG, "MUSIC");
+				CheckBox cb = (CheckBox)event.getListenerActor();
+				boolean checked = !cb.isChecked(); //will be inverted in near future
+				globalPrefs.putBoolean(Constants.PLAY_BACKGROUND_MUSIC, checked);
+				globalPrefs.flush();
 				return true;
 			}
 		});
 
 		enableSwarmButton = new CheckBox("Включить Swarm", Assets.skin);
-		enableSwarmButton.scale(2);
+		enableSwarmButton.setChecked(globalPrefs.getBoolean(Constants.USE_SWARM));
+		enableSwarmButton.scale(3);
 		enableSwarmButton.addListener(new InputListener() {
 			@Override
 			public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-				Gdx.app.log(TAG, "SWARM");
+				CheckBox cb = (CheckBox)event.getListenerActor();
+				boolean checked = !cb.isChecked(); //will be inverted in near future
+				globalPrefs.putBoolean(Constants.USE_SWARM, checked);
+				globalPrefs.flush();
 				return true;
 			}
 		});

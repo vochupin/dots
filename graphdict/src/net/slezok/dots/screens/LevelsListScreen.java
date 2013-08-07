@@ -89,7 +89,7 @@ public class LevelsListScreen implements Screen {
 
 	@Override
 	public void show() {
-		globalPrefs = Gdx.app.getPreferences(Constants.GLOBAL_SETTINGS_PREFS);
+		globalPrefs = Gdx.app.getPreferences(Constants.GLOBAL_PREFS);
 		playedLevelsPrefs = Gdx.app.getPreferences(Constants.PLAYED_LEVELS_PREFS);
 
 		stage = new Stage(Constants.VIRTUAL_WIDTH, Constants.VIRTUAL_HEIGHT, true);
@@ -168,7 +168,7 @@ public class LevelsListScreen implements Screen {
 			@Override
 			public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
 				CheckBox cb = (CheckBox)event.getListenerActor();
-				boolean checked = !cb.isChecked(); //will be checked in near future
+				boolean checked = !cb.isChecked(); //will be inverted in near future
 				levels = loadLevels(checked);
 				levelsList.setItems(loadLevelNames(levels));
 				
