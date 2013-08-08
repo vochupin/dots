@@ -43,7 +43,7 @@ public class SettingsScreen implements Screen {
 	private Dots game;
 	private Stage stage;
 	private CheckBox enableSwarmButton;
-	private CheckBox backMusicButton;
+	private ImageButton backMusicButton;
 	private Level level = null;
 	
 	private Preferences globalPrefs;
@@ -82,7 +82,7 @@ public class SettingsScreen implements Screen {
 		stage = new Stage(Constants.VIRTUAL_WIDTH, Constants.VIRTUAL_HEIGHT, true);
 		Gdx.input.setInputProcessor(stage);
 		
-		Image backImage = new Image(Assets.dictBackgroundTexture);
+		Image backImage = new Image(Assets.settingsBackgroundTexture);
 		
 		float scale = Constants.VIRTUAL_WIDTH / backImage.getWidth();
 		backImage.setScale(scale);
@@ -90,13 +90,13 @@ public class SettingsScreen implements Screen {
 		backImage.setX(stage.getGutterWidth());
 		backImage.setY(stage.getGutterHeight() + (Constants.VIRTUAL_HEIGHT - backImage.getHeight() * scale) / 2);
 		
-		backMusicButton = new CheckBox("Фоновая музыка", Assets.skin);
+		backMusicButton = new ImageButton(new TextureRegionDrawable(Assets.musicOff), 
+				new TextureRegionDrawable(Assets.musicPressed), new TextureRegionDrawable(Assets.musicOn));
 		backMusicButton.setChecked(globalPrefs.getBoolean(Constants.PLAY_BACKGROUND_MUSIC));
-		backMusicButton.scale(3);
 		backMusicButton.addListener(new InputListener() {
 			@Override
 			public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-				CheckBox cb = (CheckBox)event.getListenerActor();
+				ImageButton cb = (ImageButton)event.getListenerActor();
 				boolean checked = !cb.isChecked(); //will be inverted in near future
 				globalPrefs.putBoolean(Constants.PLAY_BACKGROUND_MUSIC, checked);
 				globalPrefs.flush();
@@ -106,7 +106,6 @@ public class SettingsScreen implements Screen {
 
 		enableSwarmButton = new CheckBox("Включить Swarm", Assets.skin);
 		enableSwarmButton.setChecked(globalPrefs.getBoolean(Constants.USE_SWARM));
-		enableSwarmButton.scale(3);
 		enableSwarmButton.addListener(new InputListener() {
 			@Override
 			public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
@@ -124,9 +123,9 @@ public class SettingsScreen implements Screen {
 		table.setHeight(300);
 		table.align(Align.top);
 		table.setX(stage.getGutterWidth());
-		table.setY(stage.getGutterHeight());
+		table.setY(stage.getGutterHeight() + 200);
 //		table.debug(); 
-		table.add(backMusicButton).width(450).height(200).padTop(50);
+		table.add(backMusicButton).width(450).height(100).padTop(50);
 		table.add(enableSwarmButton).width(450).height(200).padTop(50);
 		
 		stage.addActor(backImage);

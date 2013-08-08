@@ -24,3 +24,15 @@ opt_panel
   orig: 200, 600
   offset: 0, 0
   index: -1
+
+pack2.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+sett_screen
+  rotate: false
+  xy: 1, 1
+  size: 800, 480
+  orig: 800, 480
+  offset: 0, 0
+  index: -1

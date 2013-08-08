@@ -21,6 +21,7 @@ public class Assets {
 	public static TextureRegion listBackgroundTexture;
 	public static TextureRegion settPanelBackgroundTexture;
 	public static Texture dictBackgroundTexture;
+	public static TextureRegion settingsBackgroundTexture;
 	public static Skin skin;
 	
 	public static TextureRegion up;
@@ -53,6 +54,9 @@ public class Assets {
 	public static TextureRegion records;
 	public static TextureRegion recordsPressed;
 
+	public static TextureRegion settings;
+	public static TextureRegion settingsPressed;
+
 	public static Sound wellDoneSound;
 	public static Sound gameOverSound;
 	public static Sound errorSound;
@@ -83,6 +87,7 @@ public class Assets {
 		mainBackgroundTexture = bgrAtlas.findRegion("intro_screen");
 		listBackgroundTexture = bgrAtlas.findRegion("menu_screen");
 		settPanelBackgroundTexture = bgrAtlas.findRegion("opt_panel");
+		settingsBackgroundTexture = bgrAtlas.findRegion("sett_screen");
 		
 		dictBackgroundTexture = new Texture(Gdx.files.internal("data/dictback.jpg"));
 		
@@ -113,6 +118,9 @@ public class Assets {
 		
 		play = buttonsAtlas.findRegion("play");
 		playPressed = buttonsAtlas.findRegion("play_pressed");
+
+		settings = buttonsAtlas.findRegion("settings");
+		settingsPressed = buttonsAtlas.findRegion("settings_pressed");
 
 		records = buttonsAtlas.findRegion("records");
 		recordsPressed = buttonsAtlas.findRegion("records_pressed");

@@ -51,7 +51,7 @@ public class LevelsListScreen implements Screen {
 	private ImageButton playButton;
 	private ImageButton recordsButton;
 
-	private TextButton settButton;
+	private ImageButton settButton;
 	private CheckBox showNewOnlyCheckBox;
 
 	private Level level = null;
@@ -145,7 +145,7 @@ public class LevelsListScreen implements Screen {
 			}
 		});
 
-		settButton = new TextButton("Настройки", Assets.skin);
+		settButton = new ImageButton(new TextureRegionDrawable(Assets.settings), new TextureRegionDrawable(Assets.settingsPressed));
 		settButton.addListener(new InputListener() {
 			@Override
 			public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
@@ -184,23 +184,23 @@ public class LevelsListScreen implements Screen {
 			}
 		});
 
-		Label spacer = new Label("  ", Assets.skin);
-		VerticalGroup additionalButtons = new VerticalGroup();
-		additionalButtons.addActor(showNewOnlyCheckBox);
-		additionalButtons.addActor(spacer);
-		additionalButtons.addActor(settButton);
+		Table subTable = new Table(Assets.skin);
+		subTable.add(showNewOnlyCheckBox).width(250).height(80);
+		subTable.row();
+		subTable.add(settButton).width(250).height(80);
 
 		Table table = new Table(Assets.skin);
 		table.setWidth(600);
 		table.setHeight(300);
 		table.setX(350 + stage.getGutterWidth());
-		table.setY(100 + stage.getGutterHeight());
+		table.setY(130 + stage.getGutterHeight());
 		//		table.debug(); 
-		table.add(scroller).width(200).height(200).padTop(50);
-		table.add(additionalButtons);
+		table.add(scroller);
+		table.add(subTable);
 		table.row();
 		table.add(playButton).width(250).height(80).padTop(50);
 		table.add(recordsButton).width(250).height(80).padTop(50);
+
 
 		stage.addActor(backImage);
 		stage.addActor(table);

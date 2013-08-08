@@ -46,7 +46,7 @@ public class DictScreen extends ActorGestureListener implements Screen {
 
 	protected static final float NORMAL_STEP_TIME = 6000;
 
-	private static final float SETT_HANDLER_WIDTH = 50;
+	private static final float SETT_HANDLER_WIDTH = 60;
 	
 	private static final float CONTROL_PANEL_MOVE_TIME = 2;
 	private static final float UNVISIBLE_X_POSITION = -300;
