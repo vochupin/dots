@@ -111,6 +111,13 @@ public class SettingsScreen implements Screen {
 			public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
 				CheckBox cb = (CheckBox)event.getListenerActor();
 				boolean checked = !cb.isChecked(); //will be inverted in near future
+				
+				if(checked){
+					game.enableSwarm();
+				}else{
+					game.disableSwarm();
+				}
+				
 				globalPrefs.putBoolean(Constants.USE_SWARM, checked);
 				globalPrefs.flush();
 				return true;

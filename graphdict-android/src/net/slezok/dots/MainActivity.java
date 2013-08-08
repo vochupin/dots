@@ -103,6 +103,8 @@ public class MainActivity extends AndroidApplication implements PlatformDependen
 		if(enable){
 			Swarm.setActive(this);
 			Swarm.init(this, Constants.GRAPHDICT_APP_ID, Constants.GRAPHDICT_APP_KEY);
+		}else{
+			if(Swarm.isSwarmEnabled()) Swarm.setInactive(this);
 		}
 		swarmEnabled = enable;
 	}  

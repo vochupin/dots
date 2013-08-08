@@ -101,7 +101,7 @@ public class LevelsListScreen implements Screen {
 		levels = loadLevels(globalPrefs.getBoolean(Constants.ONLY_NEW_LEVELS));
 		String[] levelNames = loadLevelNames(levels);
 
-		if(levelNames.length != 0){
+		if(levelNames.length > 0){
 			List levelsList = createLevelsList(levelNames);
 			scroller = new ScrollPane(levelsList);
 		}else{
@@ -134,8 +134,8 @@ public class LevelsListScreen implements Screen {
 		table.add(subTable);
 		table.row();
 		table.add(playButton).width(250).height(80).padTop(50);
-		table.add(recordsButton).width(250).height(80).padTop(50);
-
+		
+		if(globalPrefs.getBoolean(Constants.USE_SWARM)) table.add(recordsButton).width(250).height(80).padTop(50);
 
 		stage.addActor(backImage);
 		stage.addActor(table);
@@ -169,7 +169,9 @@ public class LevelsListScreen implements Screen {
 
 			@Override
 			public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-				Swarm.showLeaderboards();
+				if(globalPrefs.getBoolean(Constants.USE_SWARM)){
+					Swarm.showLeaderboards();
+				}
 			}
 		});
 

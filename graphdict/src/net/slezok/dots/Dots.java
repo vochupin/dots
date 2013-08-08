@@ -27,5 +27,13 @@ public class Dots extends Game {
 		
 		Gdx.app.setLogLevel(Application.LOG_INFO);
 	}
+	
+	public void enableSwarm(){
+		deps.enableSwarm(true);
+	}
+
+	public void disableSwarm(){
+		deps.enableSwarm(false);
+	}
 }
 
