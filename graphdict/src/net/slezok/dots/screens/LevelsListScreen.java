@@ -54,11 +54,13 @@ public class LevelsListScreen implements Screen {
 	private ImageButton settButton;
 	private CheckBox showNewOnlyCheckBox;
 
-	private Level level = null;
+	private int levelIndex = -1;
 
 	private Level[] levels;
 	private Preferences globalPrefs;
 	private Preferences playedLevelsPrefs;
+	
+	Image noNewLevelsImage;
 
 	public LevelsListScreen(Dots game) {
 		this.game = game;
@@ -103,7 +105,7 @@ public class LevelsListScreen implements Screen {
 			List levelsList = createLevelsList(levelNames);
 			scroller = new ScrollPane(levelsList);
 		}else{
-			Image noNewLevelsImage = new Image(Assets.recordsPressed);
+			noNewLevelsImage = new Image(Assets.noNewLevelsImage);
 			scroller = new ScrollPane(noNewLevelsImage);
 		}
 
@@ -115,6 +117,31 @@ public class LevelsListScreen implements Screen {
 		backImage.setX(stage.getGutterWidth());
 		backImage.setY(stage.getGutterHeight() + (Constants.VIRTUAL_HEIGHT - backImage.getHeight() * scale) / 2);
 
+		createButtons();
+
+		Table subTable = new Table(Assets.skin);
+		subTable.add(showNewOnlyCheckBox).width(250).height(80);
+		subTable.row();
+		subTable.add(settButton).width(250).height(80);
+
+		Table table = new Table(Assets.skin);
+		table.setWidth(600);
+		table.setHeight(300);
+		table.setX(350 + stage.getGutterWidth());
+		table.setY(130 + stage.getGutterHeight());
+		//		table.debug(); 
+		table.add(scroller);
+		table.add(subTable);
+		table.row();
+		table.add(playButton).width(250).height(80).padTop(50);
+		table.add(recordsButton).width(250).height(80).padTop(50);
+
+
+		stage.addActor(backImage);
+		stage.addActor(table);
+	}
+
+	private void createButtons() {
 		playButton = new ImageButton(new TextureRegionDrawable(Assets.play), new TextureRegionDrawable(Assets.playPressed));
 		playButton.addListener(new InputListener() {
 			@Override
@@ -124,7 +151,8 @@ public class LevelsListScreen implements Screen {
 
 			@Override
 			public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-				if(level != null){
+				if(levelIndex >= 0 && levelIndex < levels.length){
+					Level level = levels[levelIndex];
 					playedLevelsPrefs.putBoolean(level.getId(), true);
 					playedLevelsPrefs.flush();
 					game.setScreen(new DictScreen(game, level));
@@ -168,14 +196,17 @@ public class LevelsListScreen implements Screen {
 				levels = loadLevels(checked);
 				String[] levelNames = loadLevelNames(levels);
 				
-				Actor actor = scroller.getWidget();
-				
-				if(actor instanceof List){
-					List levelsList = (List)actor;
-					levelsList.setItems(levelNames);
+				if(levels.length > 0){
+					Actor actor = scroller.getWidget();
+					if(actor instanceof List){
+						List levelsList = (List)actor;
+						levelsList.setItems(levelNames);
+					}else{
+						List levelsList = createLevelsList(levelNames);
+						scroller.setWidget(levelsList);
+					}
 				}else{
-					List levelsList = createLevelsList(levelNames);
-					scroller.setWidget(levelsList);
+					scroller.setWidget(noNewLevelsImage);
 				}
 				
 				globalPrefs.putBoolean(Constants.ONLY_NEW_LEVELS, checked);
@@ -183,38 +214,17 @@ public class LevelsListScreen implements Screen {
 				return true;
 			}
 		});
-
-		Table subTable = new Table(Assets.skin);
-		subTable.add(showNewOnlyCheckBox).width(250).height(80);
-		subTable.row();
-		subTable.add(settButton).width(250).height(80);
-
-		Table table = new Table(Assets.skin);
-		table.setWidth(600);
-		table.setHeight(300);
-		table.setX(350 + stage.getGutterWidth());
-		table.setY(130 + stage.getGutterHeight());
-		//		table.debug(); 
-		table.add(scroller);
-		table.add(subTable);
-		table.row();
-		table.add(playButton).width(250).height(80).padTop(50);
-		table.add(recordsButton).width(250).height(80).padTop(50);
-
-
-		stage.addActor(backImage);
-		stage.addActor(table);
 	}
 
 	private List createLevelsList(String[] levelNames) {
 		List levelsList = new List(levelNames, Assets.skin);
 		levelsList.setSelectedIndex(0);
-		level = levels.length > 0 ? levels[0] : null;
+		if(levels.length > 0) levelIndex = 0;
 		levelsList.addListener(new EventListener(){
 			@Override
 			public boolean handle(Event event) {
 				List list = (List)event.getListenerActor();
-				level = levels[list.getSelectedIndex()];
+				levelIndex = list.getSelectedIndex();
 				return true;
 			}
 		});

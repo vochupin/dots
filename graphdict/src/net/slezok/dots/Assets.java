@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.NinePatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
@@ -56,6 +57,8 @@ public class Assets {
 
 	public static TextureRegion settings;
 	public static TextureRegion settingsPressed;
+
+	public static TextureRegion noNewLevelsImage;
 
 	public static Sound wellDoneSound;
 	public static Sound gameOverSound;
@@ -125,6 +128,8 @@ public class Assets {
 		records = buttonsAtlas.findRegion("records");
 		recordsPressed = buttonsAtlas.findRegion("records_pressed");
 
+		noNewLevelsImage = buttonsAtlas.findRegion("sound_off");
+		
 		skin = new Skin(Gdx.files.internal("data/uiskin.json"));
 		
 		loadSounds(deps);
