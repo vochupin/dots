@@ -101,11 +101,11 @@ public class LevelsListScreen implements Screen {
 		levels = loadLevels(globalPrefs.getBoolean(Constants.ONLY_NEW_LEVELS));
 		String[] levelNames = loadLevelNames(levels);
 
+		noNewLevelsImage = new Image(Assets.noNewLevelsImage);
 		if(levelNames.length > 0){
 			List levelsList = createLevelsList(levelNames);
 			scroller = new ScrollPane(levelsList);
 		}else{
-			noNewLevelsImage = new Image(Assets.noNewLevelsImage);
 			scroller = new ScrollPane(noNewLevelsImage);
 		}
 
