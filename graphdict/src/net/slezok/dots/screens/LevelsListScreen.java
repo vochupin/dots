@@ -52,7 +52,7 @@ public class LevelsListScreen implements Screen {
 	private ImageButton recordsButton;
 
 	private ImageButton settButton;
-	private CheckBox showNewOnlyCheckBox;
+	private ImageButton showNewOnlyCheckBox;
 
 	private int levelIndex = -1;
 
@@ -188,12 +188,13 @@ public class LevelsListScreen implements Screen {
 			}
 		});
 
-		showNewOnlyCheckBox = new CheckBox("Только новые", Assets.skin);
+		showNewOnlyCheckBox = new ImageButton(new TextureRegionDrawable(Assets.onlyNewOff), 
+				new TextureRegionDrawable(Assets.onlyNewPressed), new TextureRegionDrawable(Assets.onlyNewOn));
 		showNewOnlyCheckBox.setChecked(globalPrefs.getBoolean(Constants.ONLY_NEW_LEVELS));
 		showNewOnlyCheckBox.addListener(new InputListener() {
 			@Override
 			public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-				CheckBox cb = (CheckBox)event.getListenerActor();
+				ImageButton cb = (ImageButton)event.getListenerActor();
 				boolean checked = !cb.isChecked(); //will be inverted in near future
 				levels = loadLevels(checked);
 				String[] levelNames = loadLevelNames(levels);

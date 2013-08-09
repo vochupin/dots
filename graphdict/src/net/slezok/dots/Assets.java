@@ -49,6 +49,14 @@ public class Assets {
 	public static TextureRegion musicPressed;
 	public static TextureRegion musicOff;
 
+	public static TextureRegion onlyNewOn;
+	public static TextureRegion onlyNewPressed;
+	public static TextureRegion onlyNewOff;
+
+	public static TextureRegion swarmOn;
+	public static TextureRegion swarmPressed;
+	public static TextureRegion swarmOff;
+
 	public static TextureRegion play;
 	public static TextureRegion playPressed;
 	
@@ -118,6 +126,14 @@ public class Assets {
 		musicOn = buttonsAtlas.findRegion("sound_on");
 		musicOff = buttonsAtlas.findRegion("sound_off");
 		musicPressed = buttonsAtlas.findRegion("sound_pressed");
+
+		onlyNewOn = buttonsAtlas.findRegion("only_new_on");
+		onlyNewOff = buttonsAtlas.findRegion("only_new_off");
+		onlyNewPressed = buttonsAtlas.findRegion("only_new_pressed");
+
+		swarmOn = buttonsAtlas.findRegion("swarm_on");
+		swarmOff = buttonsAtlas.findRegion("swarm_off");
+		swarmPressed = buttonsAtlas.findRegion("swarm_pressed");
 		
 		play = buttonsAtlas.findRegion("play");
 		playPressed = buttonsAtlas.findRegion("play_pressed");
@@ -128,7 +144,7 @@ public class Assets {
 		records = buttonsAtlas.findRegion("records");
 		recordsPressed = buttonsAtlas.findRegion("records_pressed");
 
-		noNewLevelsImage = buttonsAtlas.findRegion("sound_off");
+		noNewLevelsImage = buttonsAtlas.findRegion("no_more");
 		
 		skin = new Skin(Gdx.files.internal("data/uiskin.json"));
 		

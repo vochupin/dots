@@ -42,7 +42,7 @@ public class SettingsScreen implements Screen {
 	
 	private Dots game;
 	private Stage stage;
-	private CheckBox enableSwarmButton;
+	private ImageButton enableSwarmButton;
 	private ImageButton backMusicButton;
 	private Level level = null;
 	
@@ -104,12 +104,13 @@ public class SettingsScreen implements Screen {
 			}
 		});
 
-		enableSwarmButton = new CheckBox("¬ключить Swarm", Assets.skin);
+		enableSwarmButton = new ImageButton(new TextureRegionDrawable(Assets.swarmOff), 
+				new TextureRegionDrawable(Assets.swarmPressed), new TextureRegionDrawable(Assets.swarmOn));;
 		enableSwarmButton.setChecked(globalPrefs.getBoolean(Constants.USE_SWARM));
 		enableSwarmButton.addListener(new InputListener() {
 			@Override
 			public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-				CheckBox cb = (CheckBox)event.getListenerActor();
+				ImageButton cb = (ImageButton)event.getListenerActor();
 				boolean checked = !cb.isChecked(); //will be inverted in near future
 				
 				if(checked){
@@ -132,7 +133,7 @@ public class SettingsScreen implements Screen {
 		table.setX(stage.getGutterWidth());
 		table.setY(stage.getGutterHeight() + 200);
 //		table.debug(); 
-		table.add(backMusicButton).width(450).height(100).padTop(50);
+		table.add(backMusicButton).width(450).height(200).padTop(50);
 		table.add(enableSwarmButton).width(450).height(200).padTop(50);
 		
 		stage.addActor(backImage);
