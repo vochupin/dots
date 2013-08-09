@@ -121,12 +121,14 @@ public class Level{
 
 			default: throw new IllegalArgumentException("Unknown move type: " + direction);
 			}
-			
+						
 			if(maxX < currX) maxX = currX;
 			if(maxY < currY) maxY = currY;
 			if(minX > currX) minX = currX;
 			if(minY > currY) minY = currY;
 		}
+		if(maxIdenticalSteps < ++identicalSteps) maxIdenticalSteps = identicalSteps;
+		
 		maxX += MARGIN; maxY += MARGIN;
 		minX -= MARGIN; minY -= MARGIN;
 		
