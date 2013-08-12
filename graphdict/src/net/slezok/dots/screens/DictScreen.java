@@ -2,6 +2,7 @@ package net.slezok.dots.screens;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Random;
 
 import com.badlogic.gdx.Application.ApplicationType;
 import com.badlogic.gdx.Gdx;
@@ -87,6 +88,8 @@ public class DictScreen extends ActorGestureListener implements Screen {
 	private int[] directions;
 	
 	private Preferences globalPrefs;
+	
+	private Random random = new Random(System.currentTimeMillis());
 
 	private class SoundMessage{
 		public Sound sound;
@@ -342,7 +345,7 @@ public class DictScreen extends ActorGestureListener implements Screen {
 						soundMessages.clear();
 						soundMessages.add(new SoundMessage(Assets.moveSound, 0));
 						if(identicalSteps == 0){
-							soundMessages.add(new SoundMessage(Assets.wellDoneSound, 500));
+							soundMessages.add(new SoundMessage(Assets.wellDoneSounds[random.nextInt(Assets.NUMBER_OF_WELLDONE_MESSAGES)], 500));
 						}
 						recalculateIdenticalStepsAndPlaySound();
 					}
@@ -536,7 +539,9 @@ public class DictScreen extends ActorGestureListener implements Screen {
 	public void dispose() {
 		stage.dispose();
 		staticStage.dispose();
-		Assets.wellDoneSound.dispose();
+		for(int i = 0; i < Assets.NUMBER_OF_WELLDONE_MESSAGES; i++){
+			Assets.wellDoneSounds[i].dispose();
+		}
 		Assets.gameOverSound.dispose();
 		Assets.errorSound.dispose();
 		stopBackgroundMusic();

@@ -14,6 +14,8 @@ public class Assets {
 	public static final int MAXIMUM_STEPS_NUMBER = 10;
 
 	private static final String TAG = "Assets";
+
+	public static final int NUMBER_OF_WELLDONE_MESSAGES = 5;
 	
 	public static TextureRegion bluebar;
 	public static TextureRegion blackbar;
@@ -68,7 +70,7 @@ public class Assets {
 
 	public static TextureRegion noNewLevelsImage;
 
-	public static Sound wellDoneSound;
+	public static Sound[] wellDoneSounds;
 	public static Sound gameOverSound;
 	public static Sound errorSound;
 
@@ -152,7 +154,11 @@ public class Assets {
 	}
 
 	private static void loadSounds(PlatformDependencies deps) {
-		wellDoneSound = Gdx.audio.newSound(Gdx.files.internal("data/sound/welldone.mp3"));
+		wellDoneSounds = new Sound[NUMBER_OF_WELLDONE_MESSAGES];
+		for(int i = 1; i <= NUMBER_OF_WELLDONE_MESSAGES; i++){
+			wellDoneSounds[i - 1] = Gdx.audio.newSound(Gdx.files.internal("data/sound/welldone_" + i + ".mp3"));
+		}
+		
 		gameOverSound = Gdx.audio.newSound(Gdx.files.internal("data/sound/gameover.mp3"));
 		errorSound = Gdx.audio.newSound(Gdx.files.internal("data/sound/error.mp3"));
 		

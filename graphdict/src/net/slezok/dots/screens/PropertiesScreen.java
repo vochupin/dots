@@ -115,9 +115,6 @@ public class PropertiesScreen implements Screen{
 	@Override
 	public void dispose() {
 		staticStage.dispose();
-		Assets.wellDoneSound.dispose();
-		Assets.gameOverSound.dispose();
-		Assets.errorSound.dispose();
 	}
 
 	public void addBridge(Bridge bridge) {
