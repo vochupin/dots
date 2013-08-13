@@ -22,6 +22,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.CheckBox;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.List;
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
@@ -35,6 +36,7 @@ import com.badlogic.gdx.utils.OrderedMap;
 import com.badlogic.gdx.utils.SerializationException;
 import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.Timer.Task;
+import com.esotericsoftware.tablelayout.BaseTableLayout;
 import com.swarmconnect.Swarm;
 
 public class SettingsScreen implements Screen {
@@ -125,16 +127,23 @@ public class SettingsScreen implements Screen {
 			}
 		});
 
+		Label l1 = new Label("Фоновая музыка", Assets.skin);
+		l1.setFontScale(2);
+		Label l2 = new Label("Рекорды в Swarm", Assets.skin);
+		l2.setFontScale(2);
 
 		Table table = new Table(Assets.skin);
 		table.setWidth(900);
-		table.setHeight(300);
+		table.setHeight(400);
 		table.align(Align.top);
 		table.setX(stage.getGutterWidth());
 		table.setY(stage.getGutterHeight() + 200);
 //		table.debug(); 
-		table.add(backMusicButton).width(450).height(200).padTop(50);
-		table.add(enableSwarmButton).width(450).height(200).padTop(50);
+		table.add(backMusicButton).width(100).height(200);
+		table.add(l1).width(400).height(200);
+		table.row();
+		table.add(enableSwarmButton).width(100).height(200);
+		table.add(l2).width(400).height(200);
 		
 		stage.addActor(backImage);
 		stage.addActor(table);
