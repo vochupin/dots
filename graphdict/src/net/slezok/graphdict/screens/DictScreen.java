@@ -17,6 +17,8 @@ import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.Event;
+import com.badlogic.gdx.scenes.scene2d.EventListener;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -176,6 +178,10 @@ public class DictScreen extends ActorGestureListener implements Screen {
 					game.setScreen(new LevelsListScreen(game));
 				}
 			}, 0.5F);
+		}else if(Gdx.input.isKeyPressed(Keys.DPAD_UP)) {
+			dictField.scale(0.01F);
+		}else if(Gdx.input.isKeyPressed(Keys.DPAD_DOWN)) {
+			dictField.scale(-0.01F);
 		}
 	}
 
