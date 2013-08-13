@@ -556,9 +556,10 @@ public class DictScreen extends ActorGestureListener implements Screen {
 
 		camera.position.y -= y;
 		if(camera.position.y < 0) camera.position.y = 0;
-//		if(camera.position.y > dictField.getWorldHeight() + 20) camera.position.y = dictField.getWorldHeight() + 20;
+		if(camera.position.y > dictField.getWorldHeight()) camera.position.y = dictField.getWorldHeight();
 
-		Gdx.app.log(TAG, "New camera position: x=" + camera.position.x + " y=" + camera.position.y);
+		Gdx.app.log(TAG, "New camera position: x=" + camera.position.x + " y=" + camera.position.y + 
+				" WW: " + dictField.getWorldWidth() +" WH: " + dictField.getWorldHeight());
 	}
 
 	public void addBridge(Bridge bridge) {

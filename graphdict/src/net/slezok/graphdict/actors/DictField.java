@@ -15,11 +15,11 @@ public class DictField extends Group {
 	public static final float DOT_HALF_SIZE = 0.02F;
 	public static final float LINE_HALF_WIDTH = 0.1F;
 
-	private final float FIELD_WIDTH;
+	private final float FIELD_WIDTH; //field size in game steps
 	private final float FIELD_HEIGHT;
-	private final float SCREEN_WIDTH;
+	private final float SCREEN_WIDTH; // screen size in pixels
 	private final float SCREEN_HEIGHT;
-	private final float WORLD_WIDTH;
+	private final float WORLD_WIDTH; //field size in pixels
 	private final float WORLD_HEIGHT;
 	
 	private final float SCALE;
@@ -36,8 +36,8 @@ public class DictField extends Group {
 		
 		SCALE = SCREEN_WIDTH / FIELD_WIDTH;
 
-		WORLD_HEIGHT = SCREEN_HEIGHT * 2;
-		WORLD_WIDTH = SCREEN_WIDTH * 1;
+		WORLD_HEIGHT = SCREEN_WIDTH * FIELD_HEIGHT / FIELD_WIDTH;
+		WORLD_WIDTH = SCREEN_WIDTH;
 		
 		Gdx.app.log(TAG, "Screen width: " + SCREEN_WIDTH + " Screen height: " + SCREEN_HEIGHT);
 		Gdx.app.log(TAG, "Field width: " + FIELD_WIDTH + " Field height: " + FIELD_HEIGHT);
