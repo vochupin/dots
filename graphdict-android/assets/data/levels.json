@@ -1,6 +1,6 @@
 [
 {
-	class: net.slezok.dots.Level,
+	class: net.slezok.graphdict.Level,
 	id: "plane",
 	directions: [2,2,0,-1,5,2,0,2,0,2,0,2,0,2,0,2,
 				2,2,2,4,6,4,6,4,6,4,6,4,2,2,2,2,0,2,
@@ -8,7 +8,7 @@
 				2,4,2,4,2,4,2,4,2,4,6,6,6,6,0,6,0,6,
 				0,6,0,6,0,6,0,-1,7,6,0]
 },{
-	class: net.slezok.dots.Level,
+	class: net.slezok.graphdict.Level,
 	id: "tank",
 	directions: [4,2,2,4,2,4,2,2,4,2,4,4,4,6,6,6,6,4,2,2,
 				2,2,2,2,2,2,2,4,2,4,2,4,4,4,6,4,6,4,6,6,6,
@@ -17,7 +17,7 @@
 				2,2,0,6,6,6,0,6,6,6,6,6,6,6,6,6,4,6,0,0,0,
 				2,4,2,2,2,2,2,2,2,2,2,0,2,2,0,2,0,2,2,0,2,2,2]
 },{
-	class: net.slezok.dots.Level,
+	class: net.slezok.graphdict.Level,
 	id: "robot",
 	directions: [2,2,2,2,4,2,4,4,6,4,4,6,4,4,2,2,2,2,2,4,2,4,4,4,6,
                  4,4,4,4,4,4,2,4,4,6,0,6,4,6,0,0,2,0,0,0,0,0,6,4,4,4,4,
@@ -26,90 +26,90 @@
                  0,0,0,6,0,0,0,0,6,4,4,4,4,4,2,4,4,6,0,6,4,6,0,0,2,0,
                  0,0,0,0,0,6,0,0,0,2,0,2,2,2,2,2,0,0,6,0,0,6,0,0,2,0]	
 },{
-	class: net.slezok.dots.Level,
+	class: net.slezok.graphdict.Level,
 	id: "car",
 	directions: [0,0,0,2,2,2,2,2,2,2,2,2,4,4,4,4,6,6,5,6,7,6,
                  6,6,6,6,6,6,6,5,6,7,6,6,0,2,0,1,2,2,0,0,1,
                  2,2,2,4,4,4,4,4,2] 
 },{
-	class: net.slezok.dots.Level,
+	class: net.slezok.graphdict.Level,
 	id: "elephant",
 	directions: [2,0,0,0,0,0,0,0,2,2,2,2,4,2,2,2,2,2,4,4,4,4,
 	             4,4,4,4,6,6,6,0,0,0,6,4,4,4,6,6,6,0,0,0,0,6,
 	             4,4,4,6,6,0]
 },{
-	class: net.slezok.dots.Level,
+	class: net.slezok.graphdict.Level,
 	id: "house",
 	directions: [0,0,0,0,0,0,0,0,6,6,0,2,0,2,0,2,0,2,0,2,0,2,0,
 	             2,4,2,4,2,4,2,4,2,4,2,4,2,4,6,6,4,4,4,4,4,4,4,
 	             4,6,6,6,6,6,6,6,6,6] 
 },{
-	class: net.slezok.dots.Level,
+	class: net.slezok.graphdict.Level,
 	id: "key",
 	directions: [2,2,2,2,2,2,4,2,4,4,4,4,4,4,4,4,4,6,6,6,4,4,4,
 	             4,4,4,4,4,2,2,2,4,6,4,2,4,6,6,6,4,6,6,0,6,6,6,
 	             0,6,0,2,0,2,2,2,0,0,0,0,0,0,0,0,6,6,6,0,0,0,0,
 	             0,0,0,0,2,0]
 },{
-	class: net.slezok.dots.Level,
+	class: net.slezok.graphdict.Level,
 	id: "horse",
 	directions: [1,1,1,2,2,2,2,2,3,3,3,1,7,7,0,0,0,2,0,2,0,2,0,
 	             6,4,6,4,6,4,6,6,6,6,6,6,7,7,6,0,0,5,4,5,5,3,1,
 	             2,3,4,5,5,5,3]
 },{
-	class: net.slezok.dots.Level,
+	class: net.slezok.graphdict.Level,
 	id: "swan",
 	directions: [0,0,2,4,2,2,4,2,0,2,0,2,2,2,4,2,0,2,0,2,2,2,4,
 	             2,4,2,4,2,0,0,7,7,0,0,0,2,2,4,3,4,7,6,4,3,3,4,
 	             4,4,6,4,6,4,6,6,6,6,6,6,0,6,0,6,0,6,0,6]
 },{
-	class: net.slezok.dots.Level,
+	class: net.slezok.graphdict.Level,
 	id: "ostrich",
 	directions:[2,2,0,0,0,0,0,2,0,2,2,0,2,0,0,2,2,0,6,6,0,2,2,0,
 	            6,6,6,4,6,6,6,6,6,4,6,4,6,0,0,0,0,0,2,0,6,6,6,4,
 	            6,4,2,2,4,4,4,4,4,2,4,2,4,2,4,2,4,4,4,4,6,4]  
 },{
-	class: net.slezok.dots.Level,
+	class: net.slezok.graphdict.Level,
 	id: "cock",
 	directions: [2,2,0,0,0,0,2,0,2,0,2,0,2,0,2,0,2,2,4,2,0,0,6,
 	             0,6,6,6,4,6,4,4,6,0,6,0,6,6,6,4,6,0,6,0,0,2,1,
 	             6,0,6,0,6,0,5,4,6,4,6,6,3,2,4,2,4,4,4,2,4,2,4,
 	             2,4,2,4,2,4,4,4,6,4]
 },{
-	class: net.slezok.dots.Level,
+	class: net.slezok.graphdict.Level,
 	id: "wolf",
 	directions: [2,2,0,2,2,0,2,4,2,2,2,2,2,2,2,2,4,2,4,2,4,4,6, 
 	             0,6,0,6,4,4,4,4,4,6,6,0,2,0,0,0,6,6,6,6,6,4,4,
 	             4,4,6,6,0,2,0,0,0,6,6,0,6,6,6,0]
 },{
-	class: net.slezok.dots.Level,
+	class: net.slezok.graphdict.Level,
 	id: "fish",
 	directions: [2,0,2,0,0,2,2,0,2,2,2,2,4,2,2,4,4,2,0,2,0,2,2,
 	             4,4,6,4,2,4,4,6,6,0,6,6,4,6,6,4,6,6,6,6,0,6,6,
 	             0,6,6,0]
 },{
-	class: net.slezok.dots.Level,
+	class: net.slezok.graphdict.Level,
 	id: "bear",
 	directions: [2,0,2,0,0,2,2,0,2,4,2,2,2,2,2,2,2,2,2,4,2,4,2,
 	             4,4,4,4,4,6,4,4,4,4,4,6,6,6,6,0,0,2,0,0,0,6,6,
 	             6,6,4,4,4,4,4,6,6,6,6,0,0,2,0,0,0,6,0,6,6,0,6,
 	             6,0,0]
 },{
-	class: net.slezok.dots.Level,
+	class: net.slezok.graphdict.Level,
 	id: "sword",
 	directions: [3,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,2,2,2,1,
 	             4,4,4,7,6,6,5,4,4,4,3,5,6,6,7,1,0,0,0,7,6,6,5,
 	             0,0,0,3,2,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 	             0,1,]
 },{
-	class: net.slezok.dots.Level,
+	class: net.slezok.graphdict.Level,
 	id: "squirrel",
 	directions: [2,4,4,4,4,4,4,4,4,4,4,2,0,2,0,0,0,6,0,0,0,2,0,
 	             2,2,4,4,6,4,2,2,4,2,4,4,4,6,4,6,6,4,6,6,6,4,6,
 	             6,6,6,6,0,2,0,0,2,0,2,0,0,6,6,6,0,2,2,2,0,6,0,
 	             0,2,2,0,0]
 },{
-	class: net.slezok.dots.Level,
+	class: net.slezok.graphdict.Level,
 	id: "crocodile",
 	directions: [2,2,2,0,2,4,2,2,0,2,4,2,0,2,4,2,0,2,4,2,0,2,4,
 	             2,0,2,4,2,2,2,2,4,6,6,6,4,6,4,4,6,6,0,2,0,6,6,
