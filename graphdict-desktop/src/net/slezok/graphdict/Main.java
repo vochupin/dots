@@ -1,4 +1,7 @@
-package net.slezok.dots;
+package net.slezok.graphdict;
+
+import net.slezok.graphdict.Dots;
+import net.slezok.graphdict.PlatformDependencies;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;

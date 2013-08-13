@@ -1,8 +1,8 @@
-package net.slezok.dots.screens;
+package net.slezok.graphdict.screens;
 
-import net.slezok.dots.Assets;
-import net.slezok.dots.Bridge;
-import net.slezok.dots.Dots;
+import net.slezok.graphdict.Assets;
+import net.slezok.graphdict.Bridge;
+import net.slezok.graphdict.Dots;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.TextInputListener;

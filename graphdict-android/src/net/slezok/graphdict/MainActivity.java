@@ -1,4 +1,4 @@
-package net.slezok.dots;
+package net.slezok.graphdict;
 
 import java.io.BufferedOutputStream;
 import java.io.File;
@@ -7,6 +7,10 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+
+import net.slezok.graphdict.Constants;
+import net.slezok.graphdict.Dots;
+import net.slezok.graphdict.PlatformDependencies;
 
 import android.content.res.AssetFileDescriptor;
 import android.content.res.AssetManager;

@@ -1,8 +1,8 @@
-package net.slezok.dots.actors;
+package net.slezok.graphdict.actors;
 
-import net.slezok.dots.Assets;
-import net.slezok.dots.Bridge;
-import net.slezok.dots.Level;
+import net.slezok.graphdict.Assets;
+import net.slezok.graphdict.Bridge;
+import net.slezok.graphdict.Level;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;

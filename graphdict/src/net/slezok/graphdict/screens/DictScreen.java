@@ -1,4 +1,4 @@
-package net.slezok.dots.screens;
+package net.slezok.graphdict.screens;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -33,12 +33,12 @@ import com.badlogic.gdx.utils.Timer.Task;
 import com.esotericsoftware.tablelayout.BaseTableLayout;
 import com.swarmconnect.SwarmLeaderboard;
 
-import net.slezok.dots.Assets;
-import net.slezok.dots.Bridge;
-import net.slezok.dots.Constants;
-import net.slezok.dots.Dots;
-import net.slezok.dots.Level;
-import net.slezok.dots.actors.DictField;
+import net.slezok.graphdict.Assets;
+import net.slezok.graphdict.Bridge;
+import net.slezok.graphdict.Constants;
+import net.slezok.graphdict.Dots;
+import net.slezok.graphdict.Level;
+import net.slezok.graphdict.actors.DictField;
 
 public class DictScreen extends ActorGestureListener implements Screen {
 	private static final String TAG = "DictScreen";

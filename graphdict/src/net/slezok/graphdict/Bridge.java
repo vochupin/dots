@@ -1,4 +1,4 @@
-package net.slezok.dots;
+package net.slezok.graphdict;
 
 public class Bridge{
 	

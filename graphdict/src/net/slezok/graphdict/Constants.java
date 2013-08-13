@@ -1,4 +1,4 @@
-package net.slezok.dots;
+package net.slezok.graphdict;
 
 public class Constants {
 	public static final int GRAPHDICT_APP_ID = 6852;

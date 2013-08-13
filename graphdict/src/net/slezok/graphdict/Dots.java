@@ -1,6 +1,6 @@
-package net.slezok.dots;
+package net.slezok.graphdict;
 
-import net.slezok.dots.screens.IntroScreen;
+import net.slezok.graphdict.screens.IntroScreen;
 
 import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Game;

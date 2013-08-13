@@ -1,12 +1,12 @@
-package net.slezok.dots.screens;
+package net.slezok.graphdict.screens;
 
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 
-import net.slezok.dots.Assets;
-import net.slezok.dots.Constants;
-import net.slezok.dots.Dots;
-import net.slezok.dots.Level;
+import net.slezok.graphdict.Assets;
+import net.slezok.graphdict.Constants;
+import net.slezok.graphdict.Dots;
+import net.slezok.graphdict.Level;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
