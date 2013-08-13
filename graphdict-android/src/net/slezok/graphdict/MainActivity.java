@@ -9,7 +9,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 
 import net.slezok.graphdict.Constants;
-import net.slezok.graphdict.Dots;
+import net.slezok.graphdict.Dict;
 import net.slezok.graphdict.PlatformDependencies;
 
 import android.content.res.AssetFileDescriptor;
@@ -40,7 +40,7 @@ public class MainActivity extends AndroidApplication implements PlatformDependen
 		cfg.useGL20 = false;
 		cfg.useAccelerometer = false;
 		cfg.useCompass = false;
-		initialize(new Dots(this), cfg);
+		initialize(new Dict(this), cfg);
 
 		//Initialize swarm
 		if(swarmEnabled){

@@ -36,7 +36,7 @@ import com.swarmconnect.SwarmLeaderboard;
 import net.slezok.graphdict.Assets;
 import net.slezok.graphdict.Bridge;
 import net.slezok.graphdict.Constants;
-import net.slezok.graphdict.Dots;
+import net.slezok.graphdict.Dict;
 import net.slezok.graphdict.Level;
 import net.slezok.graphdict.actors.DictField;
 
@@ -53,7 +53,7 @@ public class DictScreen extends ActorGestureListener implements Screen {
 	private static final float UNVISIBLE_X_POSITION = -300;
 	private static final float CONTROL_MUSIC_Y_POSITION = 400;
 
-	private final Dots game;
+	private final Dict game;
 	private final Level level;
 
 	private Stage stage;
@@ -125,7 +125,7 @@ public class DictScreen extends ActorGestureListener implements Screen {
 	private Image settBackground;
 	private ImageButton controlMusicButton;
 
-	public DictScreen(Dots game, Level level) {
+	public DictScreen(Dict game, Level level) {
 		this.game = game;
 		this.level = level;
 		Assets.loadStepSounds(level.getMaximumIdenticalSteps());

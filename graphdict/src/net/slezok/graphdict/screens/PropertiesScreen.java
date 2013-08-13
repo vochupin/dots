@@ -2,7 +2,7 @@ package net.slezok.graphdict.screens;
 
 import net.slezok.graphdict.Assets;
 import net.slezok.graphdict.Bridge;
-import net.slezok.graphdict.Dots;
+import net.slezok.graphdict.Dict;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.TextInputListener;
@@ -25,7 +25,7 @@ public class PropertiesScreen implements Screen{
 
 	private World world;
 
-	private final Dots game;
+	private final Dict game;
 
 	private Stage staticStage;
 	
@@ -33,7 +33,7 @@ public class PropertiesScreen implements Screen{
 
 	private Box2DDebugRenderer debugRenderer = new Box2DDebugRenderer();
 	
-	public PropertiesScreen(Dots game) {
+	public PropertiesScreen(Dict game) {
 		this.game = game;
 	}
 

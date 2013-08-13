@@ -5,7 +5,7 @@ import java.io.UnsupportedEncodingException;
 
 import net.slezok.graphdict.Assets;
 import net.slezok.graphdict.Constants;
-import net.slezok.graphdict.Dots;
+import net.slezok.graphdict.Dict;
 import net.slezok.graphdict.Level;
 
 import com.badlogic.gdx.Gdx;
@@ -42,7 +42,7 @@ import com.swarmconnect.Swarm;
 public class SettingsScreen implements Screen {
 	private static final String TAG = "SettingsScreen";
 	
-	private Dots game;
+	private Dict game;
 	private Stage stage;
 	private ImageButton enableSwarmButton;
 	private ImageButton backMusicButton;
@@ -50,7 +50,7 @@ public class SettingsScreen implements Screen {
 	
 	private Preferences globalPrefs;
 
-	public SettingsScreen(Dots game) {
+	public SettingsScreen(Dict game) {
 		this.game = game;
 	}
 

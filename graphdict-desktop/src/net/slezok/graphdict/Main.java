@@ -1,6 +1,6 @@
 package net.slezok.graphdict;
 
-import net.slezok.graphdict.Dots;
+import net.slezok.graphdict.Dict;
 import net.slezok.graphdict.PlatformDependencies;
 
 import com.badlogic.gdx.Gdx;
@@ -22,7 +22,7 @@ public class Main implements PlatformDependencies{
 		cfg.width = 1024;
 		cfg.height = 768;
 		
-		new LwjglApplication(new Dots(new Main()), cfg);
+		new LwjglApplication(new Dict(new Main()), cfg);
 	}
 
 	@Override

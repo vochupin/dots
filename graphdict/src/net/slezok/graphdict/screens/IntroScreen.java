@@ -2,7 +2,7 @@ package net.slezok.graphdict.screens;
 
 import net.slezok.graphdict.Assets;
 import net.slezok.graphdict.Constants;
-import net.slezok.graphdict.Dots;
+import net.slezok.graphdict.Dict;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
@@ -17,10 +17,10 @@ public class IntroScreen implements Screen {
 	
 	private static final String TAG = "MainMenuScreen";
 
-	private Dots game;
+	private Dict game;
 	private Stage stage;
 	
-	public IntroScreen(Dots game) {
+	public IntroScreen(Dict game) {
 		this.game = game;
 	}
 

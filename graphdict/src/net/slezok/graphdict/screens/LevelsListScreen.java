@@ -7,7 +7,7 @@ import java.util.Map;
 
 import net.slezok.graphdict.Assets;
 import net.slezok.graphdict.Constants;
-import net.slezok.graphdict.Dots;
+import net.slezok.graphdict.Dict;
 import net.slezok.graphdict.Level;
 
 import com.badlogic.gdx.Gdx;
@@ -44,7 +44,7 @@ import com.swarmconnect.Swarm;
 public class LevelsListScreen implements Screen {
 	private static final String TAG = "LevelsListScreen";
 
-	private Dots game;
+	private Dict game;
 	private Stage stage;
 	private ScrollPane scroller = null;
 
@@ -62,7 +62,7 @@ public class LevelsListScreen implements Screen {
 	
 	Image noNewLevelsImage;
 
-	public LevelsListScreen(Dots game) {
+	public LevelsListScreen(Dict game) {
 		this.game = game;
 	}
 
