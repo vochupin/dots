@@ -558,11 +558,11 @@ public class DictScreen extends ActorGestureListener implements Screen {
 
 		camera.position.x -= x;
 		if(camera.position.x < 0) camera.position.x = 0;
-		if(camera.position.x > dictField.getWorldWidth()) camera.position.x = dictField.getWorldWidth();
+		if(camera.position.x > (dictField.getWorldWidth() * dictField.getScaleX())) camera.position.x = dictField.getWorldWidth() * dictField.getScaleX();
 
 		camera.position.y -= y;
 		if(camera.position.y < 0) camera.position.y = 0;
-		if(camera.position.y > dictField.getWorldHeight()) camera.position.y = dictField.getWorldHeight();
+		if(camera.position.y > (dictField.getWorldHeight() * dictField.getScaleY())) camera.position.y = dictField.getWorldHeight() * dictField.getScaleY();
 
 		Gdx.app.log(TAG, "New camera position: x=" + camera.position.x + " y=" + camera.position.y + 
 				" WW: " + dictField.getWorldWidth() +" WH: " + dictField.getWorldHeight());
