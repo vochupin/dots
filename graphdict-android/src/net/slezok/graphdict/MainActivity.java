@@ -78,7 +78,10 @@ public class MainActivity extends AndroidApplication implements PlatformDependen
 			if(!copyFile.exists() || copyFile.length() != afd.getLength()){
 				Gdx.app.log(TAG, "Copy asset file to internal storage.");
 				if(!copyFile.createNewFile()) throw new GdxRuntimeException("Can't create asset file copy: " + assetPath);
-				OutputStream os = openFileOutput(assetFileName, MODE_PRIVATE);
+				//world readable is to play music on lenovo a800
+				//because it plays music in other process
+				//TODO: move all resources on SD-CARD...
+				OutputStream os = openFileOutput(assetFileName, MODE_WORLD_READABLE); 
 				InputStream is = am.open(assetPath);
 				copy(is, os);
 				is.close();
