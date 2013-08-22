@@ -155,77 +155,77 @@ repeat
   orig: 128, 128
   offset: 0, 0
   index: -1
-repeat_pressed
+right
   rotate: false
   xy: 391, 30
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
   index: -1
-right
+right_pressed
   rotate: false
   xy: 497, 261
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
   index: -1
-right_pressed
+sound_off
   rotate: false
   xy: 521, 131
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
   index: -1
-sound_off
+sound_on
   rotate: false
   xy: 627, 261
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
   index: -1
-sound_on
+sound_pressed
   rotate: false
   xy: 521, 1
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
   index: -1
-sound_pressed
+swarm_off
   rotate: false
   xy: 757, 261
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
   index: -1
-swarm_off
+swarm_on
   rotate: false
   xy: 887, 261
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
   index: -1
-swarm_on
+swarm_pressed
   rotate: false
   xy: 651, 131
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
   index: -1
-swarm_pressed
+up
   rotate: false
   xy: 651, 1
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
   index: -1
-up
+up_left
   rotate: false
   xy: 781, 131
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
   index: -1
-up_left
+up_left_pressed
   rotate: false
   xy: 781, 1
   size: 128, 128
@@ -237,30 +237,30 @@ pack3.png
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
-up_left_pressed
+repeat_pressed
   rotate: false
   xy: 1, 1
-  size: 128, 128
-  orig: 128, 128
+  size: 116, 120
+  orig: 116, 120
   offset: 0, 0
   index: -1
 up_pressed
   rotate: false
-  xy: 131, 1
+  xy: 1, 123
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
   index: -1
 up_right
   rotate: false
-  xy: 261, 1
+  xy: 131, 123
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
   index: -1
 up_right_pressed
   rotate: false
-  xy: 391, 1
+  xy: 261, 123
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
